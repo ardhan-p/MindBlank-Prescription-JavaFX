@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.LoginController">
+<BorderPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.login.LoginUI">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="603.0" style="-fx-background-color: #e8e8e8;" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="usernameLabel" layoutX="186.0" layoutY="108.0" text="Username" />
             <Label fx:id="passwordLabel" layoutX="186.0" layoutY="189.0" text="Password" />
             <PasswordField fx:id="passwordInput" layoutX="184.0" layoutY="217.0" prefHeight="25.0" prefWidth="233.0" />
-            <Button fx:id="clearBtn" layoutX="186.0" layoutY="301.0" mnemonicParsing="false" text="Clear" />
-            <Button fx:id="loginBtn" layoutX="362.0" layoutY="301.0" mnemonicParsing="false" text="Login" />
+            <Button fx:id="clearBtn" layoutX="186.0" layoutY="301.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
+            <Button fx:id="loginBtn" layoutX="362.0" layoutY="301.0" mnemonicParsing="false" onAction="#onSubmit" text="Login" />
             <Label fx:id="titleLAbel" layoutX="131.0" layoutY="54.0" text="MindBlank Prescription System">
                <font>
                   <Font size="26.0" />
