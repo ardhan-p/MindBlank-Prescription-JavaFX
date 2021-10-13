@@ -1,5 +1,4 @@
 package com.mindblank.login;
-import com.mindblank.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
