@@ -63,8 +63,6 @@ public class User {
     }
 
     public boolean login(String uName, String uPass) {
-        // TODO: connect to MySQL database to verify login details
-
         DatabaseConnection connectSQL = new DatabaseConnection();
         Connection connectDB = connectSQL.getConnection();
 
@@ -82,7 +80,6 @@ public class User {
                     return true;
                 }
             }
-
 
         } catch (Exception e){
             e.printStackTrace();
