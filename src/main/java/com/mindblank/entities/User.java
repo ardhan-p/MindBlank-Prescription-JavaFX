@@ -1,5 +1,10 @@
 package com.mindblank.entities;
 
+import com.mindblank.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class User {
     private String uName;
     private String uPass;
@@ -59,6 +64,31 @@ public class User {
 
     public boolean login(String uName, String uPass) {
         // TODO: connect to MySQL database to verify login details
+
+        DatabaseConnection connectSQL = new DatabaseConnection();
+        Connection connectDB = connectSQL.getConnection();
+
+        String verifyLogin = "SELECT * FROM user WHERE BINARY username = '" + uName
+                           + "' AND BINARY password = '" + uPass + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(verifyLogin);
+
+            while(queryResult.next()) {
+                if (queryResult == null) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
         return false;
     }
 }

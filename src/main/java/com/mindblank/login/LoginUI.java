@@ -27,6 +27,7 @@ public class LoginUI {
     public void onSubmit(ActionEvent event) {
         if (LoginController.validateUser(usernameInput.getText(), passwordInput.getText())) {
             //TODO: add code to allow users to access main menu
+            loginStatus.setText("Login details are correct!");
         } else {
             loginStatus.setText("Login details are incorrect! Try again.");
         }
