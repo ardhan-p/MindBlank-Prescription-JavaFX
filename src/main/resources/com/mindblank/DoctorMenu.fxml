@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: #caddfc;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="addPresBtn" layoutX="33.0" layoutY="77.0" mnemonicParsing="false" text="Add Prescription" />
+            <Button fx:id="addViewBtn" layoutX="31.0" layoutY="119.0" mnemonicParsing="false" text="View Prescription" />
+            <Button fx:id="updatePresBtn" layoutX="25.0" layoutY="165.0" mnemonicParsing="false" text="Update Prescription" />
+            <Button fx:id="updateProfileBtn" layoutX="41.0" layoutY="210.0" mnemonicParsing="false" text="Update Profile" />
+            <Button fx:id="logoutBtn" layoutX="61.0" layoutY="345.0" mnemonicParsing="false" text="Logout" />
+            <Label fx:id="userLabel" layoutX="70.0" layoutY="318.0" text="Doctor">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="homeBtn" layoutX="58.0" layoutY="38.0" mnemonicParsing="false" text="Home" />
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
