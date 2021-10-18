@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="doctorMainMenuPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.doctor.DoctorMainMenuUI">
+<BorderPane fx:id="doctorMainMenuPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: #caddfc;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: #ed8787;" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="logoutBtn" layoutX="53.0" layoutY="347.0" mnemonicParsing="false" text="Logout" />
-            <Label fx:id="userLabel" layoutX="61.0" layoutY="320.0" text="Doctor">
+            <Label fx:id="userLabel" layoutX="51.0" layoutY="319.0" text="Pharmacist">
                <font>
                   <Font size="14.0" />
                </font>
@@ -32,14 +32,14 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addPresBtn" layoutX="63.0" layoutY="119.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="Add Prescription" />
-            <Button fx:id="viewPresBtn" layoutX="229.0" layoutY="119.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="View Prescriptions" />
-            <Button fx:id="updateProfileBtn" layoutX="146.0" layoutY="211.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="Update Profile" />
+            <Button fx:id="addUserBtn" layoutX="67.0" layoutY="130.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="Add User" />
             <Label fx:id="welcomeLabel" layoutX="67.0" layoutY="61.0" prefHeight="18.0" prefWidth="299.0" text="Welcome message">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <Button fx:id="viewUserBtn" layoutX="226.0" layoutY="130.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="View User" />
+            <Button fx:id="updateUserBtn" layoutX="147.0" layoutY="218.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="Update User" />
          </children>
       </AnchorPane>
    </center>
