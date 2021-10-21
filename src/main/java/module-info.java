@@ -5,6 +5,12 @@ module com.mindblank {
 
     opens com.mindblank to javafx.fxml;
     exports com.mindblank;
-    exports com.mindblank.login;
+
     opens com.mindblank.login to javafx.fxml;
+    exports com.mindblank.login;
+
+    opens com.mindblank.doctor to javafx.fxml;
+    exports com.mindblank.doctor;
+
+    opens com.mindblank.patient to javafx.fxml;
 }
