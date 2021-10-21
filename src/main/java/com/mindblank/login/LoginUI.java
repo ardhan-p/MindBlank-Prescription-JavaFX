@@ -1,5 +1,6 @@
 package com.mindblank.login;
 
+import com.mindblank.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class LoginUI {
+
     @FXML
     private Button clearBtn;
     @FXML
@@ -26,17 +28,19 @@ public class LoginUI {
         loginStatus.setText("Username and password cleared!");
     }
 
-
+    // TODO: add switch screen functionality
     public void onSubmit(ActionEvent event) {
         if (LoginController.validateUser(usernameInput.getText(), passwordInput.getText())) {
-            //TODO: add code to allow users to access main menu
             loginStatus.setText("Login details are correct!");
+            if (LoginController.getUserType().contains("DOCTOR")) {
+
+            }
         } else if (usernameInput.getText().trim().isEmpty()) {
             loginStatus.setText("Username is required");
         } else if (passwordInput.getText().trim().isEmpty()) {
             loginStatus.setText("Password is required");
         } else {
-            loginStatus.setText("Login details are incorrect! Try again.");
+            loginStatus.setText("Login details are incorrect! Try again." + usernameInput.getText());
         }
     }
 }

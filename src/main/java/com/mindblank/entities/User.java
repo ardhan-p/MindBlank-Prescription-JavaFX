@@ -8,9 +8,11 @@ import java.sql.Statement;
 public class User {
     private String uName;
     private String uPass;
+    private String realName;
     private String email;
     private String phoneNum;
     private String address;
+    private String userType;
 
     public User() {
         uName = "Default";
@@ -42,6 +44,10 @@ public class User {
         return address;
     }
 
+    public String getUserType() {
+        return userType;
+    }
+
     public void setuName(String uName) {
         this.uName = uName;
     }
@@ -62,12 +68,16 @@ public class User {
         this.address = address;
     }
 
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
     public boolean login(String uName, String uPass) {
         DatabaseConnection connectSQL = new DatabaseConnection();
         Connection connectDB = connectSQL.getConnection();
 
-        String verifyLogin = "SELECT * FROM user WHERE BINARY username = '" + uName
-                           + "' AND BINARY password = '" + uPass + "';";
+        String verifyLogin = "SELECT * FROM USER WHERE BINARY NRIC = '" + uName
+                           + "' AND BINARY pass = '" + uPass + "';";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -77,11 +87,13 @@ public class User {
                 if (queryResult == null) {
                     return false;
                 } else {
+                    // sets user type from sql result
+                    this.userType = queryResult.getString(7);
                     return true;
                 }
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
