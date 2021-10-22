@@ -12,5 +12,4 @@ module com.mindblank {
     opens com.mindblank.doctor to javafx.fxml;
     exports com.mindblank.doctor;
 
-    opens com.mindblank.patient to javafx.fxml;
 }

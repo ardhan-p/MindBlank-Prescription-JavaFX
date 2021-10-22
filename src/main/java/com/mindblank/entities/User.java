@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class User {
-    private String uName;
-    private String uPass;
-    private String realName;
-    private String email;
-    private String phoneNum;
-    private String address;
-    private String userType;
+    protected String uName;
+    protected String uPass;
+    protected String realName;
+    protected String email;
+    protected String phoneNum;
+    protected String address;
+    protected String userType;
 
     public User() {
         uName = "Default";
@@ -88,6 +88,10 @@ public class User {
                     return false;
                 } else {
                     // sets user type from sql result
+                    this.realName = queryResult.getString(3);
+                    this.email = queryResult.getString(4);
+                    this.phoneNum = queryResult.getString(5);
+                    this.address = queryResult.getString(6);
                     this.userType = queryResult.getString(7);
                     return true;
                 }
