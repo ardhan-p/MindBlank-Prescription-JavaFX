@@ -6,6 +6,10 @@ public class Prescription {
     private String date;
     private boolean collectedStatus;
 
+    public String getNRIC() {
+        return NRIC;
+    }
+
 //    public String[] getPatientIC() {
 //
 //    }

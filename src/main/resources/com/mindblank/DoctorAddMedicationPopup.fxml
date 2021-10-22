@@ -28,7 +28,7 @@
          </font>
       </Label>
       <DatePicker fx:id="expiryDateInput" layoutX="238.0" layoutY="112.0" prefHeight="25.0" prefWidth="175.0" promptText="Enter expiry date..." />
-      <Button fx:id="addMedicationBtn" defaultButton="true" layoutX="173.0" layoutY="250.0" mnemonicParsing="false" text="Add Medication" />
+      <Button fx:id="addMedicationBtn" defaultButton="true" disable="true" layoutX="173.0" layoutY="250.0" mnemonicParsing="false" text="Add Medication" />
       <Label fx:id="instructionsLabel" layoutX="36.0" layoutY="150.0" text="Instructions">
          <font>
             <Font size="14.0" />

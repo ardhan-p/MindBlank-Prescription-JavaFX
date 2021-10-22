@@ -9,17 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class LoginUI {
-
-    @FXML
-    private Button clearBtn;
-    @FXML
-    private Button loginBtn;
-    @FXML
-    private TextField usernameInput;
-    @FXML
-    private TextField passwordInput;
-    @FXML
-    private Label loginStatus;
+    @FXML private Button clearBtn;
+    @FXML private Button loginBtn;
+    @FXML private TextField usernameInput;
+    @FXML private TextField passwordInput;
+    @FXML private Label loginStatus;
+    private User user;
+    private LoginController loginController;
 
     public TextField getUsernameInput() {
         return usernameInput;
@@ -31,19 +27,19 @@ public class LoginUI {
         loginStatus.setText("Username and password cleared!");
     }
 
-    // TODO: add switch screen functionality
     public void onSubmit(ActionEvent event) {
-        User user = new User(usernameInput.getText(), passwordInput.getText());
+        user = new User(usernameInput.getText(), passwordInput.getText());
+        loginController = new LoginController(user);
 
-        if (LoginController.validateUser(user)) {
-            if (LoginController.getUserType(user).contains("DOCTOR")) {
-                DoctorMainMenuUI.displayDoctorMainMenu(event, user);
-            } else if (LoginController.getUserType(user).contains("PATIENT")) {
-
-            } else if (LoginController.getUserType(user).contains("PHARMACIST")) {
-
-            } else if (LoginController.getUserType(user).contains("ADMIN")) {
-
+        if (loginController.validateUser()) {
+            if (loginController.getUserType().contains("DOCTOR")) {
+                DoctorMainMenuUI.displayPage(event, user);
+            } else if (loginController.getUserType().contains("PATIENT")) {
+                // TODO: add patient display page
+            } else if (loginController.getUserType().contains("PHARMACIST")) {
+                // TODO: add pharmacist display page
+            } else if (loginController.getUserType().contains("ADMIN")) {
+                // TODO: add admin display page
             } else if (usernameInput.getText().trim().isEmpty()) {
                 loginStatus.setText("Username is required");
             } else if (passwordInput.getText().trim().isEmpty()) {

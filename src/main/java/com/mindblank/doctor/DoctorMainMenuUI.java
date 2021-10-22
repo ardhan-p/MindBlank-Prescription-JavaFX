@@ -18,26 +18,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DoctorMainMenuUI {
-    @FXML
-    private Label timeLabel;
-    @FXML
-    private Label dateLabel;
-    @FXML
-    private Label welcomeLabel;
-    @FXML
-    private Button logoutBtn;
-    @FXML
-    private Button addPresBtn;
-    @FXML
-    private Button viewPresBtn;
-    @FXML
-    private Button updateProfileBtn;
-
+    @FXML private Label timeLabel;
+    @FXML private Label dateLabel;
+    @FXML private Label welcomeLabel;
+    @FXML private Button logoutBtn;
+    @FXML private Button addPresBtn;
+    @FXML private Button viewPresBtn;
+    @FXML private Button updateProfileBtn;
     private Doctor doc;
 
     @FXML
+    // set time data
     public void initialize() {
-        // set time data
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(System.currentTimeMillis());
@@ -45,7 +37,7 @@ public class DoctorMainMenuUI {
         dateLabel.setText(dateFormat.format(date));
     }
 
-    public static void displayDoctorMainMenu(ActionEvent event, User user) {
+    public static void displayPage(ActionEvent event, User user) {
         FXMLLoader loader = new FXMLLoader();
         try {
             loader.setLocation(Main.class.getResource("DoctorMainMenu.fxml"));
@@ -64,7 +56,20 @@ public class DoctorMainMenuUI {
 
     public void getDoctorInfo(User u) {
         doc = new Doctor(u);
-        welcomeLabel.setText("Welcome Dr. " + doc.getuName());
+        welcomeLabel.setText("Welcome Dr. " + doc.getRealName());
+    }
+
+    // side menu navigation on-click listeners
+    public void addPrescriptionOnClick(ActionEvent event) {
+        DoctorAddPrescriptionMenuUI.displayPage(event, doc);
+    }
+
+    public void viewPrescriptionsOnClick(ActionEvent event) {
+
+    }
+
+    public void updateProfileOnClick(ActionEvent event) {
+
     }
 
     public void onLogout(ActionEvent event) {

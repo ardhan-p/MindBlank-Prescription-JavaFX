@@ -32,7 +32,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addPresBtn" layoutX="63.0" layoutY="119.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="Add Prescription" />
+            <Button fx:id="addPresBtn" layoutX="63.0" layoutY="119.0" mnemonicParsing="false" onAction="#addPrescriptionOnClick" prefHeight="70.0" prefWidth="140.0" text="Add Prescription" />
             <Button fx:id="viewPresBtn" layoutX="229.0" layoutY="119.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="View Prescriptions" />
             <Button fx:id="updateProfileBtn" layoutX="146.0" layoutY="211.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="Update Profile" />
             <Label fx:id="welcomeLabel" layoutX="67.0" layoutY="61.0" prefHeight="18.0" prefWidth="299.0" text="Welcome message">

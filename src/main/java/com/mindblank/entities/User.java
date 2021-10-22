@@ -24,12 +24,26 @@ public class User {
         this.uPass = uPass;
     }
 
+    public User(String uName, String uPass, String realName, String email, String phoneNum, String address, String userType) {
+        this.uName = uName;
+        this.uPass = uPass;
+        this.realName = realName;
+        this.email = email;
+        this.phoneNum = phoneNum;
+        this.address = address;
+        this.userType = userType;
+    }
+
     public String getuName() {
         return uName;
     }
 
     public String getuPass() {
         return uPass;
+    }
+
+    public String getRealName() {
+        return realName;
     }
 
     public String getEmail() {
@@ -56,6 +70,10 @@ public class User {
         this.uPass = uPass;
     }
 
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -70,6 +88,15 @@ public class User {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public void print() {
+        System.out.println(uName);
+        System.out.println(realName);
+        System.out.println(email);
+        System.out.println(phoneNum);
+        System.out.println(address);
+        System.out.println(userType);
     }
 
     public boolean login(String uName, String uPass) {
