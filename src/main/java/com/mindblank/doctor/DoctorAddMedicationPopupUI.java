@@ -81,16 +81,20 @@ public class DoctorAddMedicationPopupUI {
     // menu on-click listeners
 
     public void addMedicationOnClick(ActionEvent event) {
-        Medicine newMedicine = new Medicine(selectMedicineInput.getSelectionModel().getSelectedIndex(),
-                                       selectMedicineInput.getSelectionModel().getSelectedItem());
+        if (selectMedicineInput.getSelectionModel().isEmpty() || doseInput.getText().isEmpty() ||
+                expiryDateInput.getValue().toString().isEmpty() || instructionsInput.getText().isEmpty()) {
+            statusLabel.setText("Missing data!");
+        } else {
+            Medicine newMedicine = new Medicine(selectMedicineInput.getSelectionModel().getSelectedIndex(),
+                    selectMedicineInput.getSelectionModel().getSelectedItem());
 
-        Medication newMedication = new Medication(newMedicine, Integer.parseInt(doseInput.getText()), instructionsInput.getText(), expiryDateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            Medication newMedication = new Medication(newMedicine, Integer.parseInt(doseInput.getText()), instructionsInput.getText(), expiryDateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        medicationObservableList.add(newMedication);
+            medicationObservableList.add(newMedication);
 
-        Node source = (Node)event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+            Node source = (Node)event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+        }
     }
-
 }

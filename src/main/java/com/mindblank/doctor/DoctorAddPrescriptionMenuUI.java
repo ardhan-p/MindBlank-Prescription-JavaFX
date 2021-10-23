@@ -97,6 +97,8 @@ public class DoctorAddPrescriptionMenuUI {
         return doctorController.validatePatient(patientIC);
     }
 
+//    private boolean addPrescription(String patientIC, String date, Medicine med, )
+
     // changes status label to indicate error
     private void displayErr() {
         validatedPatient = false;
@@ -110,7 +112,6 @@ public class DoctorAddPrescriptionMenuUI {
         validatedPatient = true;
         validateStatusLabel.setText("Patient found!");
         addMedicationBtn.setDisable(false);
-        confirmPrescriptionBtn.setDisable(false);
     }
 
     @FXML
@@ -118,7 +119,6 @@ public class DoctorAddPrescriptionMenuUI {
     private void displayMediPopup(ActionEvent event) {
         DoctorAddMedicationPopupUI.displayPage(event, medObservableList);
     }
-
 
     // side menu navigation on-click listeners
 
@@ -163,6 +163,7 @@ public class DoctorAddPrescriptionMenuUI {
 
     public void addMedicationOnClick(ActionEvent event) {
         displayMediPopup(event);
+        confirmPrescriptionBtn.setDisable(false);
     }
 
     public void confirmPrescriptionOnClick(ActionEvent event) {
