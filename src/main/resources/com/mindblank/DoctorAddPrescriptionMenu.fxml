@@ -66,7 +66,7 @@
                   <TableColumn fx:id="medicationInstructionsColumn" prefWidth="157.0" text="Instructions" />
                </columns>
             </TableView>
-            <Button fx:id="addMedicationBtn" disable="true" layoutX="23.0" layoutY="360.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Add Medication" />
+            <Button fx:id="addMedicationBtn" disable="true" layoutX="23.0" layoutY="360.0" mnemonicParsing="false" onAction="#addMedicationOnClick" prefHeight="26.0" prefWidth="140.0" text="Add Medication" />
             <Button fx:id="confirmPrescriptionBtn" defaultButton="true" disable="true" layoutX="270.0" layoutY="360.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Confirm Prescription" />
             <Label fx:id="dateInputLabel" layoutX="227.0" layoutY="14.0" text="Date">
                <font>

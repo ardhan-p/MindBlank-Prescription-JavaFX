@@ -28,8 +28,8 @@ public class DoctorMainMenuUI {
     private Doctor doc;
 
     @FXML
-    // set time data
     public void initialize() {
+        // set time data
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(System.currentTimeMillis());
@@ -37,6 +37,7 @@ public class DoctorMainMenuUI {
         dateLabel.setText(dateFormat.format(date));
     }
 
+    // display main menu
     public static void displayPage(ActionEvent event, User user) {
         FXMLLoader loader = new FXMLLoader();
         try {
@@ -54,12 +55,14 @@ public class DoctorMainMenuUI {
         }
     }
 
+    // gets doctor info from previous scene
     public void getDoctorInfo(User u) {
         doc = new Doctor(u);
         welcomeLabel.setText("Welcome Dr. " + doc.getRealName());
     }
 
     // side menu navigation on-click listeners
+
     public void addPrescriptionOnClick(ActionEvent event) {
         DoctorAddPrescriptionMenuUI.displayPage(event, doc);
     }

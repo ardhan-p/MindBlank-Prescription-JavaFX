@@ -17,10 +17,6 @@ public class LoginUI {
     private User user;
     private LoginController loginController;
 
-    public TextField getUsernameInput() {
-        return usernameInput;
-    }
-
     public void clear(ActionEvent event) {
         usernameInput.setText("");
         passwordInput.setText("");
