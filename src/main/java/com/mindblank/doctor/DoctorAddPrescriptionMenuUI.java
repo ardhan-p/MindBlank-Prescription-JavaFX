@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DoctorAddPrescriptionMenuUI {
@@ -167,6 +169,24 @@ public class DoctorAddPrescriptionMenuUI {
     }
 
     public void confirmPrescriptionOnClick(ActionEvent event) {
+        Medication currentMed;
+        ArrayList<Medication> medArrayList = new ArrayList<Medication>();
 
+        for (int i = 0; i < medObservableList.size(); i++) {
+            currentMed = medObservableList.get(i);
+            medArrayList.add(currentMed);
+        }
+
+        if (doctorController.addPrescription(patientInput.getText(), dateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), medArrayList)) {
+            validateStatusLabel.setText("Successfully added prescription!");
+            patientInput.clear();
+            dateInput.getEditor().clear();
+            medicationListTable.getItems().clear();
+            medObservableList.clear();
+            addMedicationBtn.setDisable(true);
+            confirmPrescriptionBtn.setDisable(true);
+        } else {
+            validateStatusLabel.setText("Unsuccessful confirmation, try again");
+        }
     }
 }

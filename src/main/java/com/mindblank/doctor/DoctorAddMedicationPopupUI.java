@@ -88,7 +88,8 @@ public class DoctorAddMedicationPopupUI {
             Medicine newMedicine = new Medicine(selectMedicineInput.getSelectionModel().getSelectedIndex(),
                     selectMedicineInput.getSelectionModel().getSelectedItem());
 
-            Medication newMedication = new Medication(newMedicine, Integer.parseInt(doseInput.getText()), instructionsInput.getText(), expiryDateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            Medication newMedication = new Medication(newMedicine, Integer.parseInt(doseInput.getText()), instructionsInput.getText(),
+                                                      expiryDateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
             medicationObservableList.add(newMedication);
 

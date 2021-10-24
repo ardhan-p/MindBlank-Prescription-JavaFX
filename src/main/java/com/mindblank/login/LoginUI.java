@@ -36,13 +36,9 @@ public class LoginUI {
                 // TODO: add pharmacist display page
             } else if (loginController.getUserType().contains("ADMIN")) {
                 // TODO: add admin display page
-            } else if (usernameInput.getText().trim().isEmpty()) {
-                loginStatus.setText("Username is required");
-            } else if (passwordInput.getText().trim().isEmpty()) {
-                loginStatus.setText("Password is required");
-            } else {
-                loginStatus.setText("Login details are incorrect! Try again." + usernameInput.getText());
             }
+        } else {
+            loginStatus.setText("Login details are incorrect! Try again.");
         }
     }
 }

@@ -5,17 +5,19 @@ import com.mindblank.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Doctor extends User {
+    DatabaseConnection connectSQL = new DatabaseConnection();
+    Connection connectDB = connectSQL.getConnection();
+
     public Doctor(User user) {
         super(user.uName, user.uPass, user.realName, user.email, user.phoneNum, user.address, user.userType);
     }
 
+    // TODO: change BCE to refer to doctor entity
     public boolean getPatientIC(String patientIC) {
-        DatabaseConnection connectSQL = new DatabaseConnection();
-        Connection connectDB = connectSQL.getConnection();
-
-        String validatePatient = "SELECT * FROM USER WHERE BINARY NRIC = '" + patientIC + "';";
+        String validatePatient = "SELECT * FROM USER WHERE BINARY NRIC = '" + patientIC + "' AND TYPE = 'PATIENT';";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -29,6 +31,54 @@ public class Doctor extends User {
                 }
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return false;
+    }
+
+    // adds prescription details to prescription sql table
+    // adds all medicine in arraylist that is associated with said prescription to medication sql table
+    public boolean addPrescription(String patientIC, String token, String date, ArrayList<Medication> medList) {
+        String insertPrescription = "INSERT INTO PRESCRIPTION (tokenString, NRIC, date, collectedStatus) " +
+                                    "VALUES ('" + token + "', '" + patientIC + "', '" + date + "', 0);";
+        String insertMedication;
+        boolean addPrescriptionValid = false;
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.execute(insertPrescription);
+
+            for (Medication med : medList) {
+                insertMedication = "INSERT INTO MEDICATION (tokenString, medicineID, dosage, instructions, expiry) " +
+                                   "VALUES ('" + token + "', " + med.getMedicineID() + ", " + med.getDosage() + ", '" +
+                                   med.getInstructions() + "', '" + med.getExpiry() + "');";
+                statement.execute(insertMedication);
+            }
+
+            addPrescriptionValid = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+        return addPrescriptionValid;
+    }
+
+    // checks if generated token is already found in database
+    public boolean validateToken(String token) {
+        String validate = "SELECT * FROM PRESCRIPTION WHERE tokenString = '" + token + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(validate);
+
+            if (queryResult.next() == false) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();

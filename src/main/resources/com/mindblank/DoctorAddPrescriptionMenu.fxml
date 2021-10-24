@@ -48,9 +48,9 @@
             </Label>
             <TextField fx:id="patientInput" layoutX="26.0" layoutY="39.0" promptText="Enter IC..." />
             <Button fx:id="validateBtn" layoutX="75.0" layoutY="74.0" mnemonicParsing="false" onAction="#validateBtnOnClick" text="Validate" />
-            <Label fx:id="validateStatusLabel" layoutX="231.0" layoutY="78.0" prefHeight="18.0" prefWidth="154.0" textAlignment="CENTER">
+            <Label fx:id="validateStatusLabel" layoutX="231.0" layoutY="78.0" prefHeight="37.0" prefWidth="154.0" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font size="14.0" />
+                  <Font size="11.0" />
                </font>
             </Label>
             <Label fx:id="medicationListLabel" layoutX="30.0" layoutY="118.0" text="Medication List">
@@ -67,7 +67,7 @@
                </columns>
             </TableView>
             <Button fx:id="addMedicationBtn" disable="true" layoutX="23.0" layoutY="360.0" mnemonicParsing="false" onAction="#addMedicationOnClick" prefHeight="26.0" prefWidth="140.0" text="Add Medication" />
-            <Button fx:id="confirmPrescriptionBtn" defaultButton="true" disable="true" layoutX="270.0" layoutY="360.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Confirm Prescription" />
+            <Button fx:id="confirmPrescriptionBtn" defaultButton="true" disable="true" layoutX="270.0" layoutY="360.0" mnemonicParsing="false" onAction="#confirmPrescriptionOnClick" prefHeight="26.0" prefWidth="140.0" text="Confirm Prescription" />
             <Label fx:id="dateInputLabel" layoutX="227.0" layoutY="14.0" text="Date">
                <font>
                   <Font size="14.0" />
