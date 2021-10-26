@@ -10,8 +10,7 @@ public class LoginController {
 
     // TODO: change BCE to passing user object instead 2 strings
     public boolean validateUser() {
-        boolean loginState = user.login(user.getuName(), user.getuPass());
-        return loginState;
+        return user.login(user.getuName(), user.getuPass());
     }
 
     // TODO: update BCE to add new function to get user type

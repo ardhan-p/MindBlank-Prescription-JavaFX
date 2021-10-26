@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.doctor.DoctorUpdateProfileAddressMenuUI">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.doctor.boundaries.DoctorUpdateProfileAddressMenuUI">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: #caddfc;" BorderPane.alignment="CENTER">
          <children>
@@ -29,8 +29,7 @@
             </Label>
             <Button fx:id="addPresBtn" layoutX="14.0" layoutY="119.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Add Prescription" />
             <Button fx:id="addViewBtn" layoutX="14.0" layoutY="156.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="View Prescription" />
-            <Button fx:id="updatePresBtn" layoutX="14.0" layoutY="194.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Update Prescription" />
-            <Button fx:id="updateProfileBtn" layoutX="14.0" layoutY="230.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Update Profile" />
+            <Button fx:id="updateProfileBtn" disable="true" layoutX="14.0" layoutY="194.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Update Profile" />
             <Button fx:id="homeBtn" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Home" />
          </children>
       </AnchorPane>

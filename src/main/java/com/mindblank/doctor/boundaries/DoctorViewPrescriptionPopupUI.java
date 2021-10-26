@@ -1,4 +1,4 @@
-package com.mindblank.doctor;
+package com.mindblank.doctor.boundaries;
 
 public class DoctorViewPrescriptionPopupUI {
 }

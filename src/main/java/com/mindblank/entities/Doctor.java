@@ -1,6 +1,7 @@
 package com.mindblank.entities;
 
 import com.mindblank.DatabaseConnection;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -85,5 +86,22 @@ public class Doctor extends User {
         }
 
         return false;
+    }
+
+    public void viewPrescriptions(String patientIC, ObservableList<Prescription> presObservableList) {
+        String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(selectPrescriptions);
+
+            while (queryResult.next()) {
+                Prescription newPres = new Prescription(queryResult.getString(1), queryResult.getString(3));
+                presObservableList.add(newPres);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 }

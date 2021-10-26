@@ -1,6 +1,6 @@
 package com.mindblank.login;
 
-import com.mindblank.doctor.DoctorMainMenuUI;
+import com.mindblank.doctor.boundaries.DoctorMainMenuUI;
 import com.mindblank.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

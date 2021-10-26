@@ -1,4 +1,4 @@
-package com.mindblank.doctor;
+package com.mindblank.doctor.boundaries;
 
 import com.mindblank.Main;
 import com.mindblank.entities.Doctor;
@@ -67,8 +67,8 @@ public class DoctorMainMenuUI {
         DoctorAddPrescriptionMenuUI.displayPage(event, doc);
     }
 
-    public void viewPrescriptionsOnClick(ActionEvent event) {
-
+    public void viewPrescriptionOnClick(ActionEvent event) {
+        DoctorViewPrescriptionMenuUI.displayPage(event, doc);
     }
 
     public void updateProfileOnClick(ActionEvent event) {

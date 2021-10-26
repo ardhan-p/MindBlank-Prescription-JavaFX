@@ -1,4 +1,4 @@
-package com.mindblank.doctor;
+package com.mindblank.doctor.boundaries;
 
 import com.mindblank.DatabaseConnection;
 import com.mindblank.Main;
@@ -28,7 +28,6 @@ public class DoctorAddMedicationPopupUI {
     @FXML private TextArea instructionsInput;
     @FXML private Label statusLabel;
 
-    private ObservableList<Medicine> medicineObservableListList;
     private ObservableList<Medication> medicationObservableList;
 
     @FXML

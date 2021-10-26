@@ -1,6 +1,8 @@
-package com.mindblank.doctor;
+package com.mindblank.doctor.boundaries;
 
 import com.mindblank.Main;
+import com.mindblank.doctor.controllers.DoctorAddPrescriptionController;
+import com.mindblank.doctor.controllers.DoctorController;
 import com.mindblank.entities.Doctor;
 import com.mindblank.entities.Medication;
 import com.mindblank.entities.User;
@@ -27,7 +29,6 @@ public class DoctorAddPrescriptionMenuUI {
     @FXML private Button homeBtn;
     @FXML private Button addPresBtn;
     @FXML private Button addViewBtn;
-    @FXML private Button updatePresBtn;
     @FXML private Button updateProfileBtn;
     @FXML private Button logout;
     @FXML private Label timeLabel;
@@ -45,10 +46,10 @@ public class DoctorAddPrescriptionMenuUI {
     @FXML private TableColumn<Medication, String> medicationInstructionsColumn;
     @FXML private Button addMedicationBtn;
     @FXML private Button confirmPrescriptionBtn;
+
     private Doctor doc;
-    private DoctorController doctorController;
+    private DoctorAddPrescriptionController doctorController;
     private ObservableList<Medication> medObservableList = FXCollections.observableArrayList();
-    private boolean validatedPatient;
 
     @FXML
     public void initialize() {
@@ -91,7 +92,7 @@ public class DoctorAddPrescriptionMenuUI {
     // gets doctor info from previous scene
     private void getDoctorInfo(User u) {
         doc = new Doctor(u);
-        doctorController = new DoctorController(doc);
+        doctorController = new DoctorAddPrescriptionController(doc);
     }
 
     // checks if patient exists
@@ -99,11 +100,8 @@ public class DoctorAddPrescriptionMenuUI {
         return doctorController.validatePatient(patientIC);
     }
 
-//    private boolean addPrescription(String patientIC, String date, Medicine med, )
-
     // changes status label to indicate error
     private void displayErr() {
-        validatedPatient = false;
         validateStatusLabel.setText("Patient not found!");
         addMedicationBtn.setDisable(true);
         confirmPrescriptionBtn.setDisable(true);
@@ -111,7 +109,6 @@ public class DoctorAddPrescriptionMenuUI {
 
     // changes status label to indicate valid
     private void displayValid() {
-        validatedPatient = true;
         validateStatusLabel.setText("Patient found!");
         addMedicationBtn.setDisable(false);
     }
@@ -128,12 +125,8 @@ public class DoctorAddPrescriptionMenuUI {
         DoctorMainMenuUI.displayPage(event, doc);
     }
 
-    public void viewPrescriptionsOnClick(ActionEvent event) {
-
-    }
-
-    public void updatePrescriptionOnClick(ActionEvent event) {
-
+    public void viewPrescriptionOnClick(ActionEvent event) {
+        DoctorViewPrescriptionMenuUI.displayPage(event, doc);
     }
 
     public void updateProfileOnClick(ActionEvent event) {

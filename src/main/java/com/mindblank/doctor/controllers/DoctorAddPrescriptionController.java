@@ -1,4 +1,4 @@
-package com.mindblank.doctor;
+package com.mindblank.doctor.controllers;
 
 import com.mindblank.entities.Doctor;
 import com.mindblank.entities.Medication;
@@ -6,16 +6,9 @@ import com.mindblank.entities.Medication;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class DoctorController {
-    private Doctor doc;
-
-    public DoctorController(Doctor doc) {
-        this.doc = doc;
-    }
-
-    // TODO: update BCE #23; add prescription will contact DoctorController instead of Prescription
-    public boolean validatePatient(String patientIC) {
-        return doc.getPatientIC(patientIC);
+public class DoctorAddPrescriptionController extends DoctorController {
+    public DoctorAddPrescriptionController(Doctor doc) {
+        super(doc);
     }
 
     // TODO: add this to BCE diagrams
