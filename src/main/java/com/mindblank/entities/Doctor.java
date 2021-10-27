@@ -40,6 +40,7 @@ public class Doctor extends User {
         return false;
     }
 
+    // TODO: add QR code generation
     // adds prescription details to prescription sql table
     // adds all medicine in arraylist that is associated with said prescription to medication sql table
     public boolean addPrescription(String patientIC, String token, String date, ArrayList<Medication> medList) {
@@ -88,7 +89,7 @@ public class Doctor extends User {
         return false;
     }
 
-    public void viewPrescriptions(String patientIC, ObservableList<Prescription> presObservableList) {
+    public void viewAllPrescriptions(String patientIC, ObservableList<Prescription> presObservableList) {
         String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "';";
 
         try {
@@ -104,4 +105,32 @@ public class Doctor extends User {
             e.getCause();
         }
     }
+
+    public void viewCurrentPrescription(String tokenString, ObservableList<Medication> medObservableList) {
+        String selectCurrentPrescription = "SELECT * FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(selectCurrentPrescription);
+
+            while (queryResult.next()) {
+                // create medicine object
+                Medicine newMedicine = new Medicine(queryResult.getInt(2), "");
+                String getMedicineName = "SELECT name FROM MEDICINE WHERE medicineID = " + newMedicine.getMedicineID() + ";";
+                ResultSet queryMedicineName = statement.executeQuery(getMedicineName);
+                newMedicine.setName(queryMedicineName.getString(1));
+
+                // create medication object
+                Medication newMedication = new Medication(newMedicine, queryResult.getInt(3), queryResult.getString(4), queryResult.getString(5));
+                medObservableList.add(newMedication);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+//    public Patient viewPatientData(String tokenString) {
+//        // TODO: add code here
+//    }
 }

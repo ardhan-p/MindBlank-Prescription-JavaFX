@@ -10,7 +10,7 @@ public class DoctorViewPrescriptionController extends DoctorController {
     }
 
     public void fetchUserPrescriptions(String patientIC, ObservableList<Prescription> presObservableList) {
-        doc.viewPrescriptions(patientIC, presObservableList);
+        doc.viewAllPrescriptions(patientIC, presObservableList);
     }
 
     public void fetchSelectedPrescription(String tokenString) {

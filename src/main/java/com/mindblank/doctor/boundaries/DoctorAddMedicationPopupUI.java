@@ -30,8 +30,8 @@ public class DoctorAddMedicationPopupUI {
 
     private ObservableList<Medication> medicationObservableList;
 
-    @FXML
     // fills combobox (drop-down) from medication in SQL database
+    @FXML
     public void initialize() {
         DatabaseConnection connectSQL = new DatabaseConnection();
         Connection connectDB = connectSQL.getConnection();
