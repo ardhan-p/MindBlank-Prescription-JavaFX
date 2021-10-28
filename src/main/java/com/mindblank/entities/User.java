@@ -13,6 +13,8 @@ public class User {
     protected String phoneNum;
     protected String address;
     protected String userType;
+    protected DatabaseConnection connectSQL = new DatabaseConnection();
+    protected Connection connectDB = connectSQL.getConnection();
 
     public User() {
         uName = "Default";
@@ -100,9 +102,6 @@ public class User {
     }
 
     public boolean login(String uName, String uPass) {
-        DatabaseConnection connectSQL = new DatabaseConnection();
-        Connection connectDB = connectSQL.getConnection();
-
         String verifyLogin = "SELECT * FROM USER WHERE BINARY NRIC = '" + uName
                            + "' AND BINARY pass = '" + uPass + "';";
 

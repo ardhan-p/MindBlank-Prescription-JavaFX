@@ -9,8 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Doctor extends User {
-    DatabaseConnection connectSQL = new DatabaseConnection();
-    Connection connectDB = connectSQL.getConnection();
 
     public Doctor(User user) {
         super(user.uName, user.uPass, user.realName, user.email, user.phoneNum, user.address, user.userType);
@@ -106,8 +104,8 @@ public class Doctor extends User {
         }
     }
 
-    public void viewCurrentPrescription(String tokenString, ObservableList<Medication> medObservableList) {
-        String selectCurrentPrescription = "SELECT * FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
+    public void viewMedicationsInPrescription(String tokenString, ObservableList<Medication> medObservableList) {
+        String selectCurrentPrescription = "SELECT * FROM MEDICATION WHERE tokenString = '" + tokenString + "';";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -115,10 +113,7 @@ public class Doctor extends User {
 
             while (queryResult.next()) {
                 // create medicine object
-                Medicine newMedicine = new Medicine(queryResult.getInt(2), "");
-                String getMedicineName = "SELECT name FROM MEDICINE WHERE medicineID = " + newMedicine.getMedicineID() + ";";
-                ResultSet queryMedicineName = statement.executeQuery(getMedicineName);
-                newMedicine.setName(queryMedicineName.getString(1));
+                Medicine newMedicine = new Medicine(queryResult.getInt(2));
 
                 // create medication object
                 Medication newMedication = new Medication(newMedicine, queryResult.getInt(3), queryResult.getString(4), queryResult.getString(5));
@@ -130,7 +125,41 @@ public class Doctor extends User {
         }
     }
 
-//    public Patient viewPatientData(String tokenString) {
-//        // TODO: add code here
-//    }
+    public Patient viewPatientData(String tokenString) {
+        String selectUsernameFromToken = "SELECT NRIC FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
+        Patient currentPatient = new Patient();
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(selectUsernameFromToken);
+
+            while (queryResult.next()) {
+                currentPatient.setPatientInfoFromDB(queryResult.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return currentPatient;
+    }
+
+    public String getPrescriptionDate(String tokenString) {
+        String date = "";
+        String selectDate = "SELECT date FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(selectDate);
+
+            while (queryResult.next()) {
+                date = queryResult.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return date;
+    }
 }
