@@ -2,6 +2,8 @@ module com.mindblank {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires java.desktop;
+    requires core;
 
     exports com.mindblank;
     opens com.mindblank to javafx.fxml;
