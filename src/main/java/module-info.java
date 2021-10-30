@@ -20,4 +20,10 @@ module com.mindblank {
 
     exports com.mindblank.doctor.boundaries;
     opens com.mindblank.doctor.boundaries to javafx.fxml;
+
+    opens com.mindblank.pharmacist.controllers to javafx.fxml;
+    exports com.mindblank.pharmacist.controllers;
+
+    exports com.mindblank.pharmacist.boundaries;
+    opens com.mindblank.pharmacist.boundaries to javafx.fxml;
 }

@@ -13,6 +13,9 @@ public class User {
     protected String phoneNum;
     protected String address;
     protected String userType;
+    protected DatabaseConnection connectSQL = new DatabaseConnection();
+    protected Connection connectDB = connectSQL.getConnection();
+
 
     public User() {
         uName = "Default";

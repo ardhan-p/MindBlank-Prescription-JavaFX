@@ -4,6 +4,9 @@ public class Prescription {
     private String tokenString;
     private String NRIC;
     private String date;
+    private String dosage;
+    private String expiry;
+    private String instructions;
     private boolean collectedStatus;
 
     public Prescription() {
