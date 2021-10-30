@@ -111,7 +111,7 @@ public class DoctorViewPrescriptionMenuUI {
 
     @FXML
     public void viewProfileOnClick(ActionEvent event) {
-
+        DoctorViewProfileMenuUI.displayPage(event, doc);
     }
 
     @FXML

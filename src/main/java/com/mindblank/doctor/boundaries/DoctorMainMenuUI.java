@@ -58,6 +58,7 @@ public class DoctorMainMenuUI {
     // gets doctor info from previous scene
     public void getDoctorInfo(User u) {
         doc = new Doctor(u);
+        doc.setDoctorInfoFromDB(u.getuName());
         welcomeLabel.setText("Welcome Dr. " + doc.getRealName());
     }
 
@@ -72,7 +73,7 @@ public class DoctorMainMenuUI {
     }
 
     public void viewProfileOnClick(ActionEvent event) {
-
+        DoctorViewProfileMenuUI.displayPage(event, doc);
     }
 
     public void onLogout(ActionEvent event) {

@@ -131,7 +131,7 @@ public class DoctorAddPrescriptionMenuUI {
     }
 
     public void viewProfileOnClick(ActionEvent event) {
-
+        DoctorViewProfileMenuUI.displayPage(event, doc);
     }
 
     public void onLogout(ActionEvent event) {

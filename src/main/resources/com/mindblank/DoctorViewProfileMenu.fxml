@@ -12,7 +12,7 @@
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: #caddfc;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="logoutBtn" layoutX="53.0" layoutY="347.0" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="logoutBtn" layoutX="53.0" layoutY="347.0" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
             <Label fx:id="userLabel" layoutX="61.0" layoutY="320.0" text="Doctor">
                <font>
                   <Font size="14.0" />
@@ -28,51 +28,51 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Button fx:id="addPresBtn" layoutX="14.0" layoutY="119.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Add Prescription" />
-            <Button fx:id="addViewBtn" layoutX="14.0" layoutY="156.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="View Prescription" />
+            <Button fx:id="addPresBtn" layoutX="14.0" layoutY="119.0" mnemonicParsing="false" onAction="#addPrescriptionOnClick" prefHeight="26.0" prefWidth="140.0" text="Add Prescription" />
+            <Button fx:id="addViewBtn" layoutX="14.0" layoutY="156.0" mnemonicParsing="false" onAction="#viewPrescriptionOnClick" prefHeight="26.0" prefWidth="140.0" text="View Prescription" />
             <Button fx:id="viewProfileBtn" disable="true" layoutX="14.0" layoutY="194.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="View Profile" />
-            <Button fx:id="homeBtn" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Home" />
+            <Button fx:id="homeBtn" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onAction="#homeOnClick" prefHeight="26.0" prefWidth="140.0" text="Home" />
          </children>
       </AnchorPane>
    </left>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="nameLabel" layoutX="81.0" layoutY="56.0" text="Name">
+            <Label fx:id="nameLabel" layoutX="87.0" layoutY="74.0" text="Name">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="nameText" editable="false" layoutX="177.0" layoutY="53.0" />
+            <TextField fx:id="nameText" editable="false" layoutX="183.0" layoutY="71.0" />
             <Label fx:id="searchStatusLabel" layoutX="247.0" layoutY="86.0" prefHeight="18.0" prefWidth="154.0" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="NRICLabel" layoutX="81.0" layoutY="91.0" text="NRIC">
+            <Label fx:id="NRICLabel" layoutX="87.0" layoutY="109.0" text="NRIC">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="NRICText" editable="false" layoutX="177.0" layoutY="88.0" />
-            <Label fx:id="dobLabel" layoutX="81.0" layoutY="125.0" text="Date Of Birth">
+            <TextField fx:id="NRICText" editable="false" layoutX="183.0" layoutY="106.0" />
+            <Label fx:id="emailLabel" layoutX="87.0" layoutY="146.0" text="Email">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="dobText" editable="false" layoutX="177.0" layoutY="122.0" />
-            <Label fx:id="emailLabel" layoutX="81.0" layoutY="159.0" text="Email">
+            <TextField fx:id="emailText" editable="false" layoutX="183.0" layoutY="143.0" prefHeight="25.0" prefWidth="162.0" />
+            <Label fx:id="addressLabel" layoutX="87.0" layoutY="218.0" text="Address">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="emailText" editable="false" layoutX="177.0" layoutY="156.0" prefHeight="25.0" prefWidth="162.0" />
-            <Label fx:id="addressLabel" layoutX="81.0" layoutY="197.0" text="Address">
+            <TextArea fx:id="addressText" editable="false" layoutX="183.0" layoutY="218.0" prefHeight="109.0" prefWidth="162.0" />
+            <Label fx:id="phoneLabel" layoutX="87.0" layoutY="184.0" text="Phone">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextArea fx:id="addressText" editable="false" layoutX="177.0" layoutY="197.0" prefHeight="109.0" prefWidth="162.0" />
+            <TextField fx:id="phoneText" editable="false" layoutX="183.0" layoutY="181.0" prefHeight="25.0" prefWidth="162.0" />
          </children>
       </AnchorPane>
    </center>
