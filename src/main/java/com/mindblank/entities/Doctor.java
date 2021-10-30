@@ -14,7 +14,6 @@ public class Doctor extends User {
         super(user.uName, user.uPass, user.realName, user.email, user.phoneNum, user.address, user.userType);
     }
 
-    // TODO: change BCE to refer to doctor entity
     public boolean getPatientIC(String patientIC) {
         String validatePatient = "SELECT * FROM USER WHERE BINARY NRIC = '" + patientIC + "' AND TYPE = 'PATIENT';";
 
@@ -161,5 +160,24 @@ public class Doctor extends User {
         }
 
         return date;
+    }
+
+    public String getEmail(String tokenString) {
+        String email = "";
+        String selectEmail = "SELECT USER.email FROM USER INNER JOIN PRESCRIPTION ON USER.NRIC = PRESCRIPTION.NRIC " +
+                             "WHERE tokenString = '" + tokenString + "';";
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(selectEmail);
+
+            while (queryResult.next()) {
+                email = queryResult.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return email;
     }
 }

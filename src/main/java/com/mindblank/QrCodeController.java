@@ -17,23 +17,27 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class QrCodeController {
+    // from https://www.journaldev.com/470/java-qr-code-generator-zxing-example
+    // creates QR code that contains the corresponding string
+    // src/main/resources/qr
     public static void createQRImage(File qrFile, String qrCodeText, int size, String fileType) throws WriterException, IOException {
-        // Create the ByteMatrix for the QR-Code that encodes the given String
+        // create the ByteMatrix for the QR-Code that encodes the given String
         Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<>();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix byteMatrix = qrCodeWriter.encode(qrCodeText, BarcodeFormat.QR_CODE, size, size, hintMap);
 
-        // Make the BufferedImage that are to hold the QRCode
+        // make the BufferedImage that are to hold the QRCode
         int matrixWidth = byteMatrix.getWidth();
         BufferedImage image = new BufferedImage(matrixWidth, matrixWidth, BufferedImage.TYPE_INT_RGB);
         image.createGraphics();
 
-        // Create the QR graphics
+        // create the QR graphics
         Graphics2D graphics = (Graphics2D) image.getGraphics();
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0, 0, matrixWidth, matrixWidth);
-        // Paint and save the image using the ByteMatrix
+
+        // paint and save the image using the ByteMatrix
         graphics.setColor(Color.BLACK);
 
         for (int i = 0; i < matrixWidth; i++) {

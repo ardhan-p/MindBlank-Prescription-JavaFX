@@ -71,7 +71,7 @@ public class DoctorMainMenuUI {
         DoctorViewPrescriptionMenuUI.displayPage(event, doc);
     }
 
-    public void updateProfileOnClick(ActionEvent event) {
+    public void viewProfileOnClick(ActionEvent event) {
 
     }
 

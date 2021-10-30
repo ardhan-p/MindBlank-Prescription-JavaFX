@@ -1,8 +1,12 @@
 package com.mindblank.doctor.controllers;
 
+import com.google.zxing.WriterException;
 import com.mindblank.entities.Doctor;
 import com.mindblank.entities.Medication;
+import com.mindblank.QrCodeController;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -33,7 +37,24 @@ public class DoctorAddPrescriptionController extends DoctorController {
         return token;
     }
 
-    public boolean addPrescription(String patientIC, String date, ArrayList<Medication> medList) {
-        return doc.addPrescription(patientIC, generateToken(), date, medList);
+    public String fetchPatientEmailFromToken(String tokenString) {
+        return doc.getEmail(tokenString);
+    }
+
+    public void generateQR(String tokenString) {
+        String filePath = "src/main/resources/qr/" + tokenString +".png";
+        int size = 150;
+        String fileType = "png";
+        File qrFile = new File(filePath);
+        try {
+            QrCodeController.createQRImage(qrFile, tokenString, size, fileType);
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+    public boolean addPrescription(String patientIC, String tokenString, String date, ArrayList<Medication> medList) {
+        return doc.addPrescription(patientIC, tokenString, date, medList);
     }
 }

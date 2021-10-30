@@ -110,7 +110,7 @@ public class DoctorViewPrescriptionMenuUI {
     }
 
     @FXML
-    public void updateProfileOnClick(ActionEvent event) {
+    public void viewProfileOnClick(ActionEvent event) {
 
     }
 
@@ -147,7 +147,7 @@ public class DoctorViewPrescriptionMenuUI {
         // creates new patient from database query
         // gets date from database query
         // fills the medication list with medication that has the same token string as row
-        // displays popup with above parameters
+        // displays popup with above parameters as it gets passed via the function
         medicationObservableList.clear();
         Patient newPatient = doctorController.fetchPatientInfoInPrescription(tokenString);
         String prescriptionDate = doctorController.fetchPrescriptionDate(tokenString);
