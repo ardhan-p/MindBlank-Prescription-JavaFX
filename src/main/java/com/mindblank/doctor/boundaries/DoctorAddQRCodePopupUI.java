@@ -23,27 +23,7 @@ public class DoctorAddQRCodePopupUI {
     @FXML private Button closeBtn;
     @FXML private ImageView qrCodeImageView;
 
-//    private String successMessage = "";
-//    private String tokenString = "";
-//    private Image qrCode;
     private DoctorAddPrescriptionController doctorController;
-
-//    public void setQrCode(String tokenString) {
-//        doctorController.generateQR(tokenString);
-//        File qrFile = new File("src/main/resources/qr/" + tokenString +".png");
-//        Image qrImage = new Image(qrFile.toURI().toString());
-//        qrCode = qrImage;
-//    }
-//
-//    public void setSuccessLabel(String tokenString) {
-//        String email = doctorController.fetchPatientEmailFromToken(tokenString);
-//
-//        String result = "Email was successfully sent to " +
-//                         email + " with the token " +
-//                         tokenString + " and with the QR code below.";
-//
-//        successMessage = result;
-//    }
 
     public static void displayPage(ActionEvent event, String tokenString, String successMessage, Image qrImage) {
         FXMLLoader loader = new FXMLLoader();

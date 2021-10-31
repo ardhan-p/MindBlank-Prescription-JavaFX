@@ -47,7 +47,7 @@ public class DoctorAddPrescriptionController extends DoctorController {
         String fileType = "png";
         File qrFile = new File(filePath);
         try {
-            QrCodeController.createQRImage(qrFile, tokenString, size, fileType);
+            QrCodeController.storeQRImage(qrFile, tokenString, size, fileType);
         } catch (WriterException | IOException e) {
             e.printStackTrace();
             e.getCause();

@@ -57,7 +57,7 @@ public class DoctorViewProfileMenuUI {
             ui.getDoctorInfo(user);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("View Prescription");
+            stage.setTitle("View Profile");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
