@@ -2,6 +2,7 @@ package com.mindblank.doctor.boundaries;
 
 import com.mindblank.Main;
 import com.mindblank.entities.Medication;
+import com.mindblank.entities.Patient;
 import com.mindblank.entities.Prescription;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,4 +68,6 @@ public class DoctorViewPrescriptionPopupUI {
             e.printStackTrace();
         }
     }
+
+
 }

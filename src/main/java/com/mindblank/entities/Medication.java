@@ -23,6 +23,14 @@ public class Medication {
         this.expiry = expiry;
     }
 
+    public Medication(String medicineName, int dosage, String expiry, String instructions) {
+        this.medicine = new Medicine();
+        this.medicine.setName(medicineName);
+        this.dosage = dosage;
+        this.expiry = expiry;
+        this.instructions = instructions;
+    }
+
     public void setTokenString(String tokenString) {
         this.tokenString = tokenString;
     }

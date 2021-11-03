@@ -9,9 +9,6 @@ module com.mindblank {
     exports com.mindblank.login;
     opens com.mindblank.login to javafx.fxml;
 
-    exports com.mindblank.patient;
-    opens com.mindblank.patient to javafx.fxml;
-
     exports com.mindblank.entities;
     opens com.mindblank.entities to javafx.fxml;
 
@@ -20,4 +17,11 @@ module com.mindblank {
 
     exports com.mindblank.doctor.boundaries;
     opens com.mindblank.doctor.boundaries to javafx.fxml;
+
+    exports com.mindblank.patient.boundaries;
+    opens com.mindblank.patient.boundaries to javafx.fxml;
+
+    exports com.mindblank.patient.controllers;
+    opens com.mindblank.patient.controllers to javafx.fxml;
+
 }

@@ -6,22 +6,22 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="doctorMainMenuPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="patientMainMenuPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.patient.boundaries.PatientMainMenuUI">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: #a9dbaa;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="logoutBtn" layoutX="53.0" layoutY="347.0" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="logoutBtn" layoutX="53.0" layoutY="347.0" mnemonicParsing="false" onAction="#patientLogoutOnClick" text="Logout" />
             <Label fx:id="userLabel" layoutX="61.0" layoutY="320.0" text="Patient">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="timeLabel" layoutX="66.0" layoutY="24.0" text="Time">
+            <Label fx:id="timeLabel" layoutX="66.0" layoutY="24.0" prefHeight="24.0" prefWidth="46.0" text="Time">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="dateLabel" layoutX="53.0" layoutY="49.0" prefHeight="15.0" prefWidth="78.0" text="Date">
+            <Label fx:id="dateLabel" layoutX="28.0" layoutY="57.0" prefHeight="32.0" prefWidth="90.0" text="Date">
                <font>
                   <Font size="12.0" />
                </font>
@@ -32,14 +32,14 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="viewPastPresBtn" layoutX="63.0" layoutY="119.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="View Past Prescription" />
-            <Button fx:id="viewCurrentPresBtn" layoutX="229.0" layoutY="119.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="View Current Prescription" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="updateProfileBtn" layoutX="146.0" layoutY="211.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" text="Update Profile" />
+            <Button fx:id="viewPastPresBtn" layoutX="63.0" layoutY="119.0" mnemonicParsing="false" onAction="#viewPastPrescriptionOnClick" prefHeight="70.0" prefWidth="140.0" text="View Past Prescription" />
+            <Button fx:id="viewNewPresBtn" layoutX="229.0" layoutY="119.0" mnemonicParsing="false" onAction="#viewNewPrescriptionOnClick" prefHeight="70.0" prefWidth="140.0" text="View New Prescription" textAlignment="CENTER" wrapText="true" />
             <Label fx:id="welcomeLabel" layoutX="67.0" layoutY="61.0" prefHeight="18.0" prefWidth="299.0" text="Welcome message">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <Button fx:id="viewProfileBtn" layoutX="143.0" layoutY="214.0" mnemonicParsing="false" onAction="#patientViewProfileOnClick" prefHeight="67.0" prefWidth="147.0" text="View Profile" />
          </children>
       </AnchorPane>
    </center>

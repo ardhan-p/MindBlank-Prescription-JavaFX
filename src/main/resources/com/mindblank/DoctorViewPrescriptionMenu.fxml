@@ -56,7 +56,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TableView fx:id="prescriptionListTable" layoutX="28.0" layoutY="137.0" prefHeight="243.0" prefWidth="385.0">
+            <TableView fx:id="prescriptionListTable" layoutX="28.0" layoutY="137.0" onMouseClicked="#onRowSelect" prefHeight="243.0" prefWidth="385.0">
                <columns>
                   <TableColumn fx:id="prescriptionTokenColumn" prefWidth="190.0" text="Token No." />
                   <TableColumn fx:id="prescriptionDateColumn" prefWidth="194.0" text="Date Issued" />
