@@ -1,7 +1,6 @@
 package com.mindblank.admin.boundaries;
 
 import com.mindblank.Main;
-import com.mindblank.doctor.boundaries.DoctorAddPrescriptionMenuUI;
 import com.mindblank.entities.Admin;
 import com.mindblank.entities.User;
 import javafx.collections.FXCollections;
@@ -102,6 +101,6 @@ public class AdminAddUserMenuUI {
     }
 
     public void searchUserProfileOnClick(ActionEvent event) {
-//        AdminMainMenuUI.displayPage(event, admin);
+        AdminSearchUserMenuUI.displayPage(event, admin);
     }
 }

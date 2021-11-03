@@ -69,7 +69,7 @@ public class AdminMainMenuUI {
     }
 
     public void searchUserOnClick(ActionEvent event) {
-//        AdminSearchUserMenuUI.displayPage(event, admin);
+        AdminSearchUserMenuUI.displayPage(event, admin);
     }
 
     public void onLogout(ActionEvent event) {
