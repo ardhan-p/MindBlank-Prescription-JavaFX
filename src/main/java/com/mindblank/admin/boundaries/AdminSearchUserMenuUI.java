@@ -64,8 +64,15 @@ public class AdminSearchUserMenuUI {
         admin.setAdminInfoFromDB(u.getuName());
     }
 
-    public void createUserOnClick(ActionEvent event) {
-        // TODO: add SQL query in controller and entity class
+    public void searchUserOnClick(ActionEvent event) {
+        if (nricInput.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error occurred!");
+            alert.setContentText("Please fill in NRIC!");
+
+            alert.showAndWait();
+        }
     }
 
     public void onLogout(ActionEvent event) {

@@ -75,7 +75,7 @@ public class AdminViewUpdateUserMenuUI {
     }
 
     public void createUserOnClick(ActionEvent event) {
-        // TODO: add SQL query in controller and entity class
+
     }
 
     public void onLogout(ActionEvent event) {

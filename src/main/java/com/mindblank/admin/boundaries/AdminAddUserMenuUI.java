@@ -1,6 +1,7 @@
 package com.mindblank.admin.boundaries;
 
 import com.mindblank.Main;
+import com.mindblank.admin.controllers.AdminAddUserController;
 import com.mindblank.entities.Admin;
 import com.mindblank.entities.User;
 import javafx.collections.FXCollections;
@@ -37,6 +38,7 @@ public class AdminAddUserMenuUI {
     @FXML private Button createUserBtn;
 
     private Admin admin;
+    private AdminAddUserController adminController;
 
     public void initialize() {
         // set time data
@@ -48,8 +50,8 @@ public class AdminAddUserMenuUI {
 
         // fill combobox of user
         ObservableList<String> userTypes = FXCollections.observableArrayList(
-                "DOCTOR",
                 "PATIENT",
+                "DOCTOR",
                 "PHARMACIST"
         );
         userTypeBox.setItems(userTypes);
@@ -77,10 +79,64 @@ public class AdminAddUserMenuUI {
     public void getAdminInfo(User u) {
         admin = new Admin(u);
         admin.setAdminInfoFromDB(u.getuName());
+        adminController = new AdminAddUserController(admin);
+    }
+
+    public boolean checkAllFields() {
+        // if every field is NOT empty, valid == true
+        // else false
+        boolean valid = !userTypeBox.getSelectionModel().isEmpty() && !nricField.getText().isEmpty() && !passField.getText().isEmpty()
+                        && !nameField.getText().isEmpty() && !emailField.getText().isEmpty()
+                        && !phoneField.getText().isEmpty() && !addressField.getText().isEmpty();
+
+        return valid;
+    }
+
+    public void clearAllFields() {
+        nricField.clear();
+        passField.clear();
+        nameField.clear();
+        emailField.clear();
+        phoneField.clear();
+        addressField.clear();
+        nricField.clear();
+        userTypeBox.getSelectionModel().clearSelection();
     }
 
     public void createUserOnClick(ActionEvent event) {
-        // TODO: add SQL query in controller and entity class
+        User u = new User(nricField.getText(), passField.getText(), nameField.getText(), emailField.getText(),
+                 phoneField.getText(), addressField.getText(), userTypeBox.getValue());
+
+        if (checkAllFields() == false) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error occurred!");
+            alert.setContentText("Please fill in all of the fields");
+            alert.showAndWait();
+        } else {
+            if (adminController.validateNRIC(nricField.getText())) {
+                if (adminController.addUserToDB(u)) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success!");
+                    alert.setHeaderText("Successfully added user.");
+                    alert.setContentText("User " + u.getuName() + " has been added to the database!");
+                    alert.showAndWait();
+                    clearAllFields();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error occurred!");
+                    alert.setContentText("Database insertion error has occurred");
+                    alert.showAndWait();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error occurred!");
+                alert.setContentText("User NRIC is already in system!");
+                alert.showAndWait();
+            }
+        }
     }
 
     public void onLogout(ActionEvent event) {

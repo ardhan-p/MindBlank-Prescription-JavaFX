@@ -27,4 +27,41 @@ public class Admin extends User {
             e.getCause();
         }
     }
+
+    public boolean checkNRIC(String NRIC) {
+        String validate = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(validate);
+
+            if (queryResult.next() == false) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return false;
+    }
+
+    public boolean insertUser(User u) {
+        String addUser = "INSERT INTO USER (NRIC, pass, name, email, phoneNum, address, type) " +
+                "VALUES ('" + u.getuName() + "', '" + u.getuPass() + "', '" + u.getRealName() + "', '" + u.getEmail() +
+                "', '" + u.getPhoneNum() + "', '" + u.getAddress() + "', '" + u.getUserType() + "');";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.execute(addUser);
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+            return false;
+        }
+    }
 }
