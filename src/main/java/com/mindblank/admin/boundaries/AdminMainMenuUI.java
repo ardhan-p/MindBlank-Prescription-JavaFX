@@ -1,11 +1,7 @@
 package com.mindblank.admin.boundaries;
 
 import com.mindblank.Main;
-import com.mindblank.doctor.boundaries.DoctorAddPrescriptionMenuUI;
-import com.mindblank.doctor.boundaries.DoctorMainMenuUI;
-import com.mindblank.doctor.boundaries.DoctorViewPrescriptionMenuUI;
 import com.mindblank.entities.Admin;
-import com.mindblank.entities.Doctor;
 import com.mindblank.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +25,7 @@ public class AdminMainMenuUI {
     @FXML private Button addPresBtn;
     @FXML private Button viewPresBtn;
     @FXML private Button updateProfileBtn;
+
     private Admin admin;
 
     @FXML
@@ -63,16 +60,16 @@ public class AdminMainMenuUI {
     public void getAdminInfo(User u) {
         admin = new Admin(u);
         admin.setAdminInfoFromDB(u.getuName());
-        welcomeLabel.setText("Welcome Dr. " + admin.getRealName());
+        welcomeLabel.setText("Welcome Admin " + admin.getRealName());
     }
 
     // action listeners
     public void addUserOnClick(ActionEvent event) {
-//        AdminAddUserMenuUI.displayPage(event, doc);
+        AdminAddUserMenuUI.displayPage(event, admin);
     }
 
     public void searchUserOnClick(ActionEvent event) {
-//        AdminSearchUserMenuUI.displayPage(event, doc);
+//        AdminSearchUserMenuUI.displayPage(event, admin);
     }
 
     public void onLogout(ActionEvent event) {
