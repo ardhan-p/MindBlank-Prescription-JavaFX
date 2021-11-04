@@ -31,10 +31,13 @@ public class PharmacistViewPrescriptionMenuUI {
     @FXML private Label timeLabel;
     @FXML private Label dateLabel;
 
+    //Main menu
     @FXML private TextField patientNameText;
     @FXML private TextField patientEmailText;
     @FXML private TextField patientICText;
     @FXML private TextField dateText;
+    @FXML private Button updatePresBtn;
+    @FXML private Label statusLabel;
     @FXML private TableView<Medication> medicationTable;
     @FXML private TableColumn<Medication, String> medicineNameColumn;
     @FXML private TableColumn<Medication, Integer> dosageColumn;
@@ -46,6 +49,9 @@ public class PharmacistViewPrescriptionMenuUI {
     private ObservableList<Medication> medicationObservableList;
     private Pharmacist pharm;
     private PharmacistSearchPrescriptionController pharmacistController;
+
+    //Initializing alert object
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     public void setCurrentTokenString(String currentTokenString) {
         this.currentTokenString = currentTokenString;
@@ -112,6 +118,23 @@ public class PharmacistViewPrescriptionMenuUI {
         pharmacistController.fetchUserMedication(currentTokenString, medicationObservableList);
     }
 
+    //Update button
+    @FXML
+    public void onUpdate (ActionEvent event){
+        //Creates an alert popup for confirmation
+        alert.setTitle("Collection Confirmation Message");
+        alert.setHeaderText(null);
+        alert.setContentText("Patient has collected their medication successfully!");
+        alert.showAndWait();
+        //Code for database update
+        pharmacistController.updatePrescriptionStatus(currentTokenString);
+        //Code for status label
+        int statInt = pharmacistController.updateStatusBoole(currentTokenString);
+        if (statInt == 1){
+            statusLabel.setText("Status: Collected");
+        }
+    }
+
     // Side menu navigation
     public void homeOnClick(ActionEvent event){
         PharmacistMainMenuUI.displayPage(event, pharm);
@@ -130,5 +153,4 @@ public class PharmacistViewPrescriptionMenuUI {
             e.printStackTrace();
         }
     }
-
 }

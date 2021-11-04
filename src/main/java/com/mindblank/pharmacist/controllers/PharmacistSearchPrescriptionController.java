@@ -23,5 +23,15 @@ public class PharmacistSearchPrescriptionController extends PharmacistController
         return pharm.getPrescriptionDate(token);
     }
 
+    //For updating collectedStatus in DB
+    public void updatePrescriptionStatus(String token){
+       pharm.updateStatus(token);
+    }
+
+    //To return collectedStatus value in DB
+    public int updateStatusBoole(String token){
+        return pharm.updateStatusBool(token);
+    }
+
 
 }

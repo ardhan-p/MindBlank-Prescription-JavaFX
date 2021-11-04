@@ -90,4 +90,41 @@ public class Pharmacist extends User {
         return date;
     }
 
+    public void updateStatus(String tokenString) {
+        String updateSt = " UPDATE PRESCRIPTION " +
+                          "SET collectedStatus = 1 " +
+                          "WHERE tokenString = '" + tokenString + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.execute(updateSt);
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+    public int updateStatusBool(String tokenString) {
+        int hold = 0;
+        String updateBool = " SELECT collectedStatus " +
+                "FROM PRESCRIPTION " +
+                "WHERE tokenString = '" + tokenString + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(updateBool);
+
+            while(queryResult.next()) {
+                hold = queryResult.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+        return hold;
+
+    }
+
+
 }
