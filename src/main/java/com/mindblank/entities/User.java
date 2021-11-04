@@ -21,6 +21,16 @@ public class User {
         uPass = "Default";
     }
 
+    public User(User u) {
+        this.uName = u.uName;
+        this.uPass = u.uPass;
+        this.realName = u.realName;
+        this.email = u.email;
+        this.phoneNum = u.phoneNum;
+        this.address = u.address;
+        this.userType = u.userType;
+    }
+
     public User(String uName, String uPass) {
         this.uName = uName;
         this.uPass = uPass;
@@ -129,5 +139,27 @@ public class User {
         }
 
         return false;
+    }
+
+    public void setUserInfoFromDB(String NRIC) {
+        String getDoctorInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(getDoctorInfo);
+
+            while (queryResult.next()) {
+                this.uName = queryResult.getString(1);
+                this.uPass = queryResult.getString(2);
+                this.realName = queryResult.getString(3);
+                this.email = queryResult.getString(4);
+                this.phoneNum = queryResult.getString(5);
+                this.address = queryResult.getString(6);
+                this.userType = queryResult.getString(7);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 }

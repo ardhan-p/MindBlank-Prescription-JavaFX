@@ -58,9 +58,9 @@
             <Label fx:id="emailLabel" layoutX="97.0" layoutY="204.0" text="Email:" />
             <Label fx:id="phoneLabel" layoutX="44.0" layoutY="244.0" text="Phone Number:" />
             <Label fx:id="addressLabel" layoutX="76.0" layoutY="280.0" text="Address:" />
-            <Button fx:id="updateBtn" layoutX="248.0" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Update Profile" />
+            <Button fx:id="updateBtn" layoutX="248.0" layoutY="349.0" mnemonicParsing="false" onAction="#updateOnClick" prefHeight="25.0" prefWidth="104.0" text="Update Profile" />
             <TextField fx:id="userTypeField" disable="true" layoutX="235.0" layoutY="51.0" />
-            <Button fx:id="editBtn" layoutX="61.0" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Toggle Edit Mode" />
+            <Button fx:id="editBtn" layoutX="61.0" layoutY="349.0" mnemonicParsing="false" onAction="#editOnClick" prefHeight="25.0" prefWidth="139.0" text="Toggle Edit Mode" />
             <PasswordField fx:id="passField" disable="true" layoutX="235.0" layoutY="121.0" />
          </children>
       </AnchorPane>

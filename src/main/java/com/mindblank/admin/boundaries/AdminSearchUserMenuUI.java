@@ -1,6 +1,7 @@
 package com.mindblank.admin.boundaries;
 
 import com.mindblank.Main;
+import com.mindblank.admin.controllers.AdminSearchUserController;
 import com.mindblank.entities.Admin;
 import com.mindblank.entities.User;
 import javafx.event.ActionEvent;
@@ -30,6 +31,8 @@ public class AdminSearchUserMenuUI {
     @FXML private Button searchBtn;
 
     private Admin admin;
+    private User user;
+    private AdminSearchUserController adminController;
 
     public void initialize() {
         // set time data
@@ -52,7 +55,7 @@ public class AdminSearchUserMenuUI {
             ui.getAdminInfo(user);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Add User");
+            stage.setTitle("Search User");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,6 +65,7 @@ public class AdminSearchUserMenuUI {
     public void getAdminInfo(User u) {
         admin = new Admin(u);
         admin.setAdminInfoFromDB(u.getuName());
+        adminController = new AdminSearchUserController(admin);
     }
 
     public void searchUserOnClick(ActionEvent event) {
@@ -70,8 +74,19 @@ public class AdminSearchUserMenuUI {
             alert.setTitle("Error");
             alert.setHeaderText("Error occurred!");
             alert.setContentText("Please fill in NRIC!");
-
             alert.showAndWait();
+        } else {
+            if (adminController.validateNRIC(nricInput.getText())) {
+                user = new User();
+                adminController.getUserFromDB(nricInput.getText(), user);
+                AdminViewUpdateUserMenuUI.displayPage(event, admin, user);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error occurred!");
+                alert.setContentText("User NRIC not found!");
+                alert.showAndWait();
+            }
         }
     }
 

@@ -11,7 +11,7 @@ public class AdminAddUserController {
     }
 
     public boolean validateNRIC(String NRIC) {
-        return admin.checkNRIC(NRIC);
+        return admin.checkNRIC(NRIC, false);
     }
 
     public boolean addUserToDB(User u) {

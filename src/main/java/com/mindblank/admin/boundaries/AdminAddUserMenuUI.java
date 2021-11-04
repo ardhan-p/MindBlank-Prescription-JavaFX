@@ -76,6 +76,7 @@ public class AdminAddUserMenuUI {
         }
     }
 
+    // get admin info from previous scene
     public void getAdminInfo(User u) {
         admin = new Admin(u);
         admin.setAdminInfoFromDB(u.getuName());
@@ -103,6 +104,10 @@ public class AdminAddUserMenuUI {
         userTypeBox.getSelectionModel().clearSelection();
     }
 
+    // creates user from user inputs
+    // checks if fields are filled
+    // checks if nric has existed
+    // checks if database insertion has thrown error
     public void createUserOnClick(ActionEvent event) {
         User u = new User(nricField.getText(), passField.getText(), nameField.getText(), emailField.getText(),
                  phoneField.getText(), addressField.getText(), userTypeBox.getValue());

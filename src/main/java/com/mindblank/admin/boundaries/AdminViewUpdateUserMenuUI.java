@@ -1,7 +1,9 @@
 package com.mindblank.admin.boundaries;
 
 import com.mindblank.Main;
+import com.mindblank.admin.controllers.AdminViewUpdateUserController;
 import com.mindblank.entities.Admin;
+import com.mindblank.entities.Patient;
 import com.mindblank.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,23 +22,39 @@ public class AdminViewUpdateUserMenuUI {
     // side menu fxml
     @FXML
     private Button homeBtn;
-    @FXML private Button searchUserBtn;
-    @FXML private Button logoutBtn;
-    @FXML private Label timeLabel;
-    @FXML private Label dateLabel;
+    @FXML
+    private Button searchUserBtn;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private Label timeLabel;
+    @FXML
+    private Label dateLabel;
 
     // main pane fxml
-    @FXML private TextField userTypeField;
-    @FXML private TextField nricField;
-    @FXML private PasswordField passField;
-    @FXML private TextField nameField;
-    @FXML private TextField emailField;
-    @FXML private TextField phoneField;
-    @FXML private TextField addressField;
-    @FXML private Button editBtn;
-    @FXML private Button updateBtn;
+    @FXML
+    private TextField userTypeField;
+    @FXML
+    private TextField nricField;
+    @FXML
+    private PasswordField passField;
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private TextField phoneField;
+    @FXML
+    private TextField addressField;
+    @FXML
+    private Button editBtn;
+    @FXML
+    private Button updateBtn;
 
     private Admin admin;
+    private User searchedUser;
+    private AdminViewUpdateUserController controller;
+    private boolean editMode = false;
 
     public void initialize() {
         // set time data
@@ -52,30 +67,101 @@ public class AdminViewUpdateUserMenuUI {
 
     // display page from previous scene
     // carries admin data from previous scene to current scene
-    public static void displayPage(ActionEvent event, User user) {
+    public static void displayPage(ActionEvent event, User user, User searchedUser) {
         FXMLLoader loader = new FXMLLoader();
         try {
             loader.setLocation(Main.class.getResource("AdminViewUpdateUserMenu.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             AdminViewUpdateUserMenuUI ui = loader.getController();
-            ui.getAdminInfo(user);
+            ui.getAdminAndPatientInfo(user, searchedUser);
+            ui.setUserFields();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Add User");
+            stage.setTitle("View / Update User");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void getAdminInfo(User u) {
+    public void getAdminAndPatientInfo(User u, User searchedUser) {
         admin = new Admin(u);
+        this.searchedUser = new User(searchedUser);
         admin.setAdminInfoFromDB(u.getuName());
+        controller = new AdminViewUpdateUserController(admin);
     }
 
-    public void createUserOnClick(ActionEvent event) {
+    public void setUserFields() {
+        userTypeField.setText(searchedUser.getUserType());
+        nricField.setText(searchedUser.getuName());
+        passField.setText(searchedUser.getuPass());
+        nameField.setText(searchedUser.getRealName());
+        emailField.setText(searchedUser.getEmail());
+        phoneField.setText(searchedUser.getPhoneNum());
+        addressField.setText(searchedUser.getAddress());
+    }
 
+    public boolean checkAllFields() {
+        // if every field is NOT empty, valid == true
+        // else false
+        boolean valid = !nricField.getText().isEmpty() && !passField.getText().isEmpty()
+                && !nameField.getText().isEmpty() && !emailField.getText().isEmpty()
+                && !phoneField.getText().isEmpty() && !addressField.getText().isEmpty();
+
+        return valid;
+    }
+
+    public void editOnClick(ActionEvent event) {
+        if (editMode) {
+            passField.setDisable(true);
+            nameField.setDisable(true);
+            emailField.setDisable(true);
+            phoneField.setDisable(true);
+            addressField.setDisable(true);
+            editMode = false;
+        } else {
+            passField.setDisable(false);
+            nameField.setDisable(false);
+            emailField.setDisable(false);
+            phoneField.setDisable(false);
+            addressField.setDisable(false);
+            editMode = true;
+        }
+    }
+
+    public void updateOnClick(ActionEvent event) {
+        User u = new User(nricField.getText(), passField.getText(), nameField.getText(), emailField.getText(),
+                phoneField.getText(), addressField.getText(), userTypeField.getText());
+
+        if (checkAllFields() == false) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error occurred!");
+            alert.setContentText("Please fill in all of the fields");
+            alert.showAndWait();
+        } else {
+            if (controller.updateUserInfo(u)) {
+                passField.setDisable(true);
+                nameField.setDisable(true);
+                emailField.setDisable(true);
+                phoneField.setDisable(true);
+                addressField.setDisable(true);
+                editMode = false;
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success!");
+                alert.setHeaderText("Successfully updated user.");
+                alert.setContentText("User " + u.getuName() + " has been updated in the database!");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error occurred!");
+                alert.setContentText("Database update error has occurred");
+                alert.showAndWait();
+            }
+        }
     }
 
     public void onLogout(ActionEvent event) {
