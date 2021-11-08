@@ -41,3 +41,4 @@ jobs:
         run: |
           cd src/test/java/com/mindblank/test
           ls -a
+          mvn test
