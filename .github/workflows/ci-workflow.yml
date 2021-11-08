@@ -21,9 +21,7 @@ jobs:
         # UPDATE mysql.user SET Password=PASSWORD('password123') WHERE User = 'root';
         run: |
           sudo /etc/init.d/mysql start
-          mysql -u root -p root
           mysql -e 'CREATE DATABASE mindblank_db;' -uroot -proot
-
 
       - name: Step 4 - create required table and data in database
         run: |
