@@ -22,4 +22,5 @@ module com.mindblank {
 
     exports com.mindblank.doctor.boundaries;
     opens com.mindblank.doctor.boundaries to javafx.fxml;
+
 }
