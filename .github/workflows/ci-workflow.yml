@@ -39,5 +39,5 @@ jobs:
 
       - name: Step 7 - test all of the test classes
         run: |
-          cd src/test/java/com.mindblank.test
+          cd src/test/java/com/mindblank/test
           ls -a
