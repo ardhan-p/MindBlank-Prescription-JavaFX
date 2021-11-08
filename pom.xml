@@ -91,7 +91,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <argLine>--add-opens com.mindblank/com.mindblank.test=ALL-UNAMED</argLine>
+                    <argLine>--add-opens com.mindblank/com.mindblank.test=ALL-UNNAMED</argLine>
                 </configuration>
             </plugin>
             <plugin>
