@@ -43,5 +43,10 @@ class LoginTest {
         assertEquals(true, testUser.login(testUser.getuName(), testUser.getuPass()));
     }
 
-    // add deliberate failed tests
+    @Test
+    @DisplayName("TC-1-6 but expected false")
+    void loginIncorrectUser() {
+        User testUser = new User("doctor", "pass002");
+        assertEquals(false, testUser.login(testUser.getuName(), testUser.getuPass()));
+    }
 }
