@@ -38,4 +38,4 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Step 7 - test all of the test classes
-        run: mvn test
+        run: mvn -Dtest=LoginTest test
