@@ -20,14 +20,12 @@ jobs:
       - name: Step 3 - create new MySQL server and database
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE mindblank_db' -uroot -proot
+          mysql -e 'CREATE DATABASE mindblank_db' -u root
 
       - name: Step 4 - create required table and data in database
         run: |
           mysql -u root -p mindblank_db -e "CREATE TABLE USER (NRIC varchar(9) COLLATE utf8mb4_0900_as_cs NOT NULL, pass varchar(45) COLLATE utf8mb4_0900_as_cs NOT NULL, name varchar(25) COLLATE utf8mb4_0900_as_cs NOT NULL, email varchar(45) COLLATE utf8mb4_0900_as_cs NOT NULL, phoneNum varchar(45) COLLATE utf8mb4_0900_as_cs NOT NULL, address varchar(45) COLLATE utf8mb4_0900_as_cs NOT NULL, type enum('PATIENT','DOCTOR','PHARMACIST','ADMIN') COLLATE utf8mb4_0900_as_cs NOT NULL, PRIMARY KEY (NRIC), UNIQUE KEY NRIC_UNIQUE (NRIC), UNIQUE KEY email_UNIQUE (email), UNIQUE KEY name_UNIQUE (name), UNIQUE KEY phoneNum_UNIQUE (phoneNum) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;"
-          root
           mysql -u root -p mindblank_db -e "INSERT INTO USER (NRIC, pass, name, email, phoneNum, address, type) VALUES ('doctor', 'pass002', 'name2', 'user2@email.com', '00000002', 'Street 2', 'DOCTOR');"
-          root
 
       - name: Step 5 - set up JDK 11
         uses: actions/setup-java@v2
