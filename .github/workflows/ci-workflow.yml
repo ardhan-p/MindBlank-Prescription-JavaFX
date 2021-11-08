@@ -20,8 +20,9 @@ jobs:
       - name: Step 3 - create new MySQL server and database
         run: |
           sudo /etc/init.d/mysql start
-          mysql
-          ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+          mysql -h host -u root -p
+          root
+          ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password123';
           FLUSH PRIVILEGES;
           CREATE DATABASE mindblank_db;
           USE mindblank_db
