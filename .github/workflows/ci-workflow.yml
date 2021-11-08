@@ -18,16 +18,8 @@ jobs:
         run: sudo service mysql stop
 
       - name: Step 3 - create new MySQL server and database
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          host port: 3306 # Optional, default value is 3306. The port of host
-          container port: 3306 # Optional, default value is 3306. The port of container
-          character set server: 'utf8mb4' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
-          collation server: 'utf8mb4_0900_as_cs' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-          mysql version: '8' # Optional, default value is "latest". The version of the MySQL
-          mysql database: 'mindblank_db' # Optional, default value is "test". The specified database which will be create
-          mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-          mysql password: 'password123' # Required if "mysql user" exists. The password for the "mysql user"
+        run: |
+          sudo /etc/init.d/mysql start
 
       - name: Step 4 - create required table and data in database
         run: |
