@@ -25,6 +25,7 @@ public class DoctorAddQRCodePopupUI {
 
     private DoctorAddPrescriptionController doctorController;
 
+    // displays popup
     public static void displayPage(ActionEvent event, String tokenString, String successMessage, Image qrImage) {
         FXMLLoader loader = new FXMLLoader();
         try {
