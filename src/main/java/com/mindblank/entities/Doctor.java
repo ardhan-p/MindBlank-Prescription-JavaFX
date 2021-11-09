@@ -37,7 +37,6 @@ public class Doctor extends User {
         return false;
     }
 
-    // TODO: add QR code generation
     // adds prescription details to prescription sql table
     // adds all medicine in arraylist that is associated with said prescription to medication sql table
     public boolean addPrescription(String patientIC, String token, String date, ArrayList<Medication> medList) {

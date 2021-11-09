@@ -9,8 +9,6 @@ import java.sql.Statement;
 public class Medicine {
     private int medicineID;
     private String name;
-    DatabaseConnection connectSQL = new DatabaseConnection();
-    Connection connectDB = connectSQL.getConnection();
 
     public Medicine() {
         medicineID = 0;
@@ -44,6 +42,8 @@ public class Medicine {
     }
 
     private void setMedicineNameFromDB() {
+        DatabaseConnection connectSQL = new DatabaseConnection();
+        Connection connectDB = connectSQL.getConnection();
         String selectName = "SELECT name FROM MEDICINE WHERE medicineID = " + medicineID + ";";
 
         try {
