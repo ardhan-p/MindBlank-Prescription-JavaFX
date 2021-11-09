@@ -174,8 +174,6 @@ public class DoctorAddPrescriptionMenuUI {
         // creates token for prescription
         String tokenString = doctorController.generateToken();
 
-
-
         if (doctorController.addPrescription(patientInput.getText(), tokenString, dateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), medArrayList)) {
             // create success message for popup
             String successPopupMessage = "Email was successfully sent to " +
