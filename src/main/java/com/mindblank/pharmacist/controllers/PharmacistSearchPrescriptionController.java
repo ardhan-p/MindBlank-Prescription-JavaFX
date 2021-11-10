@@ -5,13 +5,15 @@ import com.mindblank.entities.Patient;
 import com.mindblank.entities.Pharmacist;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+
 public class PharmacistSearchPrescriptionController extends PharmacistController{
     public PharmacistSearchPrescriptionController(Pharmacist pharm) {
         super(pharm);
     }
 
-    public void fetchUserMedication(String token, ObservableList<Medication> medicationObservableList){
-        pharm.getMedication(token, medicationObservableList);
+    public ArrayList<Medication> fetchUserMedication(String token) {
+        return pharm.getMedication(token);
     }
 
     public Patient fetchPatientInfoInPrescription(String token){
@@ -24,14 +26,7 @@ public class PharmacistSearchPrescriptionController extends PharmacistController
     }
 
     //For updating collectedStatus in DB
-    public void updatePrescriptionStatus(String token){
-       pharm.updateStatus(token);
+    public boolean updatePrescriptionStatus(String token){
+        return pharm.updateStatus(token);
     }
-
-    //To return collectedStatus value in DB
-    public int updateStatusBoole(String token){
-        return pharm.updateStatusBool(token);
-    }
-
-
 }

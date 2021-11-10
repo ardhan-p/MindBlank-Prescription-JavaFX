@@ -113,11 +113,6 @@ public class PharmacistViewPrescriptionMenuUI {
         pharmacistController = new PharmacistSearchPrescriptionController(pharm);
     }
 
-    private void displayPrescription(String token){
-        medicationTable.getItems().clear();
-        pharmacistController.fetchUserMedication(currentTokenString, medicationObservableList);
-    }
-
     //Update button
     @FXML
     public void onUpdate (ActionEvent event){
@@ -127,10 +122,8 @@ public class PharmacistViewPrescriptionMenuUI {
         alert.setContentText("Patient has collected their medication successfully!");
         alert.showAndWait();
         //Code for database update
-        pharmacistController.updatePrescriptionStatus(currentTokenString);
-        //Code for status label
-        int statInt = pharmacistController.updateStatusBoole(currentTokenString);
-        if (statInt == 1){
+        boolean status = pharmacistController.updatePrescriptionStatus(currentTokenString);
+        if (status == true){
             statusLabel.setText("Status: Collected");
         }
     }

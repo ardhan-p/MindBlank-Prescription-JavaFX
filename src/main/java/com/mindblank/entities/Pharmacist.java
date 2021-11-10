@@ -34,9 +34,10 @@ public class Pharmacist extends User {
         return false;
     }
 
-    public void getMedication(String token, ObservableList<Medication> medicationObservableList){
+    public ArrayList<Medication> getMedication(String token){
         String selectMedication = "SELECT medicine.name, medication.dosage, medication.expiry, medication.instructions " +
                 "FROM MEDICATION INNER JOIN MEDICINE ON medication.medicineID = medicine.medicineID WHERE medication.tokenString = '" + token + "';";
+        ArrayList<Medication> medList = new ArrayList<Medication>();
 
         try {
             Statement statement = connectDB.createStatement();
@@ -44,12 +45,14 @@ public class Pharmacist extends User {
 
             while (queryResult.next()) {
                 Medication newMed = new Medication(queryResult.getString(1), queryResult.getInt(2), queryResult.getString(3), queryResult.getString(4));
-                medicationObservableList.add(newMed);
+                medList.add(newMed);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+
+        return medList;
     }
 
     public Patient viewPatientData(String tokenString) {
@@ -90,41 +93,39 @@ public class Pharmacist extends User {
         return date;
     }
 
-    public void updateStatus(String tokenString) {
-        String updateSt = " UPDATE PRESCRIPTION " +
-                          "SET collectedStatus = 1 " +
-                          "WHERE tokenString = '" + tokenString + "';";
+    public boolean updateStatus (String tokenString) {
+        boolean hold = true;
+        int hold2 = 0;
+        String updateStat = " UPDATE PRESCRIPTION " +
+                "SET collectedStatus = 1 " +
+                "WHERE tokenString = '" + tokenString + "';";
 
-        try {
-            Statement statement = connectDB.createStatement();
-            statement.execute(updateSt);
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
-
-    public int updateStatusBool(String tokenString) {
-        int hold = 0;
         String updateBool = " SELECT collectedStatus " +
                 "FROM PRESCRIPTION " +
                 "WHERE tokenString = '" + tokenString + "';";
 
         try {
             Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(updateBool);
+            statement.execute(updateStat);
 
-            while(queryResult.next()) {
-                hold = queryResult.getInt(1);
+            Statement statement2 = connectDB.createStatement();
+            ResultSet queryResult = statement2.executeQuery(updateBool);
+
+            while (queryResult.next()) {
+                hold2 = queryResult.getInt(1);
+            }
+
+            if (hold2 == 1) {
+                hold = true;
+            } else {
+                hold = false;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+
         return hold;
-
     }
-
-
 }

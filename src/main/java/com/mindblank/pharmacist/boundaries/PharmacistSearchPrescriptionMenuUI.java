@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PharmacistSearchPrescriptionMenuUI {
@@ -61,9 +62,11 @@ public class PharmacistSearchPrescriptionMenuUI {
     public void displayView(ActionEvent event) {
         medicationObservableList.clear();
         Patient newPatient = pharmacistController.fetchPatientInfoInPrescription(tokenInput.getText());
-        System.out.println(newPatient.getRealName());
         String prescriptionDate = pharmacistController.fetchPrescriptionDate(tokenInput.getText());
-        pharmacistController.fetchUserMedication(tokenInput.getText(), medicationObservableList);
+        ArrayList<Medication> medList = pharmacistController.fetchUserMedication(tokenInput.getText());
+        for (Medication m : medList) {
+            medicationObservableList.add(m);
+        }
         PharmacistViewPrescriptionMenuUI.displayPage(event, pharm, tokenInput.getText(), medicationObservableList, newPatient, prescriptionDate);
     }
 
@@ -88,8 +91,6 @@ public class PharmacistSearchPrescriptionMenuUI {
         pharm = new Pharmacist(u);
         pharmacistController = new PharmacistSearchPrescriptionController(pharm);
     }
-
-
 
     // Side menu navigation
     public void homeOnClick(ActionEvent event){
