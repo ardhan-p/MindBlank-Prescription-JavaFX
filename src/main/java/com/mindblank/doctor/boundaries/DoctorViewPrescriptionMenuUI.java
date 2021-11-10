@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DoctorViewPrescriptionMenuUI {
@@ -93,7 +94,12 @@ public class DoctorViewPrescriptionMenuUI {
 
     private void displayPatient(String patientIC) {
         prescriptionListTable.getItems().clear();
-        doctorController.fetchUserPrescriptions(patientInput.getText(), presObservableList);
+        ArrayList<Prescription> presArrayList = doctorController.fetchUserPrescriptions(patientIC);
+
+        for (Prescription p : presArrayList) {
+            presObservableList.add(p);
+        }
+
         searchStatusLabel.setText("Patient found!");
     }
 
@@ -151,7 +157,12 @@ public class DoctorViewPrescriptionMenuUI {
         medicationObservableList.clear();
         Patient newPatient = doctorController.fetchPatientInfoInPrescription(tokenString);
         String prescriptionDate = doctorController.fetchPrescriptionDate(tokenString);
-        doctorController.fetchSelectedMedicationInPrescription(tokenString, medicationObservableList);
+        ArrayList<Medication> medList = doc.viewMedicationsInPrescription(tokenString);
+
+        for (Medication m : medList) {
+            medicationObservableList.add(m);
+        }
+
         DoctorViewPrescriptionPopupUI.displayPage(event, tokenString, medicationObservableList, newPatient, prescriptionDate);
     }
 }

@@ -33,5 +33,7 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.junit.platform:junit-platform-engine:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: com.google.zxing:core:3.3.2" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.26" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.11.4" level="project" />
   </component>
 </module>

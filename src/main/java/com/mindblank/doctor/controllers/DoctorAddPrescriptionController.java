@@ -15,7 +15,6 @@ public class DoctorAddPrescriptionController extends DoctorController {
         super(doc);
     }
 
-    // TODO: add this to BCE diagrams
     // randomly generates token and checks from database via doctor entity
     public String generateToken() {
         int leftLimit = 48; // numeral '0'
