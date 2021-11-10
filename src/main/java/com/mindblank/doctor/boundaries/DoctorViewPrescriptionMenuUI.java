@@ -144,6 +144,12 @@ public class DoctorViewPrescriptionMenuUI {
         }
     }
 
+    public void displayCurrentPrescription(MouseEvent event, String tokenString,
+                                           ObservableList<Medication> medicationObservableList,
+                                           Patient newPatient, String prescriptionDate) {
+        DoctorViewPrescriptionPopupUI.displayPage(event, tokenString, medicationObservableList, newPatient, prescriptionDate);
+    }
+
     @FXML
     public void onRowSelect(MouseEvent event) {
         // gets selected row's token
@@ -157,12 +163,12 @@ public class DoctorViewPrescriptionMenuUI {
         medicationObservableList.clear();
         Patient newPatient = doctorController.fetchPatientInfoInPrescription(tokenString);
         String prescriptionDate = doctorController.fetchPrescriptionDate(tokenString);
-        ArrayList<Medication> medList = doc.viewMedicationsInPrescription(tokenString);
+        ArrayList<Medication> medList = doctorController.fetchSelectedMedicationInPrescription(tokenString);
 
         for (Medication m : medList) {
             medicationObservableList.add(m);
         }
 
-        DoctorViewPrescriptionPopupUI.displayPage(event, tokenString, medicationObservableList, newPatient, prescriptionDate);
+        displayCurrentPrescription(event, tokenString, medicationObservableList, newPatient, prescriptionDate);
     }
 }

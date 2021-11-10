@@ -13,11 +13,11 @@ public class DoctorViewPrescriptionController extends DoctorController {
     }
 
     public ArrayList<Prescription> fetchUserPrescriptions(String patientIC) {
-        return doc.viewAllPrescriptions(patientIC);
+        return doc.viewPatientPrescriptions(patientIC);
     }
 
     public ArrayList<Medication> fetchSelectedMedicationInPrescription(String tokenString) {
-        return doc.viewMedicationsInPrescription(tokenString);
+        return doc.viewMedicationsInPatientPrescription(tokenString);
     }
 
     public Patient fetchPatientInfoInPrescription(String tokenString) {

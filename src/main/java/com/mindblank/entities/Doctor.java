@@ -86,7 +86,7 @@ public class Doctor extends User {
         return false;
     }
 
-    public ArrayList<Prescription> viewAllPrescriptions(String patientIC) {
+    public ArrayList<Prescription> viewPatientPrescriptions(String patientIC) {
         String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "';";
         ArrayList<Prescription> presArrayList = new ArrayList<Prescription>();
 
@@ -106,7 +106,7 @@ public class Doctor extends User {
         return presArrayList;
     }
 
-    public ArrayList<Medication> viewMedicationsInPrescription(String tokenString) {
+    public ArrayList<Medication> viewMedicationsInPatientPrescription(String tokenString) {
         String selectCurrentPrescription = "SELECT * FROM MEDICATION WHERE tokenString = '" + tokenString + "';";
         ArrayList<Medication> medArrayList = new ArrayList<Medication>();
 
