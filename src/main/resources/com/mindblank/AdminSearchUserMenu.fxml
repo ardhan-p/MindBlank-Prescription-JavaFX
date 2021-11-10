@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.admin.boundaries.AdminSearchUserMenuUI">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: #ed8787;" BorderPane.alignment="CENTER">
          <children>
@@ -27,7 +27,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Button fx:id="addUserBtn" layoutX="14.0" layoutY="119.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Add User Profile" />
+            <Button fx:id="addUserBtn" layoutX="14.0" layoutY="119.0" mnemonicParsing="false" onAction="#addUserProfileOnClick" prefHeight="26.0" prefWidth="140.0" text="Add User Profile" />
             <Button fx:id="searchUserBtn" disable="true" layoutX="14.0" layoutY="156.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Search User Profile" />
             <Button fx:id="homeBtn" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onAction="#homeOnClick" prefHeight="26.0" prefWidth="140.0" text="Home" />
          </children>
@@ -47,7 +47,7 @@
                </font>
             </Label>
             <TextField fx:id="nricInput" layoutX="192.0" layoutY="141.0" />
-            <Button fx:id="searchBtn" defaultButton="true" layoutX="169.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Search" />
+            <Button fx:id="searchBtn" defaultButton="true" layoutX="169.0" layoutY="188.0" mnemonicParsing="false" onAction="#searchUserOnClick" prefHeight="25.0" prefWidth="68.0" text="Search" />
          </children>
       </AnchorPane>
    </center>

@@ -2,6 +2,8 @@ module com.mindblank {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires java.desktop;
+    requires core;
 
     exports com.mindblank;
     opens com.mindblank to javafx.fxml;
@@ -26,4 +28,10 @@ module com.mindblank {
 
     exports com.mindblank.pharmacist.boundaries;
     opens com.mindblank.pharmacist.boundaries to javafx.fxml;
+
+    exports com.mindblank.admin.controllers;
+    opens com.mindblank.admin.controllers to javafx.fxml;
+
+    exports com.mindblank.admin.boundaries;
+    opens com.mindblank.admin.boundaries to javafx.fxml;
 }

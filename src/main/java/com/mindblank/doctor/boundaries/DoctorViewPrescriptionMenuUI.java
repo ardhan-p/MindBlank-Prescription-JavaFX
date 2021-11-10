@@ -2,9 +2,7 @@ package com.mindblank.doctor.boundaries;
 
 import com.mindblank.Main;
 import com.mindblank.doctor.controllers.DoctorViewPrescriptionController;
-import com.mindblank.entities.Doctor;
-import com.mindblank.entities.Prescription;
-import com.mindblank.entities.User;
+import com.mindblank.entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,11 +13,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DoctorViewPrescriptionMenuUI {
@@ -44,6 +43,7 @@ public class DoctorViewPrescriptionMenuUI {
     private Doctor doc;
     private DoctorViewPrescriptionController doctorController;
     private ObservableList<Prescription> presObservableList = FXCollections.observableArrayList();
+    private ObservableList<Medication> medicationObservableList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -94,7 +94,12 @@ public class DoctorViewPrescriptionMenuUI {
 
     private void displayPatient(String patientIC) {
         prescriptionListTable.getItems().clear();
-        doctorController.fetchUserPrescriptions(patientInput.getText(), presObservableList);
+        ArrayList<Prescription> presArrayList = doctorController.fetchUserPrescriptions(patientIC);
+
+        for (Prescription p : presArrayList) {
+            presObservableList.add(p);
+        }
+
         searchStatusLabel.setText("Patient found!");
     }
 
@@ -111,8 +116,8 @@ public class DoctorViewPrescriptionMenuUI {
     }
 
     @FXML
-    public void updateProfileOnClick(ActionEvent event) {
-
+    public void viewProfileOnClick(ActionEvent event) {
+        DoctorViewProfileMenuUI.displayPage(event, doc);
     }
 
     @FXML
@@ -141,7 +146,23 @@ public class DoctorViewPrescriptionMenuUI {
 
     @FXML
     public void onRowSelect(MouseEvent event) {
+        // gets selected row's token
         Prescription row = prescriptionListTable.getSelectionModel().getSelectedItem();
+        String tokenString = row.getTokenString();
 
+        // creates new patient from database query
+        // gets date from database query
+        // fills the medication list with medication that has the same token string as row
+        // displays popup with above parameters as it gets passed via the function
+        medicationObservableList.clear();
+        Patient newPatient = doctorController.fetchPatientInfoInPrescription(tokenString);
+        String prescriptionDate = doctorController.fetchPrescriptionDate(tokenString);
+        ArrayList<Medication> medList = doc.viewMedicationsInPrescription(tokenString);
+
+        for (Medication m : medList) {
+            medicationObservableList.add(m);
+        }
+
+        DoctorViewPrescriptionPopupUI.displayPage(event, tokenString, medicationObservableList, newPatient, prescriptionDate);
     }
 }

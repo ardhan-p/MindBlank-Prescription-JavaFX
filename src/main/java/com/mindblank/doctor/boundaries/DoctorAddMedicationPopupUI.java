@@ -60,7 +60,7 @@ public class DoctorAddMedicationPopupUI {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             DoctorAddMedicationPopupUI ui = loader.getController();
-            ui.getMedicationList(medicationList);
+            ui.setMedicationList(medicationList);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -73,7 +73,7 @@ public class DoctorAddMedicationPopupUI {
 
     // ui functions
 
-    public void getMedicationList(ObservableList<Medication> medicationList) {
+    public void setMedicationList(ObservableList<Medication> medicationList) {
         this.medicationObservableList = medicationList;
     }
 

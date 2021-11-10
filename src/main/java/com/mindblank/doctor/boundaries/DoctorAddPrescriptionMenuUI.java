@@ -2,7 +2,6 @@ package com.mindblank.doctor.boundaries;
 
 import com.mindblank.Main;
 import com.mindblank.doctor.controllers.DoctorAddPrescriptionController;
-import com.mindblank.doctor.controllers.DoctorController;
 import com.mindblank.entities.Doctor;
 import com.mindblank.entities.Medication;
 import com.mindblank.entities.User;
@@ -16,8 +15,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -129,8 +130,8 @@ public class DoctorAddPrescriptionMenuUI {
         DoctorViewPrescriptionMenuUI.displayPage(event, doc);
     }
 
-    public void updateProfileOnClick(ActionEvent event) {
-
+    public void viewProfileOnClick(ActionEvent event) {
+        DoctorViewProfileMenuUI.displayPage(event, doc);
     }
 
     public void onLogout(ActionEvent event) {
@@ -170,8 +171,21 @@ public class DoctorAddPrescriptionMenuUI {
             medArrayList.add(currentMed);
         }
 
-        if (doctorController.addPrescription(patientInput.getText(), dateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), medArrayList)) {
-            validateStatusLabel.setText("Successfully added prescription!");
+        // creates token for prescription
+        String tokenString = doctorController.generateToken();
+
+        if (doctorController.addPrescription(patientInput.getText(), tokenString, dateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), medArrayList)) {
+            // create success message for popup
+            String successPopupMessage = "Email was successfully sent to " +
+                    doctorController.fetchPatientEmailFromToken(tokenString) + " with the token " +
+                    tokenString + " and with the QR code below.";
+
+            // generate qr code for popup
+            doctorController.generateQR(tokenString);
+            File qrFile = new File("src/main/resources/qr/" + tokenString +".png");
+            Image qrImage = new Image(qrFile.toURI().toString());
+
+            DoctorAddQRCodePopupUI.displayPage(event, tokenString, successPopupMessage, qrImage);
             patientInput.clear();
             dateInput.getEditor().clear();
             medicationListTable.getItems().clear();

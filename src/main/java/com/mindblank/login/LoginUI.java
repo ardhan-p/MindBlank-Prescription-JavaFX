@@ -1,5 +1,6 @@
 package com.mindblank.login;
 
+import com.mindblank.admin.boundaries.AdminMainMenuUI;
 import com.mindblank.doctor.boundaries.DoctorMainMenuUI;
 import com.mindblank.entities.User;
 import com.mindblank.pharmacist.boundaries.PharmacistMainMenuUI;
@@ -36,7 +37,7 @@ public class LoginUI {
             } else if (loginController.getUserType().contains("PHARMACIST")) {
                 PharmacistMainMenuUI.displayPage(event, user);
             } else if (loginController.getUserType().contains("ADMIN")) {
-                // TODO: add admin display page
+                AdminMainMenuUI.displayPage(event, user);
             }
         } else {
             loginStatus.setText("Login details are incorrect! Try again.");
