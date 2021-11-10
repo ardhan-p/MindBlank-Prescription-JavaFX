@@ -10,6 +10,10 @@ public class Medicine {
     private int medicineID;
     private String name;
 
+    DatabaseConnection connectSQL = new DatabaseConnection();
+    Connection connectDB = connectSQL.getConnection();
+
+
     public Medicine() {
         medicineID = 0;
         name = "";

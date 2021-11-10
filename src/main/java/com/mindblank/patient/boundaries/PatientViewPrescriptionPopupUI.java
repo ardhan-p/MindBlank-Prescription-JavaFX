@@ -1,10 +1,9 @@
-package com.mindblank.doctor.boundaries;
+package com.mindblank.patient.boundaries;
 
 import com.mindblank.Main;
-import com.mindblank.doctor.controllers.DoctorViewPrescriptionController;
 import com.mindblank.entities.Medication;
 import com.mindblank.entities.Patient;
-import com.mindblank.entities.Prescription;
+import com.mindblank.patient.controllers.PatientViewPrescriptionController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,8 +22,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DoctorViewPrescriptionPopupUI {
-    @FXML private TextField patientNameText;
+public class PatientViewPrescriptionPopupUI {
+    @FXML
+    private TextField patientNameText;
     @FXML private TextField patientEmailText;
     @FXML private TextField patientICText;
     @FXML private TextField dateText;
@@ -36,10 +36,11 @@ public class DoctorViewPrescriptionPopupUI {
     @FXML private TableColumn<Medication, String> instructionsColumn;
 
     private String currentTokenString;
-    private DoctorViewPrescriptionController doctorController;
+    private PatientViewPrescriptionController patientController;
     private ObservableList<Medication> medicationObservableList;
     private Patient currentPatient;
     private String prescriptionDate;
+
 
     public void setCurrentTokenString(String currentTokenString) {
         this.currentTokenString = currentTokenString;
@@ -71,10 +72,10 @@ public class DoctorViewPrescriptionPopupUI {
     public static void displayPage(MouseEvent event, String tokenString, ObservableList<Medication> medicationObservableList, Patient currentPatient, String prescriptionDate) {
         FXMLLoader loader = new FXMLLoader();
         try {
-            loader.setLocation(Main.class.getResource("DoctorViewPrescriptionPopup.fxml"));
+            loader.setLocation(Main.class.getResource("PatientViewPrescriptionPopup.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            DoctorViewPrescriptionPopupUI ui = loader.getController();
+            PatientViewPrescriptionPopupUI ui = loader.getController();
             ui.setCurrentTokenString(tokenString);
             ui.setPatient(currentPatient);
             ui.patientNameText.setText(currentPatient.getRealName());
@@ -85,7 +86,31 @@ public class DoctorViewPrescriptionPopupUI {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
-            stage.setTitle("View Current Prescription");
+            stage.setTitle("View Prescription");
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void displayPage1(ActionEvent event, String tokenString, ObservableList<Medication> medicationObservableList, Patient currentPatient, String prescriptionDate) {
+        FXMLLoader loader = new FXMLLoader();
+        try {
+            loader.setLocation(Main.class.getResource("PatientViewPrescriptionPopup.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            PatientViewPrescriptionPopupUI ui = loader.getController();
+            ui.setCurrentTokenString(tokenString);
+            ui.setPatient(currentPatient);
+            ui.patientNameText.setText(currentPatient.getRealName());
+            ui.patientEmailText.setText(currentPatient.getEmail());
+            ui.patientICText.setText(currentPatient.getuName());
+            ui.dateText.setText(prescriptionDate);
+            ui.medicationTable.setItems(medicationObservableList);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.setTitle("View Prescription");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,3 +124,4 @@ public class DoctorViewPrescriptionPopupUI {
         stage.close();
     }
 }
+

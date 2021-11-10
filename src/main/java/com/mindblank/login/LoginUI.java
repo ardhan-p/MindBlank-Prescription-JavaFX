@@ -2,7 +2,9 @@ package com.mindblank.login;
 
 import com.mindblank.admin.boundaries.AdminMainMenuUI;
 import com.mindblank.doctor.boundaries.DoctorMainMenuUI;
+import com.mindblank.entities.Patient;
 import com.mindblank.entities.User;
+import com.mindblank.patient.boundaries.PatientMainMenuUI;
 import com.mindblank.pharmacist.boundaries.PharmacistMainMenuUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,7 +35,7 @@ public class LoginUI {
             if (loginController.getUserType().contains("DOCTOR")) {
                 DoctorMainMenuUI.displayPage(event, user);
             } else if (loginController.getUserType().contains("PATIENT")) {
-                // TODO: add patient display page
+                PatientMainMenuUI.displayPage(event,user);
             } else if (loginController.getUserType().contains("PHARMACIST")) {
                 PharmacistMainMenuUI.displayPage(event, user);
             } else if (loginController.getUserType().contains("ADMIN")) {

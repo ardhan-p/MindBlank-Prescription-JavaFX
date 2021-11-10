@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.patient.boundaries.PatientViewPrescriptionPopupUI">
+   <children>
+      <Label fx:id="patientNameLabel" layoutX="26.0" layoutY="54.0" text="Patient Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="dateText" disable="true" editable="false" layoutX="273.0" layoutY="153.0" prefHeight="25.0" prefWidth="187.0" />
+      <Button fx:id="closeBtn" defaultButton="true" layoutX="235.0" layoutY="432.0" mnemonicParsing="false" onAction="#onClose" text="Close" />
+      <Label fx:id="patientEmailLabel" layoutX="28.0" layoutY="86.0" text="Patient Email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="patientEmailText" disable="true" editable="false" layoutX="273.0" layoutY="119.0" prefHeight="25.0" prefWidth="187.0" />
+      <Label fx:id="patientICLabel" layoutX="28.0" layoutY="122.0" prefHeight="20.0" prefWidth="63.0" text="Patient IC">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="patientICText" disable="true" editable="false" layoutX="273.0" layoutY="83.0" prefHeight="25.0" prefWidth="187.0" />
+      <Label fx:id="date" layoutX="26.0" layoutY="156.0" text="Date of Prescription">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="patientNameText" disable="true" editable="false" layoutX="273.0" layoutY="51.0" prefHeight="25.0" prefWidth="187.0" />
+      <TableView fx:id="medicationTable" layoutX="38.0" layoutY="212.0" prefHeight="209.0" prefWidth="438.0">
+         <columns>
+            <TableColumn fx:id="medicineNameColumn" prefWidth="108.0" text="Medicine Name" />
+            <TableColumn fx:id="dosageColumn" prefWidth="72.79998779296875" text="Dosage" />
+            <TableColumn fx:id="expiryColumn" prefWidth="69.5999755859375" text="Expiry" />
+            <TableColumn fx:id="instructionsColumn" prefWidth="183.20001220703125" text="Instructions" />
+         </columns>
+      </TableView>
+      <Accordion />
+   </children>
+</AnchorPane>
