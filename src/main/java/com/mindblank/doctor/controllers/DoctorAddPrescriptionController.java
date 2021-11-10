@@ -40,7 +40,7 @@ public class DoctorAddPrescriptionController extends DoctorController {
         return doc.getEmail(tokenString);
     }
 
-    public void generateQR(String tokenString) {
+    public File generateQR(String tokenString) {
         String filePath = "src/main/resources/qr/" + tokenString +".png";
         int size = 150;
         String fileType = "png";
@@ -51,6 +51,8 @@ public class DoctorAddPrescriptionController extends DoctorController {
             e.printStackTrace();
             e.getCause();
         }
+
+        return qrFile;
     }
 
     public boolean addPrescription(String patientIC, String tokenString, String date, ArrayList<Medication> medList) {

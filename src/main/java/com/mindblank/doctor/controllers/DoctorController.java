@@ -9,7 +9,6 @@ public class DoctorController {
         this.doc = doc;
     }
 
-    // TODO: update BCE #23; add prescription will contact DoctorController instead of Prescription
     public boolean validatePatient(String patientIC) {
         return doc.getPatientIC(patientIC);
     }

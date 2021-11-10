@@ -162,30 +162,45 @@ public class DoctorAddPrescriptionMenuUI {
         confirmPrescriptionBtn.setDisable(false);
     }
 
+    public String createToken() {
+        return doctorController.generateToken();
+    }
+
+    public boolean addCurrentPrescription(String patientIC, String token, String date, ArrayList<Medication> medList) {
+        return doctorController.addPrescription(patientIC, token, date, medList);
+    }
+
+    public void displaySentPopup(ActionEvent event, String tokenString, String successPopupMessage, Image qrImage) {
+        DoctorAddQRCodePopupUI.displayPage(event, tokenString, successPopupMessage, qrImage);
+    }
+
     public void confirmPrescriptionOnClick(ActionEvent event) {
         Medication currentMed;
         ArrayList<Medication> medArrayList = new ArrayList<Medication>();
 
+        // gets all medication objects from observable list to array list
         for (int i = 0; i < medObservableList.size(); i++) {
             currentMed = medObservableList.get(i);
             medArrayList.add(currentMed);
         }
 
         // creates token for prescription
-        String tokenString = doctorController.generateToken();
+        String tokenString = createToken();
 
-        if (doctorController.addPrescription(patientInput.getText(), tokenString, dateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), medArrayList)) {
+        if (addCurrentPrescription(patientInput.getText(), tokenString, dateInput.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), medArrayList)) {
             // create success message for popup
             String successPopupMessage = "Email was successfully sent to " +
                     doctorController.fetchPatientEmailFromToken(tokenString) + " with the token " +
                     tokenString + " and with the QR code below.";
 
             // generate qr code for popup
-            doctorController.generateQR(tokenString);
-            File qrFile = new File("src/main/resources/qr/" + tokenString +".png");
+            File qrFile = doctorController.generateQR(tokenString);
             Image qrImage = new Image(qrFile.toURI().toString());
 
-            DoctorAddQRCodePopupUI.displayPage(event, tokenString, successPopupMessage, qrImage);
+            // sent confirmation successful popup
+            displaySentPopup(event, tokenString, successPopupMessage, qrImage);
+
+            // clears input elements
             patientInput.clear();
             dateInput.getEditor().clear();
             medicationListTable.getItems().clear();
