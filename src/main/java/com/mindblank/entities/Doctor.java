@@ -1,6 +1,7 @@
 package com.mindblank.entities;
 
 import com.mindblank.DatabaseConnection;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
@@ -86,8 +87,9 @@ public class Doctor extends User {
         return false;
     }
 
-    public void viewAllPrescriptions(String patientIC, ObservableList<Prescription> presObservableList) {
+    public ArrayList<Prescription> viewAllPrescriptions(String patientIC) {
         String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "';";
+        ArrayList<Prescription> presArrayList = new ArrayList<Prescription>();
 
         try {
             Statement statement = connectDB.createStatement();
@@ -95,16 +97,19 @@ public class Doctor extends User {
 
             while (queryResult.next()) {
                 Prescription newPres = new Prescription(queryResult.getString(1), queryResult.getString(3));
-                presObservableList.add(newPres);
+                presArrayList.add(newPres);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+
+        return presArrayList;
     }
 
-    public void viewMedicationsInPrescription(String tokenString, ObservableList<Medication> medObservableList) {
+    public ArrayList<Medication> viewMedicationsInPrescription(String tokenString) {
         String selectCurrentPrescription = "SELECT * FROM MEDICATION WHERE tokenString = '" + tokenString + "';";
+        ArrayList<Medication> medArrayList = new ArrayList<Medication>();
 
         try {
             Statement statement = connectDB.createStatement();
@@ -116,12 +121,14 @@ public class Doctor extends User {
 
                 // create medication object
                 Medication newMedication = new Medication(newMedicine, queryResult.getInt(3), queryResult.getString(4), queryResult.getString(5));
-                medObservableList.add(newMedication);
+                medArrayList.add(newMedication);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+
+        return medArrayList;
     }
 
     public Patient viewPatientData(String tokenString) {

@@ -4,19 +4,26 @@ import com.mindblank.entities.Doctor;
 import com.mindblank.entities.Medication;
 import com.mindblank.entities.Patient;
 import com.mindblank.entities.Prescription;
-import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 public class DoctorViewPrescriptionController extends DoctorController {
     public DoctorViewPrescriptionController(Doctor doc) {
         super(doc);
     }
 
-    public void fetchUserPrescriptions(String patientIC, ObservableList<Prescription> presObservableList) {
-        doc.viewAllPrescriptions(patientIC, presObservableList);
+    public ArrayList<Prescription> fetchUserPrescriptions(String patientIC) {
+        ArrayList<Prescription> presArrayList = new ArrayList<Prescription>();
+        presArrayList = doc.viewAllPrescriptions(patientIC);
+
+        return presArrayList;
     }
 
-    public void fetchSelectedMedicationInPrescription(String tokenString, ObservableList<Medication> medicationObservableList) {
-        doc.viewMedicationsInPrescription(tokenString, medicationObservableList);
+    public ArrayList<Medication> fetchSelectedMedicationInPrescription(String tokenString) {
+        ArrayList<Medication> medArrayList = new ArrayList<Medication>();
+        medArrayList = doc.viewMedicationsInPrescription(tokenString);
+
+        return medArrayList;
     }
 
     public Patient fetchPatientInfoInPrescription(String tokenString) {
