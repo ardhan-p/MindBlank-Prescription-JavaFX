@@ -7,24 +7,20 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
-public class  Patient extends User {
-
+public class Patient extends User {
     DatabaseConnection connectSQL = new DatabaseConnection();
     Connection connectDB = connectSQL.getConnection();
 
-    private ObservableList<Prescription> presObservableList= FXCollections.observableArrayList();
-
     public Patient(User user) {
         super(user.uName, user.uPass, user.realName, user.email, user.phoneNum, user.address, user.userType);
-        setPatientPrescription(uName);
     }
 
     public Patient() {
 
     }
 
-    // TODO: change BCE to refer to doctor entity
     public boolean getPatientIC(String patientIC) {
         String validatePatient = "SELECT * FROM USER WHERE BINARY NRIC = '" + patientIC + "' AND TYPE = 'PATIENT';";
 
@@ -66,29 +62,31 @@ public class  Patient extends User {
         return false;
     }
 
-    public void getMedication(String token, ObservableList<Medication> medicationObservableList)
-    {
-        String selectMedication = "SELECT medicine.name, medication.dosage, medication.expiry, medication.instructions " +
-                "FROM MEDICATION INNER JOIN MEDICINE ON medication.medicineID = medicine.medicineID INNER JOIN PRESCRIPTION ON medication.tokenString=prescription.tokenString" +
-                " WHERE medication.tokenString = '" + token + "' AND prescription.collectedStatus = 0" + ";";
+//    public ArrayList<Medication> getMedication(String token) {
+//        String selectMedication = "SELECT medicine.name, medication.dosage, medication.expiry, medication.instructions " +
+//                "FROM MEDICATION INNER JOIN MEDICINE ON medication.medicineID = medicine.medicineID INNER JOIN PRESCRIPTION ON medication.tokenString=prescription.tokenString" +
+//                " WHERE medication.tokenString = '" + token + "' AND prescription.collectedStatus = 0" + ";";
+//        ArrayList<Medication> medicationArrayList = new ArrayList<Medication>();
+//
+//        try {
+//            Statement statement = connectDB.createStatement();
+//            ResultSet queryResult = statement.executeQuery(selectMedication);
+//
+//            while (queryResult.next()) {
+//                Medication newMed = new Medication(queryResult.getString(1), queryResult.getInt(2), queryResult.getString(3), queryResult.getString(4));
+//                medicationArrayList.add(newMed);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            e.getCause();
+//        }
+//
+//        return medicationArrayList;
+//    }
 
-        try {
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(selectMedication);
-
-            while (queryResult.next()) {
-                Medication newMed = new Medication(queryResult.getString(1), queryResult.getInt(2), queryResult.getString(3), queryResult.getString(4));
-                medicationObservableList.add(newMed);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
-
-    private void setPatientPrescription(String patientIC)
-    {
-        String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "';";
+    public ArrayList<Prescription> viewAllPastPrescriptions(String patientIC) {
+        String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "' AND COLLECTEDSTATUS = 1" + ";";
+        ArrayList<Prescription> prescriptionArrayList = new ArrayList<Prescription>();
 
         try {
             Statement statement = connectDB.createStatement();
@@ -96,42 +94,19 @@ public class  Patient extends User {
 
             while (queryResult.next()) {
                 Prescription newPres = new Prescription(queryResult.getString(1), queryResult.getString(3));
-                presObservableList.add(newPres);
+                prescriptionArrayList.add(newPres);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
 
+        return prescriptionArrayList;
     }
 
-    public ObservableList<Prescription> getPresObservableList()
-    {
-        return presObservableList;
-    }
-
-    public void viewAllPrescriptions(String patientIC, ObservableList<Prescription> presObservableList) {
-
-            String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "' AND COLLECTEDSTATUS=1" + ";";
-
-
-            try {
-                Statement statement = connectDB.createStatement();
-                ResultSet queryResult = statement.executeQuery(selectPrescriptions);
-
-                while (queryResult.next()) {
-                    Prescription newPres = new Prescription(queryResult.getString(1), queryResult.getString(3));
-                    presObservableList.add(newPres);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                e.getCause();
-            }
-
-    }
-
-    public void viewMedicationsInPrescription(String tokenString, ObservableList<Medication> medObservableList) {
+    public ArrayList<Medication> viewMedicationsInPrescription(String tokenString) {
         String selectCurrentPrescription = "SELECT * FROM MEDICATION WHERE tokenString = '" + tokenString + "';";
+        ArrayList<Medication> medicationArrayList = new ArrayList<Medication>();
 
         try {
             Statement statement = connectDB.createStatement();
@@ -143,12 +118,14 @@ public class  Patient extends User {
 
                 // create medication object
                 Medication newMedication = new Medication(newMedicine, queryResult.getInt(3), queryResult.getString(4), queryResult.getString(5));
-                medObservableList.add(newMedication);
+                medicationArrayList.add(newMedication);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+
+        return medicationArrayList;
     }
 
     public Patient viewPatientData(String tokenString) {

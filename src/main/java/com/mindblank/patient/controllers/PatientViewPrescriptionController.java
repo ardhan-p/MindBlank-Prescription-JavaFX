@@ -3,20 +3,21 @@ package com.mindblank.patient.controllers;
 import com.mindblank.entities.Medication;
 import com.mindblank.entities.Patient;
 import com.mindblank.entities.Prescription;
-import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 public class PatientViewPrescriptionController extends PatientController {
 
-    public PatientViewPrescriptionController(Patient pat)
-    {
+    public PatientViewPrescriptionController(Patient pat) {
         super(pat);
     }
-    public void fetchUserPrescriptions(String patientIC, ObservableList<Prescription> presObservableList) {
-        pat.viewAllPrescriptions(patientIC, presObservableList);
+
+    public ArrayList<Prescription> fetchUserPrescriptions(String patientIC) {
+        return pat.viewAllPastPrescriptions(patientIC);
     }
 
-    public void fetchSelectedMedicationInPrescription(String tokenString, ObservableList<Medication> medicationObservableList) {
-        pat.viewMedicationsInPrescription(tokenString, medicationObservableList);
+    public ArrayList<Medication> fetchSelectedMedicationInPrescription(String tokenString) {
+        return pat.viewMedicationsInPrescription(tokenString);
     }
 
     public Patient fetchPatientInfoInPrescription(String tokenString) {

@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.EventObject;
 import java.util.Objects;
@@ -44,7 +45,6 @@ public class PatientViewNewPrescriptionUI
 
     @FXML
     public void initialize() {
-
         // set time data
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -54,8 +54,7 @@ public class PatientViewNewPrescriptionUI
     }
 
     @FXML
-    public void patientViewPastPresBtnOnClick(ActionEvent event)
-    {
+    public void patientViewPastPresBtnOnClick(ActionEvent event) {
         PatientViewPastPrescriptionUI.displayPage(event,pat);
     }
     @FXML
@@ -78,8 +77,7 @@ public class PatientViewNewPrescriptionUI
     }
 
     @FXML
-    public void patientLogoutBtnOnClick(ActionEvent event)
-    {
+    public void patientLogoutBtnOnClick(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("LoginUI.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -93,24 +91,24 @@ public class PatientViewNewPrescriptionUI
     }
 
     @FXML
-    public void searchTokenNumberOnClick(ActionEvent event)
-    {
-        if(!patientController.validateToken(tokenNumber.getText()))
-        {
+    public void searchTokenNumberOnClick(ActionEvent event) {
+        if(!patientController.validateToken(tokenNumber.getText())) {
             errorLabel.setText("Invalid Token! Please try again!");
-        }
-    else
-        {
+        } else {
             displayView(event);
         }
     }
-    public void displayView(ActionEvent event)
-    {
+
+    public void displayView(ActionEvent event) {
         medicationObservableList.clear();
         Patient newPatient = patientController.fetchPatientInfoInPrescription(tokenNumber.getText());
-        System.out.println(newPatient.getRealName());
         String prescriptionDate = patientController.fetchPrescriptionDate(tokenNumber.getText());
-        patientController.fetchUserMedication(tokenNumber.getText(), medicationObservableList);
+        ArrayList<Medication> medicationArrayList = patientController.fetchUserMedication(tokenNumber.getText());
+
+        for (Medication m : medicationArrayList) {
+            medicationObservableList.add(m);
+        }
+
         PatientViewPrescriptionPopupUI.displayPage1(event,tokenNumber.getText(), medicationObservableList, newPatient, prescriptionDate);
     }
 
@@ -131,8 +129,7 @@ public class PatientViewNewPrescriptionUI
         }
     }
 
-    private void getPatientInfo(User user)
-    {
+    private void getPatientInfo(User user) {
         pat = new Patient(user);
         patientController = new PatientSearchPrescriptionController(pat);
     }

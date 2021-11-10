@@ -22,7 +22,9 @@ import javafx.stage.Stage;
 import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PatientViewPastPrescriptionUI {
@@ -46,11 +48,11 @@ public class PatientViewPastPrescriptionUI {
     private ObservableList<Medication> medicationObservableList=FXCollections.observableArrayList();
 
     public PatientViewPastPrescriptionUI() {
+
     }
 
     @FXML
-    public void initialize()
-    {
+    public void initialize() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(System.currentTimeMillis());
@@ -63,15 +65,13 @@ public class PatientViewPastPrescriptionUI {
         prescriptionListTable.setItems(presObservableList);
     }
 
-    public static void displayPage(ActionEvent event, Patient user)
-    {
-        FXMLLoader loader=new FXMLLoader();
-        try
-        {
+    public static void displayPage(ActionEvent event, Patient user) {
+        FXMLLoader loader = new FXMLLoader();
+        try {
             loader.setLocation(Main.class.getResource(("PatientViewPastPrescription.fxml")));
             Parent root = loader.load();
-            Scene scene=new Scene(root);
-            PatientViewPastPrescriptionUI ui=loader.getController();
+            Scene scene = new Scene(root);
+            PatientViewPastPrescriptionUI ui = loader.getController();
             ui.getPatientInfo(user);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -82,17 +82,19 @@ public class PatientViewPastPrescriptionUI {
         }
     }
 
-    private void getPatientInfo(Patient u)
-    {
-        pat=new Patient(u);
-        patientController=new PatientViewPrescriptionController(pat);
+    private void getPatientInfo(Patient u) {
+        pat = new Patient(u);
+        patientController = new PatientViewPrescriptionController(pat);
         displayPatient(pat.getuName());
     }
 
-   private void displayPatient(String patientIC)
-   {
+   private void displayPatient(String patientIC) {
        prescriptionListTable.getItems().clear();
-       patientController.fetchUserPrescriptions(pat.getuName(),presObservableList);
+       ArrayList<Prescription> prescriptionArrayList = patientController.fetchUserPrescriptions(patientIC);
+
+       for (Prescription p : prescriptionArrayList) {
+           presObservableList.add(p);
+       }
    }
 
    @FXML
@@ -108,9 +110,7 @@ public class PatientViewPastPrescriptionUI {
    }
 
    @FXML
-   public void patientViewNewPresBtnOnClick(ActionEvent event)
-   {
-
+   public void patientViewNewPresBtnOnClick(ActionEvent event) {
        PatientViewNewPrescriptionUI.displayPage(event,pat);
    }
 
@@ -142,7 +142,12 @@ public class PatientViewPastPrescriptionUI {
         medicationObservableList.clear();
         Patient newPatient = patientController.fetchPatientInfoInPrescription(tokenString);
         String prescriptionDate = patientController.fetchPrescriptionDate(tokenString);
-        patientController.fetchSelectedMedicationInPrescription(tokenString, medicationObservableList);
+        ArrayList<Medication> medArrayList = patientController.fetchSelectedMedicationInPrescription(tokenString);
+
+        for (Medication m : medArrayList) {
+            medicationObservableList.add(m);
+        }
+
         PatientViewPrescriptionPopupUI.displayPage((javafx.scene.input.MouseEvent) mouseEvent, tokenString, medicationObservableList, newPatient, prescriptionDate);
     }
 }
