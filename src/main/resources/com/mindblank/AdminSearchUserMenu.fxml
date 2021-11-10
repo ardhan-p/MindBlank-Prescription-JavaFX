@@ -2,11 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="doctorMainMenuPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.admin.boundaries.AdminMainMenuUI">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mindblank.admin.boundaries.AdminSearchUserMenuUI">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: #ed8787;" BorderPane.alignment="CENTER">
          <children>
@@ -26,19 +27,27 @@
                   <Font size="12.0" />
                </font>
             </Label>
+            <Button fx:id="addUserBtn" layoutX="14.0" layoutY="119.0" mnemonicParsing="false" onAction="#addUserProfileOnClick" prefHeight="26.0" prefWidth="140.0" text="Add User Profile" />
+            <Button fx:id="searchUserBtn" disable="true" layoutX="14.0" layoutY="156.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Search User Profile" />
+            <Button fx:id="homeBtn" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onAction="#homeOnClick" prefHeight="26.0" prefWidth="140.0" text="Home" />
          </children>
       </AnchorPane>
    </left>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addUserBtn" layoutX="67.0" layoutY="130.0" mnemonicParsing="false" onAction="#addUserOnClick" prefHeight="70.0" prefWidth="140.0" text="Add User Profile" />
-            <Label fx:id="welcomeLabel" layoutX="67.0" layoutY="61.0" prefHeight="18.0" prefWidth="299.0" text="Welcome message">
+            <Label fx:id="titleLabel" layoutX="133.0" layoutY="84.0" text="Search/Update User Profile" underline="true">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="searchUserBtn" layoutX="226.0" layoutY="130.0" mnemonicParsing="false" onAction="#searchUserOnClick" prefHeight="70.0" prefWidth="140.0" text="Search User Profile" />
+            <Label fx:id="nricLabel" layoutX="98.0" layoutY="144.0" text="Enter NRIC:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nricInput" layoutX="192.0" layoutY="141.0" />
+            <Button fx:id="searchBtn" defaultButton="true" layoutX="169.0" layoutY="188.0" mnemonicParsing="false" onAction="#searchUserOnClick" prefHeight="25.0" prefWidth="68.0" text="Search" />
          </children>
       </AnchorPane>
    </center>

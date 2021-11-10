@@ -1,6 +1,7 @@
 package com.mindblank.entities;
 
 import com.mindblank.DatabaseConnection;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
@@ -9,14 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Doctor extends User {
-    DatabaseConnection connectSQL = new DatabaseConnection();
-    Connection connectDB = connectSQL.getConnection();
 
     public Doctor(User user) {
         super(user.uName, user.uPass, user.realName, user.email, user.phoneNum, user.address, user.userType);
     }
 
-    // TODO: change BCE to refer to doctor entity
     public boolean getPatientIC(String patientIC) {
         String validatePatient = "SELECT * FROM USER WHERE BINARY NRIC = '" + patientIC + "' AND TYPE = 'PATIENT';";
 
@@ -40,7 +38,6 @@ public class Doctor extends User {
         return false;
     }
 
-    // TODO: add QR code generation
     // adds prescription details to prescription sql table
     // adds all medicine in arraylist that is associated with said prescription to medication sql table
     public boolean addPrescription(String patientIC, String token, String date, ArrayList<Medication> medList) {
@@ -89,8 +86,9 @@ public class Doctor extends User {
         return false;
     }
 
-    public void viewAllPrescriptions(String patientIC, ObservableList<Prescription> presObservableList) {
+    public ArrayList<Prescription> viewAllPrescriptions(String patientIC) {
         String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "';";
+        ArrayList<Prescription> presArrayList = new ArrayList<Prescription>();
 
         try {
             Statement statement = connectDB.createStatement();
@@ -98,16 +96,19 @@ public class Doctor extends User {
 
             while (queryResult.next()) {
                 Prescription newPres = new Prescription(queryResult.getString(1), queryResult.getString(3));
-                presObservableList.add(newPres);
+                presArrayList.add(newPres);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+
+        return presArrayList;
     }
 
-    public void viewCurrentPrescription(String tokenString, ObservableList<Medication> medObservableList) {
-        String selectCurrentPrescription = "SELECT * FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
+    public ArrayList<Medication> viewMedicationsInPrescription(String tokenString) {
+        String selectCurrentPrescription = "SELECT * FROM MEDICATION WHERE tokenString = '" + tokenString + "';";
+        ArrayList<Medication> medArrayList = new ArrayList<Medication>();
 
         try {
             Statement statement = connectDB.createStatement();
@@ -115,22 +116,94 @@ public class Doctor extends User {
 
             while (queryResult.next()) {
                 // create medicine object
-                Medicine newMedicine = new Medicine(queryResult.getInt(2), "");
-                String getMedicineName = "SELECT name FROM MEDICINE WHERE medicineID = " + newMedicine.getMedicineID() + ";";
-                ResultSet queryMedicineName = statement.executeQuery(getMedicineName);
-                newMedicine.setName(queryMedicineName.getString(1));
+                Medicine newMedicine = new Medicine(queryResult.getInt(2));
 
                 // create medication object
                 Medication newMedication = new Medication(newMedicine, queryResult.getInt(3), queryResult.getString(4), queryResult.getString(5));
-                medObservableList.add(newMedication);
+                medArrayList.add(newMedication);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return medArrayList;
+    }
+
+    public Patient viewPatientData(String tokenString) {
+        String selectUsernameFromToken = "SELECT NRIC FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
+        Patient currentPatient = new Patient();
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(selectUsernameFromToken);
+
+            while (queryResult.next()) {
+                currentPatient.setPatientInfoFromDB(queryResult.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return currentPatient;
+    }
+
+    public String getPrescriptionDate(String tokenString) {
+        String date = "";
+        String selectDate = "SELECT date FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(selectDate);
+
+            while (queryResult.next()) {
+                date = queryResult.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return date;
+    }
+
+    public String getEmail(String tokenString) {
+        String email = "";
+        String selectEmail = "SELECT USER.email FROM USER INNER JOIN PRESCRIPTION ON USER.NRIC = PRESCRIPTION.NRIC " +
+                             "WHERE tokenString = '" + tokenString + "';";
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(selectEmail);
+
+            while (queryResult.next()) {
+                email = queryResult.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return email;
+    }
+
+    public void setDoctorInfoFromDB(String NRIC) {
+        String getDoctorInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(getDoctorInfo);
+
+            while (queryResult.next()) {
+                this.uName = queryResult.getString(1);
+                this.realName = queryResult.getString(3);
+                this.email = queryResult.getString(4);
+                this.phoneNum = queryResult.getString(5);
+                this.address = queryResult.getString(6);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
     }
-
-//    public Patient viewPatientData(String tokenString) {
-//        // TODO: add code here
-//    }
 }

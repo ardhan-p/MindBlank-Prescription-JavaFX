@@ -4,6 +4,7 @@ package com.mindblank.entities;
 public class Medication {
     private String tokenString;
     private Medicine medicine;
+    private String medicineName;
     private int dosage;
     private String instructions;
     private String expiry;

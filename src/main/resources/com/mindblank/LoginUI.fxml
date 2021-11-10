@@ -14,6 +14,7 @@
          <children>
             <Label fx:id="usernameLabel" layoutX="171.0" layoutY="100.0" text="Username" />
             <Label fx:id="passwordLabel" layoutX="171.0" layoutY="181.0" text="Password" />
+            <TextField fx:id="usernameInput" layoutX="170.0" layoutY="129.0" prefHeight="25.0" prefWidth="233.0" />
             <PasswordField fx:id="passwordInput" layoutX="169.0" layoutY="209.0" prefHeight="25.0" prefWidth="233.0" />
             <Button fx:id="clearBtn" layoutX="171.0" layoutY="293.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
             <Button fx:id="loginBtn" layoutX="347.0" layoutY="293.0" mnemonicParsing="false" onAction="#onSubmit" text="Login" />
@@ -22,7 +23,6 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameInput" layoutX="170.0" layoutY="129.0" prefHeight="25.0" prefWidth="233.0" />
             <Label fx:id="loginStatus" layoutX="172.0" layoutY="251.0" prefHeight="17.0" prefWidth="228.0">
                <font>
                   <Font name="System Bold Italic" size="13.0" />

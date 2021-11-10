@@ -13,10 +13,22 @@ public class User {
     protected String phoneNum;
     protected String address;
     protected String userType;
+    protected DatabaseConnection connectSQL = new DatabaseConnection();
+    protected Connection connectDB = connectSQL.getConnection();
 
     public User() {
         uName = "Default";
         uPass = "Default";
+    }
+
+    public User(User u) {
+        this.uName = u.uName;
+        this.uPass = u.uPass;
+        this.realName = u.realName;
+        this.email = u.email;
+        this.phoneNum = u.phoneNum;
+        this.address = u.address;
+        this.userType = u.userType;
     }
 
     public User(String uName, String uPass) {
@@ -100,9 +112,6 @@ public class User {
     }
 
     public boolean login(String uName, String uPass) {
-        DatabaseConnection connectSQL = new DatabaseConnection();
-        Connection connectDB = connectSQL.getConnection();
-
         String verifyLogin = "SELECT * FROM USER WHERE BINARY NRIC = '" + uName
                            + "' AND BINARY pass = '" + uPass + "';";
 
@@ -130,5 +139,27 @@ public class User {
         }
 
         return false;
+    }
+
+    public void setUserInfoFromDB(String NRIC) {
+        String getDoctorInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(getDoctorInfo);
+
+            while (queryResult.next()) {
+                this.uName = queryResult.getString(1);
+                this.uPass = queryResult.getString(2);
+                this.realName = queryResult.getString(3);
+                this.email = queryResult.getString(4);
+                this.phoneNum = queryResult.getString(5);
+                this.address = queryResult.getString(6);
+                this.userType = queryResult.getString(7);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 }

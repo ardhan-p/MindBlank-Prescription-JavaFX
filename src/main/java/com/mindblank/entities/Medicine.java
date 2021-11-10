@@ -24,8 +24,7 @@ public class Medicine {
         this.name = name;
     }
 
-    public Medicine(int medicineID)
-    {
+    public Medicine(int medicineID) {
         this.medicineID = medicineID;
         setMedicineNameFromDB();
     }
@@ -47,6 +46,8 @@ public class Medicine {
     }
 
     private void setMedicineNameFromDB() {
+        DatabaseConnection connectSQL = new DatabaseConnection();
+        Connection connectDB = connectSQL.getConnection();
         String selectName = "SELECT name FROM MEDICINE WHERE medicineID = " + medicineID + ";";
 
         try {

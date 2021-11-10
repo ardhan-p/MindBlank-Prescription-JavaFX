@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LoginTest {
+class TestLogin {
 
     @Test
     @DisplayName("TC-1-2")
@@ -42,6 +42,4 @@ class LoginTest {
         User testUser = new User("doctor", "pass002");
         assertEquals(true, testUser.login(testUser.getuName(), testUser.getuPass()));
     }
-
-    // add deliberate failed tests
 }

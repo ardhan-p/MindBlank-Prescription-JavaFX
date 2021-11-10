@@ -1,7 +1,7 @@
-package com.mindblank.doctor.boundaries;
+package com.mindblank.pharmacist.boundaries;
 
 import com.mindblank.Main;
-import com.mindblank.entities.Doctor;
+import com.mindblank.entities.Pharmacist;
 import com.mindblank.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,15 +17,13 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DoctorMainMenuUI {
+public class PharmacistMainMenuUI {
     @FXML private Label timeLabel;
     @FXML private Label dateLabel;
     @FXML private Label welcomeLabel;
     @FXML private Button logoutBtn;
-    @FXML private Button addPresBtn;
     @FXML private Button viewPresBtn;
-    @FXML private Button updateProfileBtn;
-    private Doctor doc;
+    private Pharmacist pharm;
 
     @FXML
     public void initialize() {
@@ -41,41 +39,32 @@ public class DoctorMainMenuUI {
     public static void displayPage(ActionEvent event, User user) {
         FXMLLoader loader = new FXMLLoader();
         try {
-            loader.setLocation(Main.class.getResource("DoctorMainMenu.fxml"));
+            loader.setLocation(Main.class.getResource("PharmacistMainMenu.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            DoctorMainMenuUI ui = loader.getController();
-            ui.getDoctorInfo(user);
+            PharmacistMainMenuUI ui = loader.getController();
+            ui.getPharmacistInfo(user);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Doctor Main Menu");
+            stage.setTitle("Pharmacist Main Menu");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // gets doctor info from previous scene
-    public void getDoctorInfo(User u) {
-        doc = new Doctor(u);
-        doc.setDoctorInfoFromDB(u.getuName());
-        welcomeLabel.setText("Welcome Dr. " + doc.getRealName());
+    // gets pharmacist's info from previous scene
+    public void getPharmacistInfo(User u) {
+        pharm = new Pharmacist(u);
+        welcomeLabel.setText("Welcome " + pharm.getRealName());
     }
 
-    // side menu navigation on-click listeners
-
-    public void addPrescriptionOnClick(ActionEvent event) {
-        DoctorAddPrescriptionMenuUI.displayPage(event, doc);
+    // Side menu navigation
+    public void searchPrescriptionOnClick(ActionEvent event){
+        PharmacistSearchPrescriptionMenuUI.displayPage(event, pharm);
     }
 
-    public void viewPrescriptionOnClick(ActionEvent event) {
-        DoctorViewPrescriptionMenuUI.displayPage(event, doc);
-    }
-
-    public void viewProfileOnClick(ActionEvent event) {
-        DoctorViewProfileMenuUI.displayPage(event, doc);
-    }
-
+    //Logout
     public void onLogout(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(Main.class.getResource("LoginUI.fxml"));

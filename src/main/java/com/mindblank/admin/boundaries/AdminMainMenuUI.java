@@ -1,7 +1,7 @@
-package com.mindblank.doctor.boundaries;
+package com.mindblank.admin.boundaries;
 
 import com.mindblank.Main;
-import com.mindblank.entities.Doctor;
+import com.mindblank.entities.Admin;
 import com.mindblank.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DoctorMainMenuUI {
+public class AdminMainMenuUI {
     @FXML private Label timeLabel;
     @FXML private Label dateLabel;
     @FXML private Label welcomeLabel;
@@ -25,7 +25,8 @@ public class DoctorMainMenuUI {
     @FXML private Button addPresBtn;
     @FXML private Button viewPresBtn;
     @FXML private Button updateProfileBtn;
-    private Doctor doc;
+
+    private Admin admin;
 
     @FXML
     public void initialize() {
@@ -41,39 +42,34 @@ public class DoctorMainMenuUI {
     public static void displayPage(ActionEvent event, User user) {
         FXMLLoader loader = new FXMLLoader();
         try {
-            loader.setLocation(Main.class.getResource("DoctorMainMenu.fxml"));
+            loader.setLocation(Main.class.getResource("AdminMainMenu.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            DoctorMainMenuUI ui = loader.getController();
-            ui.getDoctorInfo(user);
+            AdminMainMenuUI ui = loader.getController();
+            ui.getAdminInfo(user);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Doctor Main Menu");
+            stage.setTitle("Admin Main Menu");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // gets doctor info from previous scene
-    public void getDoctorInfo(User u) {
-        doc = new Doctor(u);
-        doc.setDoctorInfoFromDB(u.getuName());
-        welcomeLabel.setText("Welcome Dr. " + doc.getRealName());
+    // gets admin info from previous scene
+    public void getAdminInfo(User u) {
+        admin = new Admin(u);
+        admin.setAdminInfoFromDB(u.getuName());
+        welcomeLabel.setText("Welcome Admin " + admin.getRealName());
     }
 
-    // side menu navigation on-click listeners
-
-    public void addPrescriptionOnClick(ActionEvent event) {
-        DoctorAddPrescriptionMenuUI.displayPage(event, doc);
+    // action listeners
+    public void addUserOnClick(ActionEvent event) {
+        AdminAddUserMenuUI.displayPage(event, admin);
     }
 
-    public void viewPrescriptionOnClick(ActionEvent event) {
-        DoctorViewPrescriptionMenuUI.displayPage(event, doc);
-    }
-
-    public void viewProfileOnClick(ActionEvent event) {
-        DoctorViewProfileMenuUI.displayPage(event, doc);
+    public void searchUserOnClick(ActionEvent event) {
+        AdminSearchUserMenuUI.displayPage(event, admin);
     }
 
     public void onLogout(ActionEvent event) {
