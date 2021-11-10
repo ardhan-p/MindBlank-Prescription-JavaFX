@@ -3,6 +3,7 @@ package com.mindblank.login;
 import com.mindblank.admin.boundaries.AdminMainMenuUI;
 import com.mindblank.doctor.boundaries.DoctorMainMenuUI;
 import com.mindblank.entities.User;
+import com.mindblank.pharmacist.boundaries.PharmacistMainMenuUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,7 +35,7 @@ public class LoginUI {
             } else if (loginController.getUserType().contains("PATIENT")) {
                 // TODO: add patient display page
             } else if (loginController.getUserType().contains("PHARMACIST")) {
-                // TODO: add pharmacist display page
+                PharmacistMainMenuUI.displayPage(event, user);
             } else if (loginController.getUserType().contains("ADMIN")) {
                 AdminMainMenuUI.displayPage(event, user);
             }

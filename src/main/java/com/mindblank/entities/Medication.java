@@ -4,6 +4,7 @@ package com.mindblank.entities;
 public class Medication {
     private String tokenString;
     private Medicine medicine;
+    private String medicineName;
     private int dosage;
     private String instructions;
     private String expiry;
@@ -21,6 +22,14 @@ public class Medication {
         this.dosage = dosage;
         this.instructions = instructions;
         this.expiry = expiry;
+    }
+
+    public Medication(String medicineName, int dosage, String expiry, String instructions) {
+        this.medicine = new Medicine();
+        this.medicine.setName(medicineName);
+        this.dosage = dosage;
+        this.expiry = expiry;
+        this.instructions = instructions;
     }
 
     public void setTokenString(String tokenString) {
