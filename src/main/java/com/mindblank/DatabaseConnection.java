@@ -9,7 +9,6 @@ public class DatabaseConnection {
     public Connection getConnection() {
         String databaseName = "mindblank_db";
         String databaseUser = "root";
-        String databasePassword = "root";
         String databasePassword = "root"; // change to password123
         String url = "jdbc:mysql://localhost/" + databaseName;
 
