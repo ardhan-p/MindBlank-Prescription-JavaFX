@@ -13,17 +13,11 @@ public class DoctorViewPrescriptionController extends DoctorController {
     }
 
     public ArrayList<Prescription> fetchUserPrescriptions(String patientIC) {
-        ArrayList<Prescription> presArrayList = new ArrayList<Prescription>();
-        presArrayList = doc.viewAllPrescriptions(patientIC);
-
-        return presArrayList;
+        return doc.viewAllPrescriptions(patientIC);
     }
 
     public ArrayList<Medication> fetchSelectedMedicationInPrescription(String tokenString) {
-        ArrayList<Medication> medArrayList = new ArrayList<Medication>();
-        medArrayList = doc.viewMedicationsInPrescription(tokenString);
-
-        return medArrayList;
+        return doc.viewMedicationsInPrescription(tokenString);
     }
 
     public Patient fetchPatientInfoInPrescription(String tokenString) {
