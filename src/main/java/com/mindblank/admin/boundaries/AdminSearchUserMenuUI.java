@@ -68,6 +68,20 @@ public class AdminSearchUserMenuUI {
         adminController = new AdminSearchUserController(admin);
     }
 
+    public void showErr() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error occurred!");
+        alert.setContentText("User NRIC not found!");
+        alert.showAndWait();
+    }
+
+    public void showValid(ActionEvent event) {
+        user = new User();
+        adminController.getUserFromDB(nricInput.getText(), user);
+        AdminViewUpdateUserMenuUI.displayPage(event, admin, user);
+    }
+
     public void searchUserOnClick(ActionEvent event) {
         if (nricInput.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -77,15 +91,9 @@ public class AdminSearchUserMenuUI {
             alert.showAndWait();
         } else {
             if (adminController.validateNRIC(nricInput.getText())) {
-                user = new User();
-                adminController.getUserFromDB(nricInput.getText(), user);
-                AdminViewUpdateUserMenuUI.displayPage(event, admin, user);
+                showValid(event);
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error occurred!");
-                alert.setContentText("User NRIC not found!");
-                alert.showAndWait();
+                showErr();
             }
         }
     }

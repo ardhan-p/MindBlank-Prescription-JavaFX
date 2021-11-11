@@ -93,7 +93,7 @@ public class PatientViewPrescriptionPopupUI {
         }
     }
 
-    public static void displayPage1(ActionEvent event, String tokenString, ObservableList<Medication> medicationObservableList, Patient currentPatient, String prescriptionDate) {
+    public static void displayPagePopup(ActionEvent event, String tokenString, ObservableList<Medication> medicationObservableList, Patient currentPatient, String prescriptionDate) {
         FXMLLoader loader = new FXMLLoader();
         try {
             loader.setLocation(Main.class.getResource("PatientViewPrescriptionPopup.fxml"));

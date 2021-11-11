@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EventObject;
 import java.util.Objects;
 
 public class PatientViewNewPrescriptionUI
@@ -109,7 +108,7 @@ public class PatientViewNewPrescriptionUI
             medicationObservableList.add(m);
         }
 
-        PatientViewPrescriptionPopupUI.displayPage1(event,tokenNumber.getText(), medicationObservableList, newPatient, prescriptionDate);
+        PatientViewPrescriptionPopupUI.displayPagePopup(event,tokenNumber.getText(), medicationObservableList, newPatient, prescriptionDate);
     }
 
     public static void displayPage(ActionEvent event, User user) {
