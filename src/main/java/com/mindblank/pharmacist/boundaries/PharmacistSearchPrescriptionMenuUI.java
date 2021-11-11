@@ -52,11 +52,15 @@ public class PharmacistSearchPrescriptionMenuUI {
     @FXML
     public void onSubmit(ActionEvent event){
         if (!pharmacistController.validateToken(tokenInput.getText())) {
-            errorLabel.setText("Invalid Token! Please try again");
+            displayError();
         }
         else {
             displayView(event);
         }
+    }
+
+    public void displayError() {
+        errorLabel.setText("Invalid Token! Please try again");
     }
 
     public void displayView(ActionEvent event) {

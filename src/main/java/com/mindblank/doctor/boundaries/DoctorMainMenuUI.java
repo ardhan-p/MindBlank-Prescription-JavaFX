@@ -1,6 +1,8 @@
 package com.mindblank.doctor.boundaries;
 
 import com.mindblank.Main;
+import com.mindblank.doctor.controllers.DoctorController;
+import com.mindblank.doctor.controllers.DoctorViewProfileController;
 import com.mindblank.entities.Doctor;
 import com.mindblank.entities.User;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import javax.print.Doc;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +29,7 @@ public class DoctorMainMenuUI {
     @FXML private Button viewPresBtn;
     @FXML private Button updateProfileBtn;
     private Doctor doc;
+    private DoctorViewProfileController doctorController;
 
     @FXML
     public void initialize() {
@@ -57,8 +61,9 @@ public class DoctorMainMenuUI {
 
     // gets doctor info from previous scene
     public void getDoctorInfo(User u) {
-        doc = new Doctor(u);
-        doc.setDoctorInfoFromDB(u.getuName());
+        doc = new Doctor();
+        doctorController = new DoctorViewProfileController(doc);
+        doc = doctorController.fetchDoctorInfo(u.getuName());
         welcomeLabel.setText("Welcome Dr. " + doc.getRealName());
     }
 

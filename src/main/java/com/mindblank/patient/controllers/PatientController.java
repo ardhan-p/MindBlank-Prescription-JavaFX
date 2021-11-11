@@ -19,4 +19,8 @@ public class PatientController {
     return pat.getToken(tokenNo);
     }
 
+    public Patient fetchPatientInfo(String NRIC) {
+        return pat.setPatientInfoFromDB(NRIC);
+    }
+
 }

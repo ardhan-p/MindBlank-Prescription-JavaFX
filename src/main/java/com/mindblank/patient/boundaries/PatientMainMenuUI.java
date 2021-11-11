@@ -7,6 +7,7 @@ import com.mindblank.doctor.boundaries.DoctorViewPrescriptionMenuUI;
 import com.mindblank.entities.Doctor;
 import com.mindblank.entities.Patient;
 import com.mindblank.entities.User;
+import com.mindblank.patient.controllers.PatientController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,7 @@ public class PatientMainMenuUI {
     @FXML private Button viewPresBtn;
     @FXML private Button viewProfileBtn;
     private Patient pat;
+    private PatientController controller;
 
     @FXML
     public void initialize() {
@@ -62,7 +64,9 @@ public class PatientMainMenuUI {
 
     // gets doctor info from previous scene
     public void getPatientInfo(User u) {
-        pat = new Patient(u);
+        pat = new Patient();
+        controller = new PatientController(pat);
+        pat = controller.fetchPatientInfo(u.getuName());
         welcomeLabel.setText("Welcome  " + pat.getRealName());
     }
 

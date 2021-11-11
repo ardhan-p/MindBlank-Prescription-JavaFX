@@ -8,8 +8,7 @@ public class DoctorViewProfileController extends DoctorController{
     }
 
     public Doctor fetchDoctorInfo(String NRIC) {
-        doc.setDoctorInfoFromDB(NRIC);
-        return doc;
+        return doc.setDoctorInfoFromDB(NRIC);
     }
 }
 

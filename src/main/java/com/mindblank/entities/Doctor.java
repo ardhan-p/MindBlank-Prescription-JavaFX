@@ -11,6 +11,10 @@ import java.util.ArrayList;
 
 public class Doctor extends User {
 
+    public Doctor() {
+        super();
+    }
+
     public Doctor(User user) {
         super(user.uName, user.uPass, user.realName, user.email, user.phoneNum, user.address, user.userType);
     }
@@ -187,23 +191,26 @@ public class Doctor extends User {
         return email;
     }
 
-    public void setDoctorInfoFromDB(String NRIC) {
+    public Doctor setDoctorInfoFromDB(String NRIC) {
         String getDoctorInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
+        Doctor doc = new Doctor();
 
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(getDoctorInfo);
 
             while (queryResult.next()) {
-                this.uName = queryResult.getString(1);
-                this.realName = queryResult.getString(3);
-                this.email = queryResult.getString(4);
-                this.phoneNum = queryResult.getString(5);
-                this.address = queryResult.getString(6);
+                doc.uName = queryResult.getString(1);
+                doc.realName = queryResult.getString(3);
+                doc.email = queryResult.getString(4);
+                doc.phoneNum = queryResult.getString(5);
+                doc.address = queryResult.getString(6);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+
+        return doc;
     }
 }

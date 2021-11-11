@@ -166,24 +166,27 @@ public class Patient extends User {
         return date;
     }
 
-    public void setPatientInfoFromDB(String NRIC) {
+    public Patient setPatientInfoFromDB(String NRIC) {
         String getPatientInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
+        Patient pat = new Patient();
 
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(getPatientInfo);
 
             while (queryResult.next()) {
-                this.uName = queryResult.getString(1);
-                this.realName = queryResult.getString(3);
-                this.email = queryResult.getString(4);
-                this.phoneNum = queryResult.getString(5);
-                this.address = queryResult.getString(6);
+                pat.uName = queryResult.getString(1);
+                pat.realName = queryResult.getString(3);
+                pat.email = queryResult.getString(4);
+                pat.phoneNum = queryResult.getString(5);
+                pat.address = queryResult.getString(6);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
+
+        return pat;
     }
 }
 
