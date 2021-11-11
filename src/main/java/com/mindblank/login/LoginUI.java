@@ -1,16 +1,25 @@
 package com.mindblank.login;
 
+import com.mindblank.Main;
 import com.mindblank.admin.boundaries.AdminMainMenuUI;
 import com.mindblank.doctor.boundaries.DoctorMainMenuUI;
+import com.mindblank.doctor.boundaries.DoctorViewPrescriptionMenuUI;
 import com.mindblank.entities.Patient;
 import com.mindblank.entities.User;
 import com.mindblank.patient.boundaries.PatientMainMenuUI;
 import com.mindblank.pharmacist.boundaries.PharmacistMainMenuUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LoginUI {
     @FXML private Button clearBtn;
@@ -25,6 +34,21 @@ public class LoginUI {
         usernameInput.setText("");
         passwordInput.setText("");
         loginStatus.setText("Username and password cleared!");
+    }
+
+    public static void displayPage(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader();
+        try {
+            loader.setLocation(Main.class.getResource("LoginUI.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Login");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onSubmit(ActionEvent event) {

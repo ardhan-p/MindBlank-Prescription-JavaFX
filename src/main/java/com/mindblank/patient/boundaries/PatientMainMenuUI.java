@@ -7,6 +7,7 @@ import com.mindblank.doctor.boundaries.DoctorViewPrescriptionMenuUI;
 import com.mindblank.entities.Doctor;
 import com.mindblank.entities.Patient;
 import com.mindblank.entities.User;
+import com.mindblank.login.LoginUI;
 import com.mindblank.patient.controllers.PatientController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -88,16 +89,6 @@ public class PatientMainMenuUI {
     }
 
     public void patientLogoutOnClick(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(Main.class.getResource("LoginUI.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Login");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        LoginUI.displayPage(event);
     }
-
 }

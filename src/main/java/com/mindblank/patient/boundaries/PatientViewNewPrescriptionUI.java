@@ -4,6 +4,7 @@ import com.mindblank.Main;
 import com.mindblank.entities.Medication;
 import com.mindblank.entities.Patient;
 import com.mindblank.entities.User;
+import com.mindblank.login.LoginUI;
 import com.mindblank.patient.controllers.PatientSearchPrescriptionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,16 +78,7 @@ public class PatientViewNewPrescriptionUI
 
     @FXML
     public void patientLogoutBtnOnClick(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("LoginUI.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Login");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        LoginUI.displayPage(event);
     }
 
     @FXML

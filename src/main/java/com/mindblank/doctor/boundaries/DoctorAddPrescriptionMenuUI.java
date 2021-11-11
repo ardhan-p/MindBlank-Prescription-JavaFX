@@ -5,6 +5,7 @@ import com.mindblank.doctor.controllers.DoctorAddPrescriptionController;
 import com.mindblank.entities.Doctor;
 import com.mindblank.entities.Medication;
 import com.mindblank.entities.User;
+import com.mindblank.login.LoginUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -135,16 +136,7 @@ public class DoctorAddPrescriptionMenuUI {
     }
 
     public void onLogout(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(Main.class.getResource("LoginUI.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Login");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        LoginUI.displayPage(event);
     }
 
     // main panel buttons on-click listeners
