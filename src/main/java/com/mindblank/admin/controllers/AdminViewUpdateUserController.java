@@ -10,6 +10,10 @@ public class AdminViewUpdateUserController {
         this.admin = admin;
     }
 
+    public User getUserFromDB(String NRIC) {
+        return admin.getUserFromDB(NRIC);
+    }
+
     public boolean updateUserInfo(User u) {
         return admin.editUser(u);
     }

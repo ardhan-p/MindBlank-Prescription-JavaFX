@@ -76,9 +76,9 @@ public class AdminSearchUserMenuUI {
         alert.showAndWait();
     }
 
-    public void showValid(ActionEvent event) {
+    public void showValid(ActionEvent event, String NRIC) {
         user = new User();
-        adminController.getUserFromDB(nricInput.getText(), user);
+        user = adminController.getUserFromDB(NRIC);
         AdminViewUpdateUserMenuUI.displayPage(event, admin, user);
     }
 
@@ -91,7 +91,7 @@ public class AdminSearchUserMenuUI {
             alert.showAndWait();
         } else {
             if (adminController.validateNRIC(nricInput.getText())) {
-                showValid(event);
+                showValid(event, nricInput.getText());
             } else {
                 showErr();
             }

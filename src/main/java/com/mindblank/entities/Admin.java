@@ -64,6 +64,31 @@ public class Admin extends User {
         }
     }
 
+    public User getUserFromDB(String NRIC) {
+        String getDoctorInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
+        User u = new User();
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(getDoctorInfo);
+
+            while (queryResult.next()) {
+                u.setuName(queryResult.getString(1));
+                u.setuPass(queryResult.getString(2));
+                u.setRealName(queryResult.getString(3));
+                u.setEmail(queryResult.getString(4));
+                u.setPhoneNum(queryResult.getString(5));
+                u.setAddress(queryResult.getString(6));
+                u.setUserType(queryResult.getString(7));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return u;
+    }
+
     public boolean editUser(User u) {
         String originalUser = "SELECT * FROM USER WHERE NRIC = '" + u.getuName() + "';";
 

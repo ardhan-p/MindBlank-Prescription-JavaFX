@@ -14,7 +14,7 @@ public class AdminSearchUserController {
         return admin.checkNRIC(NRIC, true);
     }
 
-    public void getUserFromDB(String NRIC, User u) {
-        u.setUserInfoFromDB(NRIC);
+    public User getUserFromDB(String NRIC) {
+        return admin.getUserFromDB(NRIC);
     }
 }
