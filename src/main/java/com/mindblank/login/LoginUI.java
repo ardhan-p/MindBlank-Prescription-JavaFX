@@ -51,22 +51,42 @@ public class LoginUI {
         }
     }
 
+    public void displayErr() {
+        loginStatus.setText("Login details are incorrect! Try again.");
+    }
+
+    public void displayDoctor(ActionEvent event, User user) {
+        DoctorMainMenuUI.displayPage(event, user);
+    }
+
+    public void displayPatient(ActionEvent event, User user) {
+        PatientMainMenuUI.displayPage(event,user);
+    }
+
+    public void displayPharmacist(ActionEvent event, User user) {
+        PharmacistMainMenuUI.displayPage(event, user);
+    }
+
+    public void displayAdmin(ActionEvent event, User user) {
+        AdminMainMenuUI.displayPage(event, user);
+    }
+
     public void onSubmit(ActionEvent event) {
         user = new User(usernameInput.getText(), passwordInput.getText());
         loginController = new LoginController(user);
 
         if (loginController.validateUser()) {
             if (loginController.getUserType().contains("DOCTOR")) {
-                DoctorMainMenuUI.displayPage(event, user);
+                displayDoctor(event, user);
             } else if (loginController.getUserType().contains("PATIENT")) {
-                PatientMainMenuUI.displayPage(event,user);
+                displayPatient(event, user);
             } else if (loginController.getUserType().contains("PHARMACIST")) {
-                PharmacistMainMenuUI.displayPage(event, user);
+                displayPharmacist(event, user);
             } else if (loginController.getUserType().contains("ADMIN")) {
-                AdminMainMenuUI.displayPage(event, user);
+                displayAdmin(event, user);
             }
         } else {
-            loginStatus.setText("Login details are incorrect! Try again.");
+            displayErr();
         }
     }
 }
