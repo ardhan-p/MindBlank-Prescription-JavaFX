@@ -99,29 +99,31 @@ public class Admin extends User {
             ResultSet queryResult = statement.executeQuery(originalUser);
 
             while (queryResult.next()) {
+                Statement updateStatement = connectDB.createStatement();
+
                 if (!(u.getuPass().equals(queryResult.getString(2)))) {
                     updateColumn = "UPDATE USER SET pass = '" + u.getuPass() + "' WHERE NRIC = '" + u.getuName() + "';";
-                    statement.execute(updateColumn);
+                    updateStatement.execute(updateColumn);
                 }
 
                 if (!(u.getRealName().equals(queryResult.getString(3)))) {
                     updateColumn = "UPDATE USER SET name = '" + u.getRealName() + "' WHERE NRIC = '" + u.getuName() + "';";
-                    statement.execute(updateColumn);
+                    updateStatement.execute(updateColumn);
                 }
 
                 if (!(u.getEmail().equals(queryResult.getString(4)))) {
                     updateColumn = "UPDATE USER SET email = '" + u.getEmail() + "' WHERE NRIC = '" + u.getuName() + "';";
-                    statement.execute(updateColumn);
+                    updateStatement.execute(updateColumn);
                 }
 
                 if (!(u.getPhoneNum().equals(queryResult.getString(5)))) {
                     updateColumn = "UPDATE USER SET phoneNum = '" + u.getPhoneNum() + "' WHERE NRIC = '" + u.getuName() + "';";
-                    statement.execute(updateColumn);
+                    updateStatement.execute(updateColumn);
                 }
 
                 if (!(u.getAddress().equals(queryResult.getString(6)))) {
                     updateColumn = "UPDATE USER SET address = '" + u.getAddress() + "' WHERE NRIC = '" + u.getuName() + "';";
-                    statement.execute(updateColumn);
+                    updateStatement.execute(updateColumn);
                 }
             }
         } catch (Exception e) {
