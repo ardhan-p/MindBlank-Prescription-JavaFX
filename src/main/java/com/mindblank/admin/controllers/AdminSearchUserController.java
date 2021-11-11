@@ -13,8 +13,4 @@ public class AdminSearchUserController {
     public boolean validateNRIC(String NRIC) {
         return admin.checkNRIC(NRIC, true);
     }
-
-    public User getUserFromDB(String NRIC) {
-        return admin.getUserFromDB(NRIC);
-    }
 }

@@ -2,6 +2,7 @@ package com.mindblank.admin.boundaries;
 
 import com.mindblank.Main;
 import com.mindblank.admin.controllers.AdminSearchUserController;
+import com.mindblank.admin.controllers.AdminViewUpdateUserController;
 import com.mindblank.entities.Admin;
 import com.mindblank.entities.User;
 import javafx.event.ActionEvent;
@@ -78,7 +79,8 @@ public class AdminSearchUserMenuUI {
 
     public void showValid(ActionEvent event, String NRIC) {
         user = new User();
-        user = adminController.getUserFromDB(NRIC);
+        AdminViewUpdateUserController viewController = new AdminViewUpdateUserController(admin);
+        user = viewController.getUserFromDB(NRIC);
         AdminViewUpdateUserMenuUI.displayPage(event, admin, user);
     }
 
