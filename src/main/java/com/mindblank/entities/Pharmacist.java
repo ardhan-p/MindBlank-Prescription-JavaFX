@@ -64,7 +64,7 @@ public class Pharmacist extends User {
             ResultSet queryResult = statement.executeQuery(selectUsernameFromToken);
 
             while (queryResult.next()) {
-                currentPatient.setPatientInfoFromDB(queryResult.getString(1));
+                currentPatient = currentPatient.setPatientInfoFromDB(queryResult.getString(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
