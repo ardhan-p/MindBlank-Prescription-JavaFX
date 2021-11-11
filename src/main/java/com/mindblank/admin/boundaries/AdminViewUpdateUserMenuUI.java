@@ -130,6 +130,22 @@ public class AdminViewUpdateUserMenuUI {
         }
     }
 
+    public void showErr() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error occurred!");
+        alert.setContentText("Database update error has occurred");
+        alert.showAndWait();
+    }
+
+    public void showSuccess(User u) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success!");
+        alert.setHeaderText("Successfully updated user.");
+        alert.setContentText("User " + u.getuName() + " has been updated in the database!");
+        alert.showAndWait();
+    }
+
     public void updateOnClick(ActionEvent event) {
         User u = new User(nricField.getText(), passField.getText(), nameField.getText(), emailField.getText(),
                 phoneField.getText(), addressField.getText(), userTypeField.getText());
@@ -149,17 +165,9 @@ public class AdminViewUpdateUserMenuUI {
                 addressField.setDisable(true);
                 editMode = false;
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success!");
-                alert.setHeaderText("Successfully updated user.");
-                alert.setContentText("User " + u.getuName() + " has been updated in the database!");
-                alert.showAndWait();
+                showSuccess(u);
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error occurred!");
-                alert.setContentText("Database update error has occurred");
-                alert.showAndWait();
+                showErr();
             }
         }
     }

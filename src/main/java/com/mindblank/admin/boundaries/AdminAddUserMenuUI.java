@@ -104,6 +104,23 @@ public class AdminAddUserMenuUI {
         userTypeBox.getSelectionModel().clearSelection();
     }
 
+    public void showErr() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error occurred!");
+        alert.setContentText("User NRIC is already in system!");
+        alert.showAndWait();
+    }
+
+    public void showValid(User u) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success!");
+        alert.setHeaderText("Successfully added user.");
+        alert.setContentText("User " + u.getuName() + " has been added to the database!");
+        alert.showAndWait();
+        clearAllFields();
+    }
+
     // creates user from user inputs
     // checks if fields are filled
     // checks if nric has existed
@@ -121,12 +138,7 @@ public class AdminAddUserMenuUI {
         } else {
             if (adminController.validateNRIC(nricField.getText())) {
                 if (adminController.addUserToDB(u)) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success!");
-                    alert.setHeaderText("Successfully added user.");
-                    alert.setContentText("User " + u.getuName() + " has been added to the database!");
-                    alert.showAndWait();
-                    clearAllFields();
+                    showValid(u);
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
@@ -135,11 +147,7 @@ public class AdminAddUserMenuUI {
                     alert.showAndWait();
                 }
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error occurred!");
-                alert.setContentText("User NRIC is already in system!");
-                alert.showAndWait();
+                showErr();
             }
         }
     }
