@@ -84,7 +84,7 @@ public class DoctorAddMedicationPopupUI {
                 expiryDateInput.getValue().toString().isEmpty() || instructionsInput.getText().isEmpty()) {
             statusLabel.setText("Missing data!");
         } else {
-            Medicine newMedicine = new Medicine(selectMedicineInput.getSelectionModel().getSelectedIndex(),
+            Medicine newMedicine = new Medicine(selectMedicineInput.getSelectionModel().getSelectedIndex() + 1,
                     selectMedicineInput.getSelectionModel().getSelectedItem());
 
             Medication newMedication = new Medication(newMedicine, Integer.parseInt(doseInput.getText()), instructionsInput.getText(),
