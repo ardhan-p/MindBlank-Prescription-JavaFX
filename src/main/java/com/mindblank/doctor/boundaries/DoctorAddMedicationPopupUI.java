@@ -36,7 +36,7 @@ public class DoctorAddMedicationPopupUI {
         DatabaseConnection connectSQL = new DatabaseConnection();
         Connection connectDB = connectSQL.getConnection();
 
-        String getMedicine = "SELECT * FROM MEDICINE;";
+        String getMedicine = "SELECT * FROM MEDICINE ORDER BY medicineID;";
 
         try {
             Statement statement = connectDB.createStatement();
