@@ -1,18 +1,18 @@
 # MindBlank-Prescription-JavaFX
 CSIT314 group project from team MindBlank, using JavaFX and MySQL database.
 
-# Features
+## Features
 - Doctor users are able to prescribe prescriptions to patient users.
 - Patient users are able to receive prescription tokens and QR codes once doctors prescribes them with a prescription.
 - Pharmacist users are able to view and set prescription statuses as collected once they give the prescription to a patient.
 - Admin users are able to edit and view all users' details in the system.
 
-# Development Tools Used
+## Development Tools Used
 - IntelliJ
 - MySQLWorkbench
 - GitHub Actions
 
-# Screenshots
+## Screenshots
 ![Screenshot 2021-11-12 at 12 14 09 PM](https://user-images.githubusercontent.com/49318134/141612848-0c4819f2-3f58-4d23-9104-2e9d2c1531bb.png)
 
 ![Screenshot 2021-11-13 at 4 51 42 PM](https://user-images.githubusercontent.com/49318134/141612894-a3975ed5-a6ee-411a-9a3f-5baa468ee926.png)
