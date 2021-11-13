@@ -8,9 +8,9 @@ CSIT314 group project from team MindBlank, using JavaFX and MySQL database.
 - Admin users are able to edit and view all users' details in the system.
 
 ## Development Tools Used
-- IntelliJ
-- MySQLWorkbench
-- GitHub Actions
+- IntelliJ as our primary Java IDE.
+- MySQLWorkbench as our database management tool.
+- GitHub Actions to facilitate CI/CD practices.
 
 ## Screenshots
 ![Screenshot 2021-11-12 at 12 14 09 PM](https://user-images.githubusercontent.com/49318134/141612848-0c4819f2-3f58-4d23-9104-2e9d2c1531bb.png)
