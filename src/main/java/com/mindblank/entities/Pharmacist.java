@@ -16,6 +16,7 @@ public class Pharmacist extends User {
         super(user.uName, user.uPass, user.realName, user.email, user.phoneNum, user.address, user.userType);
     }
 
+    // checks whether the prescription token inputted is already in database
     public boolean getToken(String token) {
         String validate = "SELECT * FROM PRESCRIPTION WHERE tokenString = '" + token + "';";
 
@@ -34,6 +35,7 @@ public class Pharmacist extends User {
         return false;
     }
 
+    // returns an arraylist of medication associated with the prescription inputted
     public ArrayList<Medication> getMedication(String token){
         String selectMedication = "SELECT medicine.name, medication.dosage, medication.expiry, medication.instructions " +
                 "FROM MEDICATION INNER JOIN MEDICINE ON medication.medicineID = medicine.medicineID WHERE medication.tokenString = '" + token + "';";
@@ -55,6 +57,7 @@ public class Pharmacist extends User {
         return medList;
     }
 
+    // returns patient object with the
     public Patient viewPatientData(String tokenString) {
         String selectUsernameFromToken = "SELECT NRIC FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
         Patient currentPatient = new Patient();
@@ -74,6 +77,7 @@ public class Pharmacist extends User {
         return currentPatient;
     }
 
+    // returns date from specified prescription
     public String getPrescriptionDate(String tokenString) {
         String date = "";
         String selectDate = "SELECT date FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
@@ -93,6 +97,7 @@ public class Pharmacist extends User {
         return date;
     }
 
+    // updates the specified prescription's collection status to true
     public boolean updateStatus (String tokenString) {
         boolean hold = true;
         int hold2 = 0;

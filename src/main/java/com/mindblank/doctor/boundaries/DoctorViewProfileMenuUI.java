@@ -71,8 +71,6 @@ public class DoctorViewProfileMenuUI {
         doctorController = new DoctorViewPrescriptionController(doc);
     }
 
-    // side menu navigation on-click listeners
-
     public void homeOnClick(ActionEvent event) {
         DoctorMainMenuUI.displayPage(event, doc);
     }

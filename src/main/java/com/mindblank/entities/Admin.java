@@ -8,6 +8,7 @@ public class Admin extends User {
         super(user.uName, user.uPass, user.realName, user.email, user.phoneNum, user.address, user.userType);
     }
 
+    // sets admin object attributes from database
     public void setAdminInfoFromDB(String NRIC) {
         String getDoctorInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
 
@@ -28,6 +29,7 @@ public class Admin extends User {
         }
     }
 
+    // checks on whether or not the nric is in database based on boolean inDatabase
     public boolean checkNRIC(String NRIC, boolean inDatabase) {
         String validate = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
 
@@ -48,6 +50,7 @@ public class Admin extends User {
         return false;
     }
 
+    // inserts user into database
     public boolean insertUser(User u) {
         String addUser = "INSERT INTO USER (NRIC, pass, name, email, phoneNum, address, type) " +
                 "VALUES ('" + u.getuName() + "', '" + u.getuPass() + "', '" + u.getRealName() + "', '" + u.getEmail() +
@@ -64,6 +67,7 @@ public class Admin extends User {
         }
     }
 
+    // returns user object from database from the nric parameter
     public User getUserFromDB(String NRIC) {
         String getDoctorInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
         User u = new User();
@@ -89,6 +93,7 @@ public class Admin extends User {
         return u;
     }
 
+    // updates user based on the details in user object
     public boolean editUser(User u) {
         String originalUser = "SELECT * FROM USER WHERE NRIC = '" + u.getuName() + "';";
 

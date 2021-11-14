@@ -54,6 +54,7 @@ public class PatientViewPastPrescriptionUI {
 
     @FXML
     public void initialize() {
+        // sets current time
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(System.currentTimeMillis());
@@ -66,6 +67,7 @@ public class PatientViewPastPrescriptionUI {
         prescriptionListTable.setItems(presObservableList);
     }
 
+    // displays this page
     public static void displayPage(ActionEvent event, Patient user) {
         FXMLLoader loader = new FXMLLoader();
         try {
@@ -83,13 +85,15 @@ public class PatientViewPastPrescriptionUI {
         }
     }
 
+    // sets patient info from previous scene
     private void getPatientInfo(Patient u) {
         pat = new Patient(u);
         patientController = new PatientViewPrescriptionController(pat);
         displayPatient(pat.getuName());
     }
 
-   private void displayPatient(String patientIC) {
+    // displays current patient's past prescription
+    private void displayPatient(String patientIC) {
        prescriptionListTable.getItems().clear();
        ArrayList<Prescription> prescriptionArrayList = patientController.fetchUserPrescriptions(patientIC);
 

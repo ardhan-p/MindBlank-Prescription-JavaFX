@@ -1,6 +1,5 @@
 package com.mindblank.entities;
 
-// TODO: add medicine as private attribute in class diagram
 public class Medication {
     private String tokenString;
     private Medicine medicine;

@@ -24,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PatientMainMenuUI {
-
     @FXML private Label timeLabel;
     @FXML private Label dateLabel;
     @FXML private Label welcomeLabel;
@@ -63,7 +62,7 @@ public class PatientMainMenuUI {
         }
     }
 
-    // gets doctor info from previous scene
+    // gets patient info from previous scene
     public void getPatientInfo(User u) {
         pat = new Patient();
         controller = new PatientController(pat);
@@ -71,21 +70,17 @@ public class PatientMainMenuUI {
         welcomeLabel.setText("Welcome  " + pat.getRealName());
     }
 
-    // side menu navigation on-click listeners
-
+    // side menu functions
     public void viewPastPrescriptionOnClick(ActionEvent event) {
         PatientViewPastPrescriptionUI.displayPage(event, pat);
-
     }
 
     public void viewNewPrescriptionOnClick(ActionEvent event) {
         PatientViewNewPrescriptionUI.displayPage(event, pat);
-
     }
 
     public void patientViewProfileOnClick(ActionEvent event) {
-        PatientViewProfileUI.displayPage(event,pat);
-
+        PatientViewProfileUI.displayPage(event, pat);
     }
 
     public void patientLogoutOnClick(ActionEvent event) {

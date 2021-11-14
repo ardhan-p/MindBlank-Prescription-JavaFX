@@ -10,10 +10,12 @@ public class AdminViewUpdateUserController {
         this.admin = admin;
     }
 
+    // returns user object from database
     public User getUserFromDB(String NRIC) {
         return admin.getUserFromDB(NRIC);
     }
 
+    // updates user info in databse
     public boolean updateUserInfo(User u) {
         return admin.editUser(u);
     }

@@ -36,10 +36,13 @@ public class DoctorAddPrescriptionController extends DoctorController {
         return token;
     }
 
+    // returns patient email from specified token
     public String fetchPatientEmailFromToken(String tokenString) {
         return doc.getEmail(tokenString);
     }
 
+    // generates QR code from the specified token
+    // saves it in directory src/main/resources/qr/
     public File generateQR(String tokenString) {
         String filePath = "src/main/resources/qr/" + tokenString +".png";
         int size = 150;
@@ -55,6 +58,7 @@ public class DoctorAddPrescriptionController extends DoctorController {
         return qrFile;
     }
 
+    // returns true if prescriptio has been successfully added to db
     public boolean addPrescription(String patientIC, String tokenString, String date, ArrayList<Medication> medList) {
         return doc.addPrescription(patientIC, tokenString, date, medList);
     }

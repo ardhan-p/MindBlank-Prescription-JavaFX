@@ -86,6 +86,7 @@ public class AdminViewUpdateUserMenuUI {
         }
     }
 
+    // gets admin and user objects from previous scene
     public void getAdminAndPatientInfo(User u, User searchedUser) {
         admin = new Admin(u);
         this.searchedUser = new User(searchedUser);
@@ -93,6 +94,7 @@ public class AdminViewUpdateUserMenuUI {
         controller = new AdminViewUpdateUserController(admin);
     }
 
+    // sets searched user object's info from previous scene into UI fields
     public void setUserFields() {
         userTypeField.setText(searchedUser.getUserType());
         nricField.setText(searchedUser.getuName());
@@ -103,9 +105,9 @@ public class AdminViewUpdateUserMenuUI {
         addressField.setText(searchedUser.getAddress());
     }
 
+    // if every field is NOT empty, valid == true
+    // else false
     public boolean checkAllFields() {
-        // if every field is NOT empty, valid == true
-        // else false
         boolean valid = !nricField.getText().isEmpty() && !passField.getText().isEmpty()
                 && !nameField.getText().isEmpty() && !emailField.getText().isEmpty()
                 && !phoneField.getText().isEmpty() && !addressField.getText().isEmpty();
@@ -113,6 +115,7 @@ public class AdminViewUpdateUserMenuUI {
         return valid;
     }
 
+    // enables edit mode if it is currently false, vice-versa
     public void editOnClick(ActionEvent event) {
         if (editMode) {
             passField.setDisable(true);
@@ -131,6 +134,7 @@ public class AdminViewUpdateUserMenuUI {
         }
     }
 
+    // displays error popup
     public void showErr() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -139,6 +143,7 @@ public class AdminViewUpdateUserMenuUI {
         alert.showAndWait();
     }
 
+    // displays success popup
     public void showSuccess(User u) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success!");
@@ -147,6 +152,7 @@ public class AdminViewUpdateUserMenuUI {
         alert.showAndWait();
     }
 
+    // gets all the inputted fields and updates the searched user's info in the database
     public void updateOnClick(ActionEvent event) {
         User u = new User(nricField.getText(), passField.getText(), nameField.getText(), emailField.getText(),
                 phoneField.getText(), addressField.getText(), userTypeField.getText());

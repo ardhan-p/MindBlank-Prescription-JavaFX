@@ -65,7 +65,7 @@ public class PatientViewProfileUI {
         }
     }
 
-    // gets doctor info from previous scene
+    // gets patient info from previous scene
     private void getPatientInfo(User u) {
         pat = new Patient(u);
         patientController = new PatientViewPrescriptionController(pat);

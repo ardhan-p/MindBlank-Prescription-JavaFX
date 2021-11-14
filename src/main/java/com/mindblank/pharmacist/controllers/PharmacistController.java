@@ -9,6 +9,7 @@ public class PharmacistController {
         this.pharm = pharm;
     }
 
+    // validates token if it exists in db
     public boolean validateToken(String token) {
         return pharm.getToken(token);
     }

@@ -25,7 +25,7 @@ public class DoctorAddQRCodePopupUI {
 
     private DoctorAddPrescriptionController doctorController;
 
-    // displays popup
+    // displays popup to show that QR code has been sent
     public static void displayPage(ActionEvent event, String tokenString, String successMessage, Image qrImage) {
         FXMLLoader loader = new FXMLLoader();
         try {

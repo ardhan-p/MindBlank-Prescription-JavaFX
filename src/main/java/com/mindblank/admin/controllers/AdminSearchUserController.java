@@ -10,6 +10,7 @@ public class AdminSearchUserController {
         this.admin = admin;
     }
 
+    // validates nric if valid and is in database
     public boolean validateNRIC(String NRIC) {
         return admin.checkNRIC(NRIC, true);
     }

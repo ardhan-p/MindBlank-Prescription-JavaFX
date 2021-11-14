@@ -45,6 +45,7 @@ public class Medicine {
         return name;
     }
 
+    // sets the current medicine object's attributes with the corresponding info from database
     private void setMedicineNameFromDB() {
         DatabaseConnection connectSQL = new DatabaseConnection();
         Connection connectDB = connectSQL.getConnection();

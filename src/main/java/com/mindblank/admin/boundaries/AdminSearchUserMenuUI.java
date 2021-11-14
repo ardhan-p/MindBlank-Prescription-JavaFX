@@ -64,12 +64,15 @@ public class AdminSearchUserMenuUI {
         }
     }
 
+    // gets admin object from previous scene
+    // creates controller using admin object
     public void getAdminInfo(User u) {
         admin = new Admin(u);
         admin.setAdminInfoFromDB(u.getuName());
         adminController = new AdminSearchUserController(admin);
     }
 
+    // displays error popup
     public void showErr() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -78,6 +81,7 @@ public class AdminSearchUserMenuUI {
         alert.showAndWait();
     }
 
+    // displays valid popup with user info
     public void showValid(ActionEvent event, String NRIC) {
         user = new User();
         AdminViewUpdateUserController viewController = new AdminViewUpdateUserController(admin);
@@ -85,6 +89,8 @@ public class AdminSearchUserMenuUI {
         AdminViewUpdateUserMenuUI.displayPage(event, admin, user);
     }
 
+    // if search field is empty, displays error
+    // else it would check the database whether nric is valid
     public void searchUserOnClick(ActionEvent event) {
         if (nricInput.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

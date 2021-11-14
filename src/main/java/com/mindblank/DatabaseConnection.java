@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 public class DatabaseConnection {
     public Connection databaseLink;
 
+    // connects to local sql server
     public Connection getConnection() {
         String databaseName = "mindblank_db";
         String databaseUser = "root";

@@ -84,9 +84,9 @@ public class AdminAddUserMenuUI {
         adminController = new AdminAddUserController(admin);
     }
 
+    // if every field is NOT empty, valid == true
+    // else false
     public boolean checkAllFields() {
-        // if every field is NOT empty, valid == true
-        // else false
         boolean valid = !userTypeBox.getSelectionModel().isEmpty() && !nricField.getText().isEmpty() && !passField.getText().isEmpty()
                         && !nameField.getText().isEmpty() && !emailField.getText().isEmpty()
                         && !phoneField.getText().isEmpty() && !addressField.getText().isEmpty();
@@ -94,6 +94,7 @@ public class AdminAddUserMenuUI {
         return valid;
     }
 
+    // clears all input fields
     public void clearAllFields() {
         nricField.clear();
         passField.clear();
@@ -105,6 +106,7 @@ public class AdminAddUserMenuUI {
         userTypeBox.getSelectionModel().clearSelection();
     }
 
+    // displays error pop-up
     public void showErr() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -113,6 +115,7 @@ public class AdminAddUserMenuUI {
         alert.showAndWait();
     }
 
+    // displays valid pop-up
     public void showValid(User u) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success!");

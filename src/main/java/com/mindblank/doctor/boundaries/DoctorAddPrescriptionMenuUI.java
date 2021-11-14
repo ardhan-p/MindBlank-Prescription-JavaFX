@@ -89,8 +89,6 @@ public class DoctorAddPrescriptionMenuUI {
         }
     }
 
-    // ui functions
-
     // gets doctor info from previous scene
     private void getDoctorInfo(User u) {
         doc = new Doctor(u);
@@ -109,7 +107,7 @@ public class DoctorAddPrescriptionMenuUI {
         confirmPrescriptionBtn.setDisable(true);
     }
 
-    // changes status label to indicate valid
+    // changes status label to indicate valid user
     private void displayValid() {
         validateStatusLabel.setText("Patient found!");
         addMedicationBtn.setDisable(false);
@@ -121,7 +119,6 @@ public class DoctorAddPrescriptionMenuUI {
         DoctorAddMedicationPopupUI.displayPage(event, medObservableList);
     }
 
-    // side menu navigation on-click listeners
 
     public void homeOnClick(ActionEvent event) {
         DoctorMainMenuUI.displayPage(event, doc);
@@ -139,8 +136,7 @@ public class DoctorAddPrescriptionMenuUI {
         LoginUI.displayPage(event);
     }
 
-    // main panel buttons on-click listeners
-
+    // checks database whether the inputted nric is valid and exists in db
     public void validateBtnOnClick(ActionEvent event) {
         if (checkPatient(patientInput.getText())) {
             displayValid();
@@ -149,23 +145,28 @@ public class DoctorAddPrescriptionMenuUI {
         }
     }
 
+    // displays popup which enables user to add medication to prescription
     public void addMedicationOnClick(ActionEvent event) {
         displayMediPopup(event);
         confirmPrescriptionBtn.setDisable(false);
     }
 
+    // randomly generates token to give identification to new prescription
     public String createToken() {
         return doctorController.generateToken();
     }
 
+    // returns true if prescription has been successfully added to the database
     public boolean addCurrentPrescription(String patientIC, String token, String date, ArrayList<Medication> medList) {
         return doctorController.addPrescription(patientIC, token, date, medList);
     }
 
+    // displays popup to show user that confirmation has been sent
     public void displaySentPopup(ActionEvent event, String tokenString, String successPopupMessage, Image qrImage) {
         DoctorAddQRCodePopupUI.displayPage(event, tokenString, successPopupMessage, qrImage);
     }
 
+    // initiates the insertion of prescription into the database
     public void confirmPrescriptionOnClick(ActionEvent event) {
         Medication currentMed;
         ArrayList<Medication> medArrayList = new ArrayList<Medication>();

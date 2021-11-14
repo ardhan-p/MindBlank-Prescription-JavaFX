@@ -25,8 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-public class PatientViewNewPrescriptionUI
-{
+public class PatientViewNewPrescriptionUI {
     @FXML private Button homeBtn;
     @FXML private Button viewPastPresBtn;
     @FXML private Button viewNewPresBtn;
@@ -53,26 +52,25 @@ public class PatientViewNewPrescriptionUI
         dateLabel.setText(dateFormat.format(date));
     }
 
+    // side menu functions
     @FXML
     public void patientViewPastPresBtnOnClick(ActionEvent event) {
         PatientViewPastPrescriptionUI.displayPage(event,pat);
     }
+
     @FXML
-    public void patientViewNewPresBtnOnClick(ActionEvent event)
-    {
+    public void patientViewNewPresBtnOnClick(ActionEvent event) {
         PatientViewNewPrescriptionUI.displayPage(event,pat);
     }
 
     @FXML
-    public void patientViewProfileBtnOnClick(ActionEvent event)
-    {
+    public void patientViewProfileBtnOnClick(ActionEvent event) {
         PatientViewProfileUI.displayPage(event,pat);
     }
 
 
     @FXML
-    public void patientHomeBtnOnClick(ActionEvent event)
-    {
+    public void patientHomeBtnOnClick(ActionEvent event) {
         PatientMainMenuUI.displayPage(event,pat);
     }
 
@@ -81,6 +79,7 @@ public class PatientViewNewPrescriptionUI
         LoginUI.displayPage(event);
     }
 
+    // initiates the validation of prescription token
     @FXML
     public void searchTokenNumberOnClick(ActionEvent event) {
         if(!patientController.validateToken(tokenNumber.getText())) {
@@ -94,6 +93,7 @@ public class PatientViewNewPrescriptionUI
         errorLabel.setText("Invalid Token! Please try again");
     }
 
+    // displays the selected prescription as well as its associated medication
     public void displayView(ActionEvent event) {
         medicationObservableList.clear();
         Patient newPatient = patientController.fetchPatientInfoInPrescription(tokenNumber.getText());
@@ -107,6 +107,7 @@ public class PatientViewNewPrescriptionUI
         PatientViewPrescriptionPopupUI.displayPagePopup(event,tokenNumber.getText(), medicationObservableList, newPatient, prescriptionDate);
     }
 
+    // displays this page
     public static void displayPage(ActionEvent event, User user) {
         FXMLLoader loader = new FXMLLoader();
         try {
@@ -124,6 +125,7 @@ public class PatientViewNewPrescriptionUI
         }
     }
 
+    // sets patient info from previous scene
     private void getPatientInfo(User user) {
         pat = new Patient(user);
         patientController = new PatientSearchPrescriptionController(pat);

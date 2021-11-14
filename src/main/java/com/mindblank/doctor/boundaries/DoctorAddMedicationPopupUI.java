@@ -30,12 +30,12 @@ public class DoctorAddMedicationPopupUI {
 
     private ObservableList<Medication> medicationObservableList;
 
-    // fills combobox (drop-down) from medication in SQL database
     @FXML
     public void initialize() {
         DatabaseConnection connectSQL = new DatabaseConnection();
         Connection connectDB = connectSQL.getConnection();
 
+        // fills combobox (drop-down) from medication in SQL database
         String getMedicine = "SELECT * FROM MEDICINE ORDER BY medicineID;";
 
         try {
@@ -71,14 +71,12 @@ public class DoctorAddMedicationPopupUI {
         }
     }
 
-    // ui functions
-
+    // sets new medication list with current one
     public void setMedicationList(ObservableList<Medication> medicationList) {
         this.medicationObservableList = medicationList;
     }
 
-    // menu on-click listeners
-
+    // inserts the medication info from popup into the table in the main view
     public void addMedicationOnClick(ActionEvent event) {
         if (selectMedicineInput.getSelectionModel().isEmpty() || doseInput.getText().isEmpty() ||
                 expiryDateInput.getValue().toString().isEmpty() || instructionsInput.getText().isEmpty()) {

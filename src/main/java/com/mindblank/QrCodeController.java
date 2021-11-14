@@ -19,7 +19,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 public class QrCodeController {
     // from https://www.journaldev.com/470/java-qr-code-generator-zxing-example
     // creates QR code that contains the corresponding string
-    // src/main/resources/qr
+    // saved in src/main/resources/qr
     public static void storeQRImage(File qrFile, String qrCodeText, int size, String fileType) throws WriterException, IOException {
         // create the ByteMatrix for the QR-Code that encodes the given String
         Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<>();

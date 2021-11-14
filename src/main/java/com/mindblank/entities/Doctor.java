@@ -19,6 +19,7 @@ public class Doctor extends User {
         super(user.uName, user.uPass, user.realName, user.email, user.phoneNum, user.address, user.userType);
     }
 
+    // checks whether nric is a valid patient in the database
     public boolean getPatientIC(String patientIC) {
         String validatePatient = "SELECT * FROM USER WHERE BINARY NRIC = '" + patientIC + "' AND TYPE = 'PATIENT';";
 
@@ -90,6 +91,7 @@ public class Doctor extends User {
         return false;
     }
 
+    // returns an arraylist containing prescriptions that has the same inputted nric
     public ArrayList<Prescription> viewPatientPrescriptions(String patientIC) {
         String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "';";
         ArrayList<Prescription> presArrayList = new ArrayList<Prescription>();
@@ -110,6 +112,7 @@ public class Doctor extends User {
         return presArrayList;
     }
 
+    // returns an arraylist containing medications from a prescription
     public ArrayList<Medication> viewMedicationsInPatientPrescription(String tokenString) {
         String selectCurrentPrescription = "SELECT * FROM MEDICATION WHERE tokenString = '" + tokenString + "';";
         ArrayList<Medication> medArrayList = new ArrayList<Medication>();
@@ -134,6 +137,7 @@ public class Doctor extends User {
         return medArrayList;
     }
 
+    // returns a patient object associated with the unique prescription token
     public Patient viewPatientData(String tokenString) {
         String selectUsernameFromToken = "SELECT NRIC FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
         Patient currentPatient = new Patient();
@@ -153,6 +157,7 @@ public class Doctor extends User {
         return currentPatient;
     }
 
+    // returns date from inputted token from database
     public String getPrescriptionDate(String tokenString) {
         String date = "";
         String selectDate = "SELECT date FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
@@ -172,6 +177,7 @@ public class Doctor extends User {
         return date;
     }
 
+    // returns an email associated with the prescription token from database
     public String getEmail(String tokenString) {
         String email = "";
         String selectEmail = "SELECT USER.email FROM USER INNER JOIN PRESCRIPTION ON USER.NRIC = PRESCRIPTION.NRIC " +
@@ -191,6 +197,7 @@ public class Doctor extends User {
         return email;
     }
 
+    // returns a doctor object that contains the info from database corresponding to the nric
     public Doctor setDoctorInfoFromDB(String NRIC) {
         String getDoctorInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
         Doctor doc = new Doctor();

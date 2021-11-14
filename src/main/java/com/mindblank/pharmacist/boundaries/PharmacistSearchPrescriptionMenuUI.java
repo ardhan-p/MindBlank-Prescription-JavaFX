@@ -51,6 +51,7 @@ public class PharmacistSearchPrescriptionMenuUI {
     }
 
     @FXML
+    // initiates the process of validating a prescription token
     public void onSubmit(ActionEvent event){
         if (!pharmacistController.validateToken(tokenInput.getText())) {
             displayError();
@@ -64,6 +65,7 @@ public class PharmacistSearchPrescriptionMenuUI {
         errorLabel.setText("Invalid Token! Please try again");
     }
 
+    // displays the prescription that the pharmacist has searched
     public void displayView(ActionEvent event) {
         medicationObservableList.clear();
         Patient newPatient = pharmacistController.fetchPatientInfoInPrescription(tokenInput.getText());
@@ -75,6 +77,7 @@ public class PharmacistSearchPrescriptionMenuUI {
         PharmacistViewPrescriptionMenuUI.displayPage(event, pharm, tokenInput.getText(), medicationObservableList, newPatient, prescriptionDate);
     }
 
+    // displays this page
     public static void displayPage(ActionEvent event, User user) {
         FXMLLoader loader = new FXMLLoader();
         try {
@@ -92,6 +95,7 @@ public class PharmacistSearchPrescriptionMenuUI {
         }
     }
 
+    // sets pharmacist's info from previous scene
     private void getPharmacistInfo(User u) {
         pharm = new Pharmacist(u);
         pharmacistController = new PharmacistSearchPrescriptionController(pharm);

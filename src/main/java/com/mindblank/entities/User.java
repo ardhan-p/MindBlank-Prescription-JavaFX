@@ -111,6 +111,7 @@ public class User {
         System.out.println(userType);
     }
 
+    // validates the username and password, and verifies it to login
     public boolean login(String uName, String uPass) {
         String verifyLogin = "SELECT * FROM USER WHERE BINARY NRIC = '" + uName
                            + "' AND BINARY pass = '" + uPass + "';";
@@ -141,6 +142,7 @@ public class User {
         return false;
     }
 
+    // sets current user attributes with the corresponding info from database
     public void setUserInfoFromDB(String NRIC) {
         String getDoctorInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
 

@@ -10,10 +10,12 @@ public class AdminAddUserController {
        this.admin = admin;
     }
 
+    // checks nric if there is a duplicate
     public boolean validateNRIC(String NRIC) {
         return admin.checkNRIC(NRIC, false);
     }
 
+    // adds new user to database
     public boolean addUserToDB(User u) {
         return admin.insertUser(u);
     }

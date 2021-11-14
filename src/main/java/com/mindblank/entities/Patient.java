@@ -21,6 +21,7 @@ public class Patient extends User {
 
     }
 
+    // checks whether or not nric is already in database
     public boolean getPatientIC(String patientIC) {
         String validatePatient = "SELECT * FROM USER WHERE BINARY NRIC = '" + patientIC + "' AND TYPE = 'PATIENT';";
 
@@ -44,6 +45,7 @@ public class Patient extends User {
         return false;
     }
 
+    // checks whether or not prescription token is already in database
     public boolean getToken(String token) {
         String validate = "SELECT * FROM PRESCRIPTION WHERE tokenString = '" + token + "';";
 
@@ -62,28 +64,7 @@ public class Patient extends User {
         return false;
     }
 
-//    public ArrayList<Medication> getMedication(String token) {
-//        String selectMedication = "SELECT medicine.name, medication.dosage, medication.expiry, medication.instructions " +
-//                "FROM MEDICATION INNER JOIN MEDICINE ON medication.medicineID = medicine.medicineID INNER JOIN PRESCRIPTION ON medication.tokenString=prescription.tokenString" +
-//                " WHERE medication.tokenString = '" + token + "' AND prescription.collectedStatus = 0" + ";";
-//        ArrayList<Medication> medicationArrayList = new ArrayList<Medication>();
-//
-//        try {
-//            Statement statement = connectDB.createStatement();
-//            ResultSet queryResult = statement.executeQuery(selectMedication);
-//
-//            while (queryResult.next()) {
-//                Medication newMed = new Medication(queryResult.getString(1), queryResult.getInt(2), queryResult.getString(3), queryResult.getString(4));
-//                medicationArrayList.add(newMed);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            e.getCause();
-//        }
-//
-//        return medicationArrayList;
-//    }
-
+    // returns an arraylist of prescriptions associated with the inputted nric
     public ArrayList<Prescription> viewAllPastPrescriptions(String patientIC) {
         String selectPrescriptions = "SELECT * FROM PRESCRIPTION WHERE NRIC = '" + patientIC + "' AND COLLECTEDSTATUS = 1" + ";";
         ArrayList<Prescription> prescriptionArrayList = new ArrayList<Prescription>();
@@ -104,6 +85,7 @@ public class Patient extends User {
         return prescriptionArrayList;
     }
 
+    // returns an arraylist of medication associated with the inputted prescription token
     public ArrayList<Medication> viewMedicationsInPrescription(String tokenString) {
         String selectCurrentPrescription = "SELECT * FROM MEDICATION WHERE tokenString = '" + tokenString + "';";
         ArrayList<Medication> medicationArrayList = new ArrayList<Medication>();
@@ -128,6 +110,7 @@ public class Patient extends User {
         return medicationArrayList;
     }
 
+    // returns patient object associated with the inputted prescription token
     public Patient viewPatientData(String tokenString) {
         String selectUsernameFromToken = "SELECT NRIC FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
         Patient currentPatient = new Patient();
@@ -147,6 +130,7 @@ public class Patient extends User {
         return currentPatient;
     }
 
+    // returns the date of a prescription from database
     public String getPrescriptionDate(String tokenString) {
         String date = "";
         String selectDate = "SELECT date FROM PRESCRIPTION WHERE tokenString = '" + tokenString + "';";
@@ -166,6 +150,7 @@ public class Patient extends User {
         return date;
     }
 
+    // returns a patient object with the corresponding attributes fetched from database
     public Patient setPatientInfoFromDB(String NRIC) {
         String getPatientInfo = "SELECT * FROM USER WHERE NRIC = '" + NRIC + "';";
         Patient pat = new Patient();

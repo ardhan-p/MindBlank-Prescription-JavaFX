@@ -80,8 +80,6 @@ public class DoctorViewPrescriptionMenuUI {
         }
     }
 
-    // ui functions
-
     // gets doctor info from previous scene
     private void getDoctorInfo(User u) {
         doc = new Doctor(u);
@@ -93,6 +91,7 @@ public class DoctorViewPrescriptionMenuUI {
         searchStatusLabel.setText("Patient not found!");
     }
 
+    // displays the prescriptions from the inputted patient via nric
     private void displayPatient(String patientIC) {
         prescriptionListTable.getItems().clear();
         ArrayList<Prescription> presArrayList = doctorController.fetchUserPrescriptions(patientIC);
@@ -103,8 +102,6 @@ public class DoctorViewPrescriptionMenuUI {
 
         searchStatusLabel.setText("Patient found!");
     }
-
-    // side menu navigation on-click listeners
 
     @FXML
     public void homeOnClick(ActionEvent event) {
@@ -126,8 +123,8 @@ public class DoctorViewPrescriptionMenuUI {
         LoginUI.displayPage(event);
     }
 
-    // main panel buttons on-click listeners
     @FXML
+    // initiates the validation of patient nric
     public void onSubmit(ActionEvent event) {
         if (!doctorController.validatePatient(patientInput.getText())) {
             displayNotFound();
@@ -136,6 +133,7 @@ public class DoctorViewPrescriptionMenuUI {
         }
     }
 
+    // displays popup containing more information on specified prescription
     public void displayCurrentPrescription(MouseEvent event, String tokenString,
                                            ObservableList<Medication> medicationObservableList,
                                            Patient newPatient, String prescriptionDate) {

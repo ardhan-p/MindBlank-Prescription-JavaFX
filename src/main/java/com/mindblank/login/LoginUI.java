@@ -71,6 +71,9 @@ public class LoginUI {
         AdminMainMenuUI.displayPage(event, user);
     }
 
+    // initiates the login process
+    // if the username is associated with a particular user type
+    // then it will display the menu for that user type
     public void onSubmit(ActionEvent event) {
         user = new User(usernameInput.getText(), passwordInput.getText());
         loginController = new LoginController(user);

@@ -7,6 +7,7 @@ public class DoctorViewProfileController extends DoctorController{
         super(doc);
     }
 
+    // returns doctor object from nric
     public Doctor fetchDoctorInfo(String NRIC) {
         return doc.setDoctorInfoFromDB(NRIC);
     }

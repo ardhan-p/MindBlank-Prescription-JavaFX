@@ -86,6 +86,7 @@ public class PharmacistViewPrescriptionMenuUI {
         medicationTable.setItems(medicationObservableList);
     }
 
+    // displays this page
     public static void displayPage(ActionEvent event, User user, String tokenString, ObservableList<Medication> medicationObservableList, Patient currentPatient, String prescriptionDate) {
         FXMLLoader loader = new FXMLLoader();
         try {
@@ -109,6 +110,7 @@ public class PharmacistViewPrescriptionMenuUI {
         }
     }
 
+    // sets pharmacist's info from last scene
     private void getPharmacistInfo(User u){
         pharm = new Pharmacist(u);
         pharmacistController = new PharmacistSearchPrescriptionController(pharm);

@@ -9,6 +9,7 @@ public class DoctorController {
         this.doc = doc;
     }
 
+    // returns true if patient's nric is valid and is in database
     public boolean validatePatient(String patientIC) {
         return doc.getPatientIC(patientIC);
     }
