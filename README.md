@@ -24,3 +24,7 @@ CSIT314 group project from team MindBlank, using JavaFX and MySQL database.
 ![Screenshot 2021-11-13 at 4 55 14 PM](https://user-images.githubusercontent.com/49318134/141612908-231575b0-4d8d-4d8b-bbfe-7ac98e364050.png)
 
 ![Screenshot 2021-11-13 at 4 55 37 PM](https://user-images.githubusercontent.com/49318134/141612917-5c2fabff-ce62-4024-ac3a-5f9c0688d78d.png)
+
+### Notice
+If using MacOS, please remove the JavaFX Windows dependencies to run program
+If using Windows, please remove the JavaFX MacOS dependencies to run program
